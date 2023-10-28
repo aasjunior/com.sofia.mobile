@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.screens
 
-import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,44 +23,44 @@ import com.sofia.mobile.ui.theme.Lilas
 import com.sofia.mobile.ui.theme.SofiaTheme
 import com.sofia.mobile.ui.theme.SofiaTypography
 
-val bgColor = Lilas
-val paddingLogo = 96
-val sizeLogo = 170
-val sizeSorridentStar = 180
-val paddingBottom = 28
-val textBottomStyle = SofiaTypography.text2.copy(color = BrillantPurple)
+val bgColorFirst = Lilas
+const val paddingLogoFirst = 96
+const val sizeLogoFirst = 170
+const val sizeSorridentStarFirst = 180
+const val paddingBottomFirst = 28
+val textBottomStyleFirst = SofiaTypography.text2.copy(color = BrillantPurple)
 
 @Composable
-fun SplashScreen(navController: NavController){
+fun FirstSplashScreen(navController: NavController){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .background(bgColor)
+            .background(bgColorFirst)
     ) {
         Row(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = paddingLogo.dp)
+                .padding(top = paddingLogoFirst.dp)
         ){
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_sofia),
                 contentDescription = "Logo",
-                modifier = Modifier.size(sizeLogo.dp)
+                modifier = Modifier.size(sizeLogoFirst.dp)
             )
         }
         Image(
             painter = painterResource(id = R.drawable.ic_sorrident_star),
             contentDescription = "Sorrident Star",
-            modifier = Modifier.size(sizeSorridentStar.dp)
+            modifier = Modifier.size(sizeSorridentStarFirst.dp)
         )
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = paddingBottom.dp)
+                .padding(bottom = paddingBottomFirst.dp)
         ){
             Text(
-                style = textBottomStyle,
+                style = textBottomStyleFirst,
                 text = "By AJA Group",
             )
         }
@@ -71,10 +70,10 @@ fun SplashScreen(navController: NavController){
 
 @Preview
 @Composable
-fun SplashScreenPreview(){
+fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            SplashScreen(navController = rememberNavController())
+            SecondSplashScreen(navController = rememberNavController())
         }
     }
 }
