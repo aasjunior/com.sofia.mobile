@@ -73,7 +73,7 @@ fun FirstSplashScreen(navController: NavController){
 fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            SecondSplashScreen(navController = rememberNavController())
+            FirstSplashScreen(navController = rememberNavController())
         }
     }
 }
