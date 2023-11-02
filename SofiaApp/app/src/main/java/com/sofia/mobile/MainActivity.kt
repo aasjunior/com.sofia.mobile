@@ -8,6 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.sofia.mobile.ui.screens.SplashScreen
 import com.sofia.mobile.ui.theme.SofiaTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,10 +19,9 @@ class MainActivity : ComponentActivity() {
             SofiaTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Text(text = "Hello Word")
+                    SplashScreen(rememberNavController())
                 }
             }
         }
