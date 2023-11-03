@@ -124,11 +124,17 @@ fun SecondSplashScreen(){
 fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-<<<<<<< HEAD:SofiaApp/app/src/main/java/com/sofia/mobile/ui/screens/SplashScreen.kt
             FirstSplashScreen()
-=======
-            FirstSplashScreen(navController = rememberNavController())
->>>>>>> 26201b913b1d17c12c1acedb3df674e5c8de30b6:SofiaApp/app/src/main/java/com/sofia/mobile/ui/screens/FirstSplashScreen.kt
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SecondSplashScreenPreview(){
+    SofiaTheme {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            SecondSplashScreen()
         }
     }
 }
