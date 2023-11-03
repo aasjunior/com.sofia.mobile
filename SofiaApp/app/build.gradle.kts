@@ -50,6 +50,8 @@ android {
 }
 
 dependencies {
+    implementation("androidx.wear.compose:compose-material3:1.0.0-alpha14")
+    implementation("com.google.android.material:material:1.10.0")
     val nav_version = "2.5.3"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
