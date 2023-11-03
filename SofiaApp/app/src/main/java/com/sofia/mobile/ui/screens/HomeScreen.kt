@@ -52,26 +52,6 @@ fun HomeScreen(
             }
         }
     )
-    /*val isShowingSearchField by mainViewModel.isShowSearchField
-    val currentSearchText by mainViewModel.currentSearchText
-    Scaffold(
-        topBar = {
-            SearchableTopBar(
-                isShowSearchField = isShowingSearchField,
-                currentSearchText = currentSearchText,
-                onSearchTextChanged = { mainViewModel.setCurrentSearchText(newText = it) },
-                onSearchDeactivated = { mainViewModel.showSearchField(show = false) },
-                onSearchDispatched = { Log.d("SEARCH_TEST", "Usuário pesquisou por: $it") },
-                onSearchIconClicked = { mainViewModel.showSearchField(show = true) }
-            )
-        }
-        ,
-        content = { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
-                Text(text = "Abobrinha")
-            }
-        }
-    )*/
 }
 
 @Preview
