@@ -14,6 +14,7 @@ val SoftYellow = Color(0xFFFFE29E)
 val Green = Color(0xFF6EC2A7)
 val Gray1 = Color(0xFF7D7D7D)
 val Gray2 = Color(0xFF3D3D3D)
+val Gray3 = Color(0xFFEAE9FF)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.screens.HomeScreen
+import com.sofia.mobile.ui.screens.PatientListScreen
 import com.sofia.mobile.ui.theme.SofiaTheme
 import com.sofia.mobile.ui.viewmodels.SearchViewModel
 
@@ -23,7 +24,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     //SplashScreen(rememberNavController())
-                    HomeScreen(rememberNavController())
+                    //HomeScreen(rememberNavController())
+                    PatientListScreen(22)
                 }
             }
         }
