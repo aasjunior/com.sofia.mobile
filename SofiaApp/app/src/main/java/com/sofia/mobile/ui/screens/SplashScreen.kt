@@ -123,7 +123,6 @@ fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             FirstSplashScreen()
-<<<<<<< HEAD
         }
     }
 }
@@ -134,8 +133,6 @@ fun SecondSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             SecondSplashScreen()
-=======
->>>>>>> feat/home-screen
         }
     }
 }
