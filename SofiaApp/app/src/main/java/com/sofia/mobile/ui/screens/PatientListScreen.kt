@@ -7,12 +7,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +41,7 @@ import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
+import com.sofia.mobile.ui.theme.SoftPurple
 import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,6 +55,7 @@ fun PatientListScreen(
 
     val patients: List<Paciente> = listOf(paciente1, paciente2, paciente3).sortedBy { it.getNome() }
 
+    val isCardOpen = remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             CustomTopAppBar()
@@ -51,7 +66,7 @@ fun PatientListScreen(
                 .padding(innerPadding)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -71,12 +86,38 @@ fun PatientListScreen(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(0.8f),
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier.fillMaxWidth(0.9f),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ){
                 FloatingAddButton(
                     onClick = {}
                 )
+
+                IconButton(onClick = { isCardOpen.value = !isCardOpen.value }){
+                    Icon(
+                        modifier = Modifier.size(32.dp),
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = null,
+                        tint = SoftPurple
+                    )
+                }
+            }
+
+            if(isCardOpen.value){
+                Card(
+                    modifier = Modifier.padding(16.dp),
+                    shape = RoundedCornerShape(20.dp)
+                ) {
+                    Column {
+                        TextButton(onClick = { /* Adicione a lógica para adicionar um paciente aqui */ }) {
+                            Text("Novo")
+                        }
+                        TextButton(onClick = { /* Adicione a lógica para deletar um paciente aqui */ }) {
+                            Text("Deletar")
+                        }
+                    }
+                }
             }
 
             PatientCheckList(patients)

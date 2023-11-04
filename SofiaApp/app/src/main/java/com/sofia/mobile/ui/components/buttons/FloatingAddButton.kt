@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.components.buttons
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -17,7 +18,8 @@ fun FloatingAddButton(onClick: () -> Unit){
         onClick = { /*TODO*/ },
         containerColor = SoftPurple,
         contentColor = Gray3,
-        elevation = FloatingActionButtonDefaults.elevation(4.dp)
+        elevation = FloatingActionButtonDefaults.elevation(4.dp),
+        shape = CircleShape
     ) {
         Icon(
             imageVector = Icons.Filled.Add,
