@@ -5,13 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.screens.HomeScreen
-import com.sofia.mobile.ui.screens.SplashScreen
 import com.sofia.mobile.ui.theme.SofiaTheme
 import com.sofia.mobile.ui.viewmodels.SearchViewModel
 
@@ -26,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     //SplashScreen(rememberNavController())
-                    HomeScreen(rememberNavController()/*, searchViewModel*/)
+                    HomeScreen(rememberNavController())
                 }
             }
         }
