@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.screens
 
-import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Lilas
@@ -125,6 +123,7 @@ fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             FirstSplashScreen()
+<<<<<<< HEAD
         }
     }
 }
@@ -135,6 +134,8 @@ fun SecondSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             SecondSplashScreen()
+=======
+>>>>>>> feat/home-screen
         }
     }
 }

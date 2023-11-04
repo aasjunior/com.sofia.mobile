@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.fonts
+package com.sofia.mobile.ui.theme.fonts
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
