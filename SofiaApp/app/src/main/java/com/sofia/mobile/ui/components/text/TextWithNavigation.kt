@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
-import com.sofia.mobile.ui.theme.SofiaTypography
 import com.sofia.mobile.ui.theme.SoftPurple
 
 @Composable
@@ -20,6 +19,6 @@ fun UnderlinedTextWithNavigation(
         textDecoration = TextDecoration.Underline,
         color = color,
         modifier = Modifier.clickable(onClick = onClick),
-        style = SofiaTypography.text1.copy(color = SoftPurple)
+        style = link1.copy(color = SoftPurple)
     )
 }

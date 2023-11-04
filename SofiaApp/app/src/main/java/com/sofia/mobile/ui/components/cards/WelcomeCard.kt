@@ -27,9 +27,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.components.text.UnderlinedTextWithNavigation
+import com.sofia.mobile.ui.components.text.body1
+import com.sofia.mobile.ui.components.text.h2
 import com.sofia.mobile.ui.theme.Black
 import com.sofia.mobile.ui.theme.BrillantPurple
-import com.sofia.mobile.ui.theme.SofiaTypography
 import com.sofia.mobile.ui.theme.White
 
 @Composable
@@ -66,7 +67,7 @@ fun WelcomeCard(
                 ){
                     Text(
                         text = "Olá, $name!",
-                        style = SofiaTypography.title24.copy(color = BrillantPurple)
+                        style = h2.copy(color = BrillantPurple)
                     )
                 }
                 Row(
@@ -79,7 +80,7 @@ fun WelcomeCard(
                     ){
                         Text(
                             text = stringResource(id = R.string.welcome_card_text),
-                            style = SofiaTypography.text1.copy(color = Black)
+                            style = body1.copy(color = Black)
                         )
 
                         Spacer(modifier = Modifier.height(16.dp))
