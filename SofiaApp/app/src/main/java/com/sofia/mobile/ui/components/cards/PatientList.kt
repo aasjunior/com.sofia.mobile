@@ -1,11 +1,14 @@
 package com.sofia.mobile.ui.components.cards
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -17,6 +20,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,8 +35,10 @@ import com.sofia.mobile.models.Paciente
 import com.sofia.mobile.models.Sexo
 import com.sofia.mobile.ui.components.inputs.RoundCheckbox
 import com.sofia.mobile.ui.components.text.body1
+import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
+import com.sofia.mobile.ui.theme.White
 import java.time.LocalDate
 
 @Composable
@@ -100,11 +106,37 @@ fun PatientList(patients: List<Paciente>) {
 }
 
 @Composable
-fun PatientCheckList(patients: List<Paciente>) {
+fun PatientCheckList(
+    patients: List<Paciente>,
+    totalChecked: MutableState<Int>,
+) {
     val grouped = patients.groupBy { it.getNome()[0].uppercase()[0] }
     val listState = rememberLazyListState()
+    val allChecked = remember { mutableStateOf(false) }
+    val patientCheckedStates = remember { patients.associate { it.getNome() to mutableStateOf(false) } }
 
     LazyColumn(state = listState) {
+        item {
+            Row(
+                modifier = Modifier.padding(horizontal = 41.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ){
+                RoundCheckbox(
+                    modifier = Modifier.size(20.dp),
+                    checked = allChecked.value,
+                    onCheckedChange = { checked ->
+                        allChecked.value = checked
+                        patientCheckedStates.values.forEach { it.value = checked }
+                        totalChecked.value = if (checked) patients.size else 0
+                    }
+                )
+                Text(
+                    text = "Todos",
+                    style = body1.copy(color = BrillantPurple)
+                )
+            }
+        }
         grouped.forEach { (initial, patientsForInitial) ->
             item {
                 CharacterHeader(initial)
@@ -117,7 +149,7 @@ fun PatientCheckList(patients: List<Paciente>) {
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     patientsForInitial.forEach { patient ->
-                        val isChecked = remember { mutableStateOf(false) }
+                        val isChecked = patientCheckedStates[patient.getNome()]!!
 
                         Column{
                             Row(
@@ -127,7 +159,11 @@ fun PatientCheckList(patients: List<Paciente>) {
                             ) {
                                 RoundCheckbox(
                                     checked = isChecked.value,
-                                    onCheckedChange = { isChecked.value = it },
+                                    onCheckedChange = { checked ->
+                                        isChecked.value = checked
+                                        totalChecked.value += if (checked) 1 else -1
+                                        allChecked.value = totalChecked.value == patients.size
+                                    },
                                 )
                                 Text(
                                     text = patient.getNome(),
@@ -163,5 +199,6 @@ fun PatientCheckListPreview() {
 
     val patients: List<Paciente> = listOf(paciente1, paciente2, paciente3).sortedBy { it.getNome() }
 
-    PatientCheckList(patients)
+    val totalChecked = remember { mutableStateOf(0) }
+    PatientCheckList(patients, totalChecked)
 }

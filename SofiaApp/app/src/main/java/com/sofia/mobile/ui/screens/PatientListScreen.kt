@@ -57,6 +57,7 @@ fun PatientListScreen(
 
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }
+    val totalChecked = remember { mutableStateOf(0) }
 
     Scaffold(
         topBar = {
@@ -76,15 +77,22 @@ fun PatientListScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ){
-                Text(
-                    text = stringResource(id = R.string.patient_list_header),
-                    style = h3.copy(color = BrillantPurple)
-                )
+                if(isDeleteMode.value){
+                    Text(
+                        text = "${totalChecked.value} selecionado(s)",
+                        style = h3.copy(color = BrillantPurple)
+                    )
+                }else{
+                    Text(
+                        text = stringResource(id = R.string.patient_list_header),
+                        style = h3.copy(color = BrillantPurple)
+                    )
 
-                Text(
-                    text = "$nPatient pacientes cadastrados",
-                    style = body1.copy(color = Gray1)
-                )
+                    Text(
+                        text = "$nPatient pacientes cadastrados",
+                        style = body1.copy(color = Gray1)
+                    )
+                }
             }
 
             Row(
@@ -123,7 +131,7 @@ fun PatientListScreen(
             }
 
             if(isDeleteMode.value)
-                PatientCheckList(patients)
+                PatientCheckList(patients, totalChecked)
             else
                 PatientList(patients)
 

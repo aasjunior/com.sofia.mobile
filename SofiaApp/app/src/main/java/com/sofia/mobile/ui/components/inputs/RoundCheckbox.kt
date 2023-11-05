@@ -1,8 +1,10 @@
 package com.sofia.mobile.ui.components.inputs
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -13,23 +15,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.BrillantPurple
-
 @Composable
 fun RoundCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    uncheckedColor: Color = Color.Gray,
+    uncheckedColor: Color = BrillantPurple,
     checkedColor: Color = BrillantPurple
 ) {
     Box(
         modifier = modifier
             .size(32.dp)
             .clip(CircleShape)
-            .background(if (checked) checkedColor else uncheckedColor)
+            .background(if (checked) checkedColor else Color.Transparent)
+            .border(2.dp, uncheckedColor, CircleShape)
             .clickable(enabled) { onCheckedChange(!checked) },
         contentAlignment = Alignment.Center
     ) {
@@ -42,3 +45,13 @@ fun RoundCheckbox(
         }
     }
 }
+
+@Preview
+@Composable
+fun RoundCheckboxPreview(){
+    Row{
+        RoundCheckbox(checked = false, onCheckedChange = {})
+        RoundCheckbox(checked = true, onCheckedChange = {})
+    }
+}
+
