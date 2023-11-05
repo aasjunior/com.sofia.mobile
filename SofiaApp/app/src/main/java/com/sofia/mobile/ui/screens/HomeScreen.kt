@@ -23,7 +23,6 @@ import com.sofia.mobile.ui.components.cards.WelcomeCard
 import com.sofia.mobile.ui.components.navbar.appbar.CustomTopAppBar
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController

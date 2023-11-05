@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.components.cards
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -45,7 +44,6 @@ fun CharacterHeader(character: Char) {
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PatientList(patients: List<Paciente>) {
     val grouped = patients.groupBy { it.getNome()[0].uppercase()[0] }
@@ -53,7 +51,7 @@ fun PatientList(patients: List<Paciente>) {
 
     LazyColumn(state = listState) {
         grouped.forEach { (initial, patientsForInitial) ->
-            stickyHeader{
+            item {
                 CharacterHeader(initial)
             }
             item {
@@ -64,7 +62,7 @@ fun PatientList(patients: List<Paciente>) {
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Column{
-                        patientsForInitial.forEachIndexed {index, patient ->
+                        patientsForInitial.forEachIndexed { index, patient ->
                             Row(
                                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
                                 verticalAlignment = Alignment.CenterVertically,
@@ -76,7 +74,6 @@ fun PatientList(patients: List<Paciente>) {
                                     contentDescription = "Cute Star"
                                 )
                                 Text(
-                                    //modifier = Modifier.padding(start = 20.dp),
                                     text = patient.getNome(),
                                     style = body1
                                 )
@@ -102,7 +99,6 @@ fun PatientList(patients: List<Paciente>) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PatientCheckList(patients: List<Paciente>) {
     val grouped = patients.groupBy { it.getNome()[0].uppercase()[0] }
@@ -110,7 +106,7 @@ fun PatientCheckList(patients: List<Paciente>) {
 
     LazyColumn(state = listState) {
         grouped.forEach { (initial, patientsForInitial) ->
-            stickyHeader{
+            item {
                 CharacterHeader(initial)
             }
             item {
@@ -120,9 +116,10 @@ fun PatientCheckList(patients: List<Paciente>) {
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp)
                 ) {
-                    Column{
-                        patientsForInitial.forEachIndexed {index, patient ->
-                            val isChecked = remember { mutableStateOf(false) }
+                    patientsForInitial.forEach { patient ->
+                        val isChecked = remember { mutableStateOf(false) }
+
+                        Column{
                             Row(
                                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
                                 verticalAlignment = Alignment.CenterVertically,
@@ -133,23 +130,9 @@ fun PatientCheckList(patients: List<Paciente>) {
                                     onCheckedChange = { isChecked.value = it },
                                 )
                                 Text(
-                                    //modifier = Modifier.padding(start = 20.dp),
                                     text = patient.getNome(),
                                     style = body1
                                 )
-                            }
-                            // Add a divider for all but the last item
-                            if(index < patientsForInitial.size - 1) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Divider(
-                                        modifier = Modifier.fillMaxWidth(0.8f),
-                                        color = Gray3,
-                                        thickness = 1.dp
-                                    )
-                                }
                             }
                         }
                     }
@@ -159,7 +142,6 @@ fun PatientCheckList(patients: List<Paciente>) {
     }
 }
 
-/*
 @Preview
 @Composable
 fun PatientListPreview() {
@@ -171,7 +153,6 @@ fun PatientListPreview() {
 
     PatientList(patients)
 }
-*/
 
 @Preview
 @Composable

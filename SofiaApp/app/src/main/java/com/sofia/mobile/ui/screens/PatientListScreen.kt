@@ -36,6 +36,7 @@ import com.sofia.mobile.models.Paciente
 import com.sofia.mobile.models.Sexo
 import com.sofia.mobile.ui.components.buttons.FloatingAddButton
 import com.sofia.mobile.ui.components.cards.PatientCheckList
+import com.sofia.mobile.ui.components.cards.PatientList
 import com.sofia.mobile.ui.components.navbar.appbar.CustomTopAppBar
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
@@ -44,7 +45,6 @@ import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
 import java.time.LocalDate
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientListScreen(
     nPatient: Int
@@ -56,6 +56,8 @@ fun PatientListScreen(
     val patients: List<Paciente> = listOf(paciente1, paciente2, paciente3).sortedBy { it.getNome() }
 
     val isCardOpen = remember { mutableStateOf(false) }
+    val isDeleteMode = remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             CustomTopAppBar()
@@ -90,9 +92,25 @@ fun PatientListScreen(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                FloatingAddButton(
-                    onClick = {}
-                )
+                if(isCardOpen.value){
+                    Card(
+                        modifier = Modifier.padding(16.dp),
+                        shape = RoundedCornerShape(20.dp)
+                    ) {
+                        Column {
+                            TextButton(onClick = {  }) {
+                                Text("Novo")
+                            }
+                            TextButton(onClick = { isDeleteMode.value = !isDeleteMode.value }) {
+                                Text("Deletar")
+                            }
+                        }
+                    }
+                }else{
+                    FloatingAddButton(
+                        onClick = {}
+                    )
+                }
 
                 IconButton(onClick = { isCardOpen.value = !isCardOpen.value }){
                     Icon(
@@ -104,23 +122,10 @@ fun PatientListScreen(
                 }
             }
 
-            if(isCardOpen.value){
-                Card(
-                    modifier = Modifier.padding(16.dp),
-                    shape = RoundedCornerShape(20.dp)
-                ) {
-                    Column {
-                        TextButton(onClick = { /* Adicione a lógica para adicionar um paciente aqui */ }) {
-                            Text("Novo")
-                        }
-                        TextButton(onClick = { /* Adicione a lógica para deletar um paciente aqui */ }) {
-                            Text("Deletar")
-                        }
-                    }
-                }
-            }
-
-            PatientCheckList(patients)
+            if(isDeleteMode.value)
+                PatientCheckList(patients)
+            else
+                PatientList(patients)
 
         }
     }

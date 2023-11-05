@@ -21,7 +21,6 @@ import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.Black
 import com.sofia.mobile.ui.theme.SofiaTypography
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StarButton(
     text: String,

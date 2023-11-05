@@ -57,7 +57,6 @@ fun SearchableTopBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchTopBar(
     currentSearchText: String,
