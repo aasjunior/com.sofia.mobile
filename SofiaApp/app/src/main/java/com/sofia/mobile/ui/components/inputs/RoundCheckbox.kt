@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.Lilas
+
 @Composable
 fun RoundCheckbox(
     checked: Boolean,

@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //SplashScreen(rememberNavController())
                     //HomeScreen(rememberNavController())
-                    PatientListScreen(22)
+                    PatientListScreen(3)
                 }
             }
         }

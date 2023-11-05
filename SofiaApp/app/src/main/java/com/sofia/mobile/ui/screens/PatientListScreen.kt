@@ -34,7 +34,9 @@ import com.sofia.mobile.R
 import com.sofia.mobile.models.Etnia
 import com.sofia.mobile.models.Paciente
 import com.sofia.mobile.models.Sexo
+import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.buttons.FloatingAddButton
+import com.sofia.mobile.ui.components.cards.CustomOptionsCard
 import com.sofia.mobile.ui.components.cards.PatientCheckList
 import com.sofia.mobile.ui.components.cards.PatientList
 import com.sofia.mobile.ui.components.navbar.appbar.CustomTopAppBar
@@ -62,6 +64,21 @@ fun PatientListScreen(
     Scaffold(
         topBar = {
             CustomTopAppBar()
+        },
+        bottomBar = {
+            if(isDeleteMode.value){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    horizontalArrangement = Arrangement.Center
+                ){
+                    CustomButton(
+                        text = "Deletar",
+                        onClick = {}
+                    )
+                }
+            }
         }
     ) { innerPadding ->
         Column(
@@ -101,19 +118,12 @@ fun PatientListScreen(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 if(isCardOpen.value){
-                    Card(
-                        modifier = Modifier.padding(16.dp),
-                        shape = RoundedCornerShape(20.dp)
-                    ) {
-                        Column {
-                            TextButton(onClick = {  }) {
-                                Text("Novo")
-                            }
-                            TextButton(onClick = { isDeleteMode.value = !isDeleteMode.value }) {
-                                Text("Deletar")
-                            }
-                        }
-                    }
+                    CustomOptionsCard(
+                        options = listOf(
+                            "Novo" to {  },
+                            "Deletar" to { isDeleteMode.value = !isDeleteMode.value }
+                        )
+                    )
                 }else{
                     FloatingAddButton(
                         onClick = {}
@@ -130,11 +140,11 @@ fun PatientListScreen(
                 }
             }
 
-            if(isDeleteMode.value)
+            if(isDeleteMode.value) {
                 PatientCheckList(patients, totalChecked)
-            else
+            }else{
                 PatientList(patients)
-
+            }
         }
     }
 }
@@ -142,5 +152,5 @@ fun PatientListScreen(
 @Preview
 @Composable
 fun PatientListScreenPreview(){
-    PatientListScreen(22)
+    PatientListScreen(3)
 }

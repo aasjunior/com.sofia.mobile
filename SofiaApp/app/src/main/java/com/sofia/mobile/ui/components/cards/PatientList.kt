@@ -38,6 +38,7 @@ import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
+import com.sofia.mobile.ui.theme.Lilas
 import com.sofia.mobile.ui.theme.White
 import java.time.LocalDate
 
@@ -133,7 +134,7 @@ fun PatientCheckList(
                 )
                 Text(
                     text = "Todos",
-                    style = body1.copy(color = BrillantPurple)
+                    style = body1.copy(color = Lilas)
                 )
             }
         }
