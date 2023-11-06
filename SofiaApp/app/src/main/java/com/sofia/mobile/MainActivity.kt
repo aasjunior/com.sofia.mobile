@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.screens.HomeScreen
 import com.sofia.mobile.ui.screens.PatientListScreen
+import com.sofia.mobile.ui.screens.PatientRegistrationScreen
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray2
 import com.sofia.mobile.ui.theme.Lilas
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //SplashScreen(rememberNavController())
                     //HomeScreen(rememberNavController())
-                    PatientListScreen(3)
+                    //PatientListScreen(3)
+                    PatientRegistrationScreen()
                 }
             }
         }
