@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
@@ -37,24 +39,28 @@ fun OutlineTextRadioButton(
     state: MutableState<Int>
 ) {
     Column(
-        modifier = Modifier.height(120.dp),
+        modifier = Modifier
+            .width(264.dp)
+            .height(120.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = Modifier
-                .border(2.dp, Lilas, RoundedCornerShape(8.dp))
+                .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
                 .padding(16.dp)
+                .zIndex(2f)
         ) {
             Text(
                 text = label,
                 style = h3.copy(color = BrillantPurple),
                 modifier = Modifier
                     .offset(y = (-30).dp)
+                    .zIndex(1f)
                     .background(White, shape = RoundedCornerShape(4.dp))
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.width(264.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 options.forEachIndexed { index, option ->
@@ -94,7 +100,8 @@ fun OutlineRadioButton(
 ) {
     Column(
         modifier = Modifier
-            .border(2.dp, Lilas, RoundedCornerShape(8.dp))
+            .width(264.dp)
+            .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
