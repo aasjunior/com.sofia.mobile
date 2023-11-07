@@ -56,7 +56,8 @@ dependencies {
     implementation("androidx.wear.compose:compose-material3:1.0.0-alpha14")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.compose.material3:material3-window-size-class:1.1.0")
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")

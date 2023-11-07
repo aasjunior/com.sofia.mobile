@@ -47,6 +47,7 @@ import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
 import java.time.LocalDate
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientListScreen(
     nPatient: Int
