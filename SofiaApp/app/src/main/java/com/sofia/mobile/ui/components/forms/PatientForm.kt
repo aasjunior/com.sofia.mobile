@@ -21,10 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.mutableIntStateOf
+import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
+import com.sofia.mobile.ui.components.inputs.Selectbox
 
 @Composable
 fun PatientForm(){
@@ -35,7 +37,7 @@ fun PatientForm(){
             .fillMaxWidth(0.8f),
         shape = RoundedCornerShape(20.dp)
     ) {
-        FormStep1()
+        FormInfo()
 
     }
 }
@@ -43,16 +45,19 @@ fun PatientForm(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormStep1(){
+fun FormInfo(){
+    val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
+    var state by remember { mutableStateOf(true) }
+    var text by rememberSaveable { mutableStateOf("") }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         ImagePicker()
-        var text by rememberSaveable { mutableStateOf("") }
 
         OutlinedTextField(
-            modifier = Modifier,
+            modifier = Modifier.fillMaxWidth(0.8f),
             value = text,
             onValueChange = { text = it },
             label = { Text("Nome") },
@@ -70,7 +75,7 @@ fun FormStep1(){
         )
 
         OutlinedTextField(
-            modifier = Modifier,
+            modifier = Modifier.fillMaxWidth(0.8f),
             value = text,
             onValueChange = { text = it },
             label = { Text("Sobrenome") },
@@ -93,18 +98,28 @@ fun FormStep1(){
         )
 
         DatePicker(
+            modifier = Modifier.fillMaxWidth(0.8f),
             state = datePickerState,
             showModeToggle = false,
             headline = null,
             title = null,
+        )
+
+        Selectbox(label = "Etnia", options = ethnicities)
+
+        val state = remember { mutableIntStateOf(0) }
+        OutlineTextRadioButton(
+            label = "Sexo",
+            options = listOf("Feminino", "Masculino"),
+            state = state
         )
     }
 }
 
 @Preview
 @Composable
-fun FormStep1Preview(){
-    FormStep1()
+fun FormInfoPreview(){
+    FormInfo()
 }
 
 /*

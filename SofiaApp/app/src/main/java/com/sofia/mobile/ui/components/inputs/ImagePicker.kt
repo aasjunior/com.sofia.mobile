@@ -63,27 +63,16 @@ fun ImagePicker(){
                 .clip(CircleShape)
                 .background(Color.Transparent)
                 .size(25.dp)
-                /*.border(
-                    width = 1.dp,
-                    color = Lilas,
-                    shape = CircleShape
-                )*/
                 //.offset(y = 2.dp) // Move the box down by half its height
         ){
-            Icon(
-                painter = painterResource(id = R.drawable.ic_camera_picker),
-                contentDescription = "Icon camera picker"
-            )
-            /*Image(
+            Image(
                 modifier = Modifier
-                    .padding(5.dp)
                     .clip(CircleShape)
-                    .background(Color.Transparent)
                     .size(25.dp)
                     .clickable { launcher.launch("image/*") },
                 painter = painterResource(id = R.drawable.baseline_camera_alt_24),
-                contentDescription = "Icon camera"
-            )*/*/
+                contentDescription = "Icon camera picker"
+            )
         }
     }
 }
