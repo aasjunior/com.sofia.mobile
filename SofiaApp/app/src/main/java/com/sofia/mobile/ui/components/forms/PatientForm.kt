@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.components.forms
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,13 +35,19 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.ui.res.painterResource
+import com.sofia.mobile.R
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.inputs.Selectbox
 import com.sofia.mobile.ui.components.text.body1
+import com.sofia.mobile.ui.components.text.body2
+import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
 
 @Composable
@@ -96,33 +103,85 @@ fun FormProgress(currentStep: Int) {
             horizontalArrangement = Arrangement.SpaceAround
 
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "1")
-                Text(text = "Informações")
-            }
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "2")
-                Text(text = "Perfil")
-            }
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "3")
-                Text(text = "Responsável")
+            when(currentStep){
+                0 -> FormProgressStep1()
+                1 -> FormProgressStep2()
+                3 -> FormProgressStep3()
             }
         }
     }
 }
 
 @Composable
-fun FormProgressSteps(){
-    val Step1 = {
-
+fun FormProgressStep1(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step1),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "2", style = body2.copy(Gray1))
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "3", style = body2.copy(Gray1))
+        Text(text = "Responsável", style = fs12.copy(Gray1))
     }
 }
 
-@Preview
 @Composable
-fun FormProgressPreview(){
-    FormProgress(1)
+fun FormProgressStep2(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step2),
+            contentDescription = null
+        )
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "3", style = body2.copy(Gray1))
+        Text(text = "Responsável", style = fs12.copy(Gray1))
+    }
+}
+
+@Composable
+fun FormProgressStep3(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step3),
+            contentDescription = null
+        )
+        Text(text = "Responsável", style = fs12.copy(Gray1))
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -373,7 +432,16 @@ fun FormResponsavel(onNext: () -> Unit) {
 @Composable
 fun FormInfoPreview(){
     FormInfo()
-}*/
+}
+
+
+@Preview
+@Composable
+fun FormProgressPreview(){
+    FormProgress(1)
+}
+
+*/
 
 
 
