@@ -1,12 +1,18 @@
 package com.sofia.mobile.ui.components.forms
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +39,9 @@ import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.inputs.Selectbox
+import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.Gray3
 
 @Composable
 fun PatientForm(){
@@ -42,35 +50,93 @@ fun PatientForm(){
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        /*when(currentStep){
+        FormProgress(currentStep)
+        when(currentStep){
             0 -> FormInfo { currentStep++ }
             1 -> FormPerfil { currentStep++ }
-        }*/
-        FormPerfil {currentStep++}
+            2 -> FormResponsavel { currentStep++ }
+        }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
-            if( currentStep == 0)
-                CustomButton(text = "Voltar", onClick = {})
-            CustomButton(text = "Próximo", onClick = {})
+            when(currentStep){
+                0 -> {
+                    CustomButton(text = "Próximo", onClick = {})
+                }
+                1 -> {
+                    CustomButton(text = "Voltar", onClick = {})
+                    CustomButton(text = "Próximo", onClick = {})
+                }
+                2 -> {
+                    CustomButton(text = "Voltar", onClick = {})
+                    CustomButton(text = "Salvar", onClick = {})
+                }
+            }
+
         }
     }
 }
 
+@Composable
+fun FormProgress(currentStep: Int) {
+    ElevatedCard(
+        modifier = Modifier
+            .padding(8.dp)
+            .height(80.dp)
+            .fillMaxWidth(0.9f),
+        shape = RoundedCornerShape(10.dp),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "1")
+                Text(text = "Informações")
+            }
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "2")
+                Text(text = "Perfil")
+            }
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "3")
+                Text(text = "Responsável")
+            }
+        }
+    }
+}
+
+@Composable
+fun FormProgressSteps(){
+    val Step1 = {
+
+    }
+}
+
+@Preview
+@Composable
+fun FormProgressPreview(){
+    FormProgress(1)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInfo(onNext: () -> Unit){
     val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
-    var text by rememberSaveable { mutableStateOf("") }
+    var nomePaciente by rememberSaveable { mutableStateOf("") }
+    var sobrenomePaciente by rememberSaveable { mutableStateOf("") }
 
     ElevatedCard(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(0.9f),
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Column(
             modifier = Modifier
@@ -83,8 +149,8 @@ fun FormInfo(onNext: () -> Unit){
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = text,
-                onValueChange = { text = it },
+                value = nomePaciente,
+                onValueChange = { nomePaciente = it },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = true,
@@ -104,8 +170,8 @@ fun FormInfo(onNext: () -> Unit){
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = text,
-                onValueChange = { text = it },
+                value = sobrenomePaciente,
+                onValueChange = { sobrenomePaciente = it },
                 label = { Text("Sobrenome") },
                 enabled = true,
                 readOnly = false,
@@ -134,15 +200,14 @@ fun FormInfo(onNext: () -> Unit){
                 initialSelectedDateMillis = 1685112333816, // epoch/unix timestamp
                 initialDisplayMode = DisplayMode.Input,
             )
-            Box(modifier = Modifier.width(264.dp)) {
-                DatePicker(
-                    modifier = Modifier.width(264.dp),
-                    state = datePickerState,
-                    showModeToggle = false,
-                    headline = null,
-                    title = null
-                )
-            }
+            DatePicker(
+                modifier = Modifier.widthIn(min = 264.dp),
+                state = datePickerState,
+                showModeToggle = false,
+                headline = null,
+                title = null
+            )
+
 
             Selectbox(label = "Etnia", options = ethnicities)
         }
@@ -155,7 +220,7 @@ fun FormPerfil(onNext: () -> Unit) {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(0.9f),
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Column(
             modifier = Modifier
@@ -199,7 +264,7 @@ fun FormResponsavel(onNext: () -> Unit) {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(0.9f),
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Column(
             modifier = Modifier
