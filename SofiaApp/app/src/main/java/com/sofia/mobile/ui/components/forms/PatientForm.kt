@@ -49,7 +49,6 @@ import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
-
 @Composable
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
@@ -70,14 +69,14 @@ fun PatientForm(){
         ){
             when(currentStep){
                 0 -> {
-                    CustomButton(text = "Próximo", onClick = {})
+                    CustomButton(text = "Próximo", onClick = { currentStep++ })
                 }
                 1 -> {
-                    CustomButton(text = "Voltar", onClick = {})
-                    CustomButton(text = "Próximo", onClick = {})
+                    CustomButton(text = "Voltar", onClick = { currentStep-- })
+                    CustomButton(text = "Próximo", onClick = { currentStep++ })
                 }
                 2 -> {
-                    CustomButton(text = "Voltar", onClick = {})
+                    CustomButton(text = "Voltar", onClick = { currentStep-- })
                     CustomButton(text = "Salvar", onClick = {})
                 }
             }
@@ -85,6 +84,7 @@ fun PatientForm(){
         }
     }
 }
+
 
 @Composable
 fun FormProgress(currentStep: Int) {
@@ -254,7 +254,7 @@ fun FormInfo(onNext: () -> Unit){
                 options = listOf("Feminino", "Masculino"),
                 state = state
             )
-
+/*
             val datePickerState = rememberDatePickerState(
                 initialSelectedDateMillis = 1685112333816, // epoch/unix timestamp
                 initialDisplayMode = DisplayMode.Input,
@@ -268,7 +268,7 @@ fun FormInfo(onNext: () -> Unit){
             )
 
 
-            Selectbox(label = "Etnia", options = ethnicities)
+            Selectbox(label = "Etnia", options = ethnicities)*/
         }
     }
 }
