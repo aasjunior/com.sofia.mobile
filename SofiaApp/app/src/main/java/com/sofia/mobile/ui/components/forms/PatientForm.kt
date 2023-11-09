@@ -35,6 +35,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
@@ -50,7 +51,6 @@ import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
     val patientInfoViewModel = PatientInfoViewModel()
-
 
     Column(
         modifier = Modifier
@@ -76,12 +76,16 @@ fun PatientForm(){
                 0 -> {
                     CustomButton(text = "Próximo", onClick = {
                         if(isFormInfoValid(viewModel = patientInfoViewModel)){
+                            patientInfoViewModel.onSave()
                             currentStep++
                         }
                     })
                 }
                 1 -> {
-                    CustomButton(text = "Voltar", onClick = { currentStep-- })
+                    CustomButton(text = "Voltar", onClick = {
+                        patientInfoViewModel.onRestore()
+                        currentStep--
+                    })
                     CustomButton(text = "Próximo", onClick = { currentStep++ })
                 }
                 2 -> {
@@ -120,7 +124,7 @@ fun FormInfo(
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = viewModel.nomePaciente,
-                onValueChange = { viewModel.nomePaciente = it },
+                onValueChange = { viewModel.onNomePacienteChange(it) },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = false,
