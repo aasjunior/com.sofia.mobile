@@ -37,9 +37,9 @@ import com.sofia.mobile.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Selectbox(label: String, options: List<String>) {
+fun Selectbox(label: String, options: List<String>, selectedOptionVM: String) {
+    var selectedOptionText = selectedOptionVM
     var expanded by remember { mutableStateOf(false) }
-    var selectedOptionText by remember { mutableStateOf(options[0]) }
 
     Column(
         modifier = Modifier
@@ -49,18 +49,18 @@ fun Selectbox(label: String, options: List<String>) {
     ) {
         Box(
             modifier = Modifier
-                .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
-                .padding(16.dp)
-                .zIndex(0f)
+               // .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
+                //.padding(16.dp)
+                //.zIndex(0f)
         ) {
-            Text(
+/*            Text(
                 text = label,
                 style = h3.copy(color = BrillantPurple),
                 modifier = Modifier
                     .offset(y = (-30).dp)
                     .zIndex(1f)
                     .background(White, shape = RoundedCornerShape(4.dp))
-            )
+            )*/
             ExposedDropdownMenuBox(
                 modifier = Modifier,
                 expanded = expanded,
@@ -69,6 +69,7 @@ fun Selectbox(label: String, options: List<String>) {
                 TextField(
                     modifier = Modifier.menuAnchor(),
                     readOnly = true,
+                    label = {Text(label)},
                     value = selectedOptionText,
                     onValueChange = {},
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
@@ -101,5 +102,5 @@ fun Selectbox(label: String, options: List<String>) {
 @Composable
 fun SelectboxPreview(){
     val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
-    Selectbox(label = "Etnia", options = ethnicities)
+    Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = "Branca")
 }

@@ -1,20 +1,20 @@
 package com.sofia.mobile.ui.components.forms
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -31,11 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.res.painterResource
 import com.sofia.mobile.R
@@ -43,22 +40,30 @@ import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.inputs.Selectbox
-import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.body2
 import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
-import com.sofia.mobile.ui.theme.Gray3
+import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
+
 @Composable
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
+    val patientInfoViewModel = PatientInfoViewModel()
+
+
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         FormProgress(currentStep)
         when(currentStep){
-            0 -> FormInfo { currentStep++ }
+            0 -> FormInfo(
+                viewModel = patientInfoViewModel,
+                onNext = { currentStep++ }
+            )
             1 -> FormPerfil { currentStep++ }
             2 -> FormResponsavel { currentStep++ }
         }
@@ -69,7 +74,11 @@ fun PatientForm(){
         ){
             when(currentStep){
                 0 -> {
-                    CustomButton(text = "Próximo", onClick = { currentStep++ })
+                    CustomButton(text = "Próximo", onClick = {
+                        if(isFormInfoValid(viewModel = patientInfoViewModel)){
+                            currentStep++
+                        }
+                    })
                 }
                 1 -> {
                     CustomButton(text = "Voltar", onClick = { currentStep-- })
@@ -85,111 +94,13 @@ fun PatientForm(){
     }
 }
 
-
-@Composable
-fun FormProgress(currentStep: Int) {
-    ElevatedCard(
-        modifier = Modifier
-            .padding(8.dp)
-            .height(80.dp)
-            .fillMaxWidth(0.9f),
-        shape = RoundedCornerShape(10.dp),
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
-
-        ) {
-            when(currentStep){
-                0 -> FormProgressStep1()
-                1 -> FormProgressStep2()
-                3 -> FormProgressStep3()
-            }
-        }
-    }
-}
-
-@Composable
-fun FormProgressStep1(){
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step1),
-            contentDescription = null
-        )
-        Text(text = "Informações", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "2", style = body2.copy(Gray1))
-        Text(text = "Perfil", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "3", style = body2.copy(Gray1))
-        Text(text = "Responsável", style = fs12.copy(Gray1))
-    }
-}
-
-@Composable
-fun FormProgressStep2(){
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step_check),
-            contentDescription = null
-        )
-        Text(text = "Informações", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step2),
-            contentDescription = null
-        )
-        Text(text = "Perfil", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "3", style = body2.copy(Gray1))
-        Text(text = "Responsável", style = fs12.copy(Gray1))
-    }
-}
-
-@Composable
-fun FormProgressStep3(){
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step_check),
-            contentDescription = null
-        )
-        Text(text = "Informações", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step_check),
-            contentDescription = null
-        )
-        Text(text = "Perfil", style = fs12.copy(Gray1))
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            modifier = Modifier.size(25.dp),
-            painter = painterResource(id = R.drawable.ic_step3),
-            contentDescription = null
-        )
-        Text(text = "Responsável", style = fs12.copy(Gray1))
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormInfo(onNext: () -> Unit){
+fun FormInfo(
+    viewModel: PatientInfoViewModel,
+    onNext: () -> Unit
+){
     val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
-    var nomePaciente by rememberSaveable { mutableStateOf("") }
-    var sobrenomePaciente by rememberSaveable { mutableStateOf("") }
 
     ElevatedCard(
         modifier = Modifier
@@ -208,11 +119,11 @@ fun FormInfo(onNext: () -> Unit){
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = nomePaciente,
-                onValueChange = { nomePaciente = it },
+                value = viewModel.nomePaciente,
+                onValueChange = { viewModel.nomePaciente = it },
                 label = { Text("Nome") },
                 enabled = true,
-                readOnly = true,
+                readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 placeholder = {
                     Text(text = "Primeiro Nome")
@@ -229,8 +140,8 @@ fun FormInfo(onNext: () -> Unit){
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = sobrenomePaciente,
-                onValueChange = { sobrenomePaciente = it },
+                value = viewModel.sobrenomePaciente,
+                onValueChange = { viewModel.sobrenomePaciente = it },
                 label = { Text("Sobrenome") },
                 enabled = true,
                 readOnly = false,
@@ -248,13 +159,12 @@ fun FormInfo(onNext: () -> Unit){
                 )
             )
 
-            val state = remember { mutableIntStateOf(0) }
             OutlineTextRadioButton(
                 label = "Sexo",
                 options = listOf("Feminino", "Masculino"),
-                state = state
+                state = viewModel.sexoState
             )
-/*
+
             val datePickerState = rememberDatePickerState(
                 initialSelectedDateMillis = 1685112333816, // epoch/unix timestamp
                 initialDisplayMode = DisplayMode.Input,
@@ -268,7 +178,7 @@ fun FormInfo(onNext: () -> Unit){
             )
 
 
-            Selectbox(label = "Etnia", options = ethnicities)*/
+            Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = viewModel.selectedOptionText)
         }
     }
 }
@@ -374,7 +284,7 @@ fun FormResponsavel(onNext: () -> Unit) {
                 )
             )
 
-            Selectbox(label = "Parentesco", listOf("Mãe", "Pai", "Irmão(ã)"))
+            //Selectbox(label = "Parentesco", listOf("Mãe", "Pai", "Irmão(ã)"))
         }
     }
     ElevatedCard(
@@ -427,6 +337,111 @@ fun FormResponsavel(onNext: () -> Unit) {
         }
     }
 }
+
+fun isFormInfoValid(viewModel: PatientInfoViewModel): Boolean {
+    return viewModel.nomePaciente.isNotEmpty() &&
+            viewModel.sobrenomePaciente.isNotEmpty() //&&
+            //viewModel.selectedOptionText.isNotEmpty()
+}
+
+@Composable
+fun FormProgress(currentStep: Int) {
+    ElevatedCard(
+        modifier = Modifier
+            .padding(8.dp)
+            .height(80.dp)
+            .fillMaxWidth(0.9f),
+        shape = RoundedCornerShape(10.dp),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+
+        ) {
+            when(currentStep){
+                0 -> FormProgressStep1()
+                1 -> FormProgressStep2()
+                3 -> FormProgressStep3()
+            }
+        }
+    }
+}
+
+@Composable
+fun FormProgressStep1(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step1),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "2", style = body2.copy(Gray1))
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "3", style = body2.copy(Gray1))
+        Text(text = "Responsável", style = fs12.copy(Gray1))
+    }
+}
+
+@Composable
+fun FormProgressStep2(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step2),
+            contentDescription = null
+        )
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "3", style = body2.copy(Gray1))
+        Text(text = "Responsável", style = fs12.copy(Gray1))
+    }
+}
+
+@Composable
+fun FormProgressStep3(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Informações", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step_check),
+            contentDescription = null
+        )
+        Text(text = "Perfil", style = fs12.copy(Gray1))
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            modifier = Modifier.size(25.dp),
+            painter = painterResource(id = R.drawable.ic_step3),
+            contentDescription = null
+        )
+        Text(text = "Responsável", style = fs12.copy(Gray1))
+    }
+}
+
 /*
 @Preview
 @Composable
@@ -442,11 +457,3 @@ fun FormProgressPreview(){
 }
 
 */
-
-
-
-@Preview
-@Composable
-fun PatientFormPreview(){
-    PatientForm()
-}

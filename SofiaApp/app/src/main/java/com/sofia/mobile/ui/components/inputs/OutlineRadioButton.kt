@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -48,16 +49,17 @@ fun OutlineTextRadioButton(
             modifier = Modifier
                 .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
                 .padding(16.dp)
-                .zIndex(2f)
+                .clipToBounds()
+                .zIndex(2f) // Aumente o zIndex para que a borda fique atrás da label
         ) {
-            Text(
+            /*Text(
                 text = label,
                 style = h3.copy(color = BrillantPurple),
                 modifier = Modifier
-                    .offset(y = (-30).dp)
-                    .zIndex(1f)
+                    .offset(y = (-30).dp) // Ajuste o offset para que a label fique mais acima
+                    .zIndex(1f) // Defina o zIndex da label para que fique na frente da borda
                     .background(White, shape = RoundedCornerShape(4.dp))
-            )
+            )*/
 
             Row(
                 modifier = Modifier.width(264.dp),
