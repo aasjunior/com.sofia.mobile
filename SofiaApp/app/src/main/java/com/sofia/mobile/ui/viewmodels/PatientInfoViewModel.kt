@@ -13,27 +13,27 @@ class PatientInfoViewModel : ViewModel() {
 
     var nomePaciente by mutableStateOf("")
     var sobrenomePaciente by mutableStateOf("")
-    var selectedOptionText by mutableStateOf("")
+    var etnia by mutableStateOf("")
     var sexoState = mutableIntStateOf(0)
 
     init {
         savedStateHandle.set("nomePaciente", nomePaciente)
         savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("selectedOptionText", selectedOptionText)
+        savedStateHandle.set("etnia", etnia)
         savedStateHandle.set("sexoState", sexoState)
     }
 
     fun onSave() {
         savedStateHandle.set("nomePaciente", nomePaciente)
         savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("selectedOptionText", selectedOptionText)
+        savedStateHandle.set("etnia", etnia)
         savedStateHandle.set("sexoState", sexoState)
     }
 
     fun onRestore() {
         nomePaciente = savedStateHandle.get("nomePaciente") ?: ""
         sobrenomePaciente = savedStateHandle.get("sobrenomePaciente") ?: ""
-        selectedOptionText = savedStateHandle.get("selectedOptionText") ?: ""
+        etnia = savedStateHandle.get("etnia") ?: ""
         sexoState = savedStateHandle.get("sexoState") ?: mutableIntStateOf(0)
     }
 
@@ -45,8 +45,8 @@ class PatientInfoViewModel : ViewModel() {
         sobrenomePaciente = novoSobrenomePaciente
     }
 
-    fun onSelectedOptionChange(novaSelectedOptionText: String) {
-        selectedOptionText = novaSelectedOptionText
+    fun onSelectedOptionChange(novaEtnia: String) {
+        etnia = novaEtnia
     }
 
     fun onSexoStateSelected(novoSexoState: MutableIntState) {

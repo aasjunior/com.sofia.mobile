@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,6 +51,7 @@ import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 @Composable
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
+
     val patientInfoViewModel = PatientInfoViewModel()
 
     Column(
@@ -61,7 +63,7 @@ fun PatientForm(){
         FormProgress(currentStep)
         when(currentStep){
             0 -> FormInfo(
-                viewModel = patientInfoViewModel,
+                pvm = patientInfoViewModel,
                 onNext = { currentStep++ }
             )
             1 -> FormPerfil { currentStep++ }
@@ -74,12 +76,14 @@ fun PatientForm(){
         ){
             when(currentStep){
                 0 -> {
-                    CustomButton(text = "Próximo", onClick = {
-                        if(isFormInfoValid(viewModel = patientInfoViewModel)){
-                            patientInfoViewModel.onSave()
-                            currentStep++
-                        }
-                    })
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End){
+                        CustomButton(text = "Próximo", onClick = {
+                            if(isFormInfoValid(viewModel = patientInfoViewModel)){
+                                patientInfoViewModel.onSave()
+                                currentStep++
+                            }
+                        })
+                    }
                 }
                 1 -> {
                     CustomButton(text = "Voltar", onClick = {
@@ -101,9 +105,19 @@ fun PatientForm(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInfo(
-    viewModel: PatientInfoViewModel,
+    pvm: PatientInfoViewModel,
     onNext: () -> Unit
 ){
+    var nomePaciente by rememberSaveable { mutableStateOf(pvm.nomePaciente) }
+    var sobrenomePaciente by rememberSaveable { mutableStateOf(pvm.sobrenomePaciente) }
+    var sexo by rememberSaveable { mutableStateOf(pvm.sexoState) }
+    var etnia by rememberSaveable { mutableStateOf(pvm.etnia) }
+
+    pvm.onNomePacienteChange(nomePaciente)
+    pvm.onSobrenomePacienteChange(sobrenomePaciente)
+    pvm.onSexoStateSelected(sexo)
+    pvm.onSelectedOptionChange(etnia)
+
     val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
 
     ElevatedCard(
@@ -123,8 +137,8 @@ fun FormInfo(
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = viewModel.nomePaciente,
-                onValueChange = { viewModel.onNomePacienteChange(it) },
+                value = pvm.nomePaciente,
+                onValueChange = { nomePaciente = it },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = false,
@@ -144,8 +158,8 @@ fun FormInfo(
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = viewModel.sobrenomePaciente,
-                onValueChange = { viewModel.sobrenomePaciente = it },
+                value = pvm.sobrenomePaciente,
+                onValueChange = { sobrenomePaciente = it },
                 label = { Text("Sobrenome") },
                 enabled = true,
                 readOnly = false,
@@ -166,7 +180,7 @@ fun FormInfo(
             OutlineTextRadioButton(
                 label = "Sexo",
                 options = listOf("Feminino", "Masculino"),
-                state = viewModel.sexoState
+                state = sexo
             )
 
             val datePickerState = rememberDatePickerState(
@@ -181,8 +195,7 @@ fun FormInfo(
                 title = null
             )
 
-
-            Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = viewModel.selectedOptionText)
+            Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = etnia)
         }
     }
 }
