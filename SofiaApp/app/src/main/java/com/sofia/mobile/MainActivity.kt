@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.screens.HomeScreen
 import com.sofia.mobile.ui.screens.PatientListScreen
 import com.sofia.mobile.ui.screens.PatientRegistrationScreen
+import com.sofia.mobile.ui.screens.SplashScreen
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray2
 import com.sofia.mobile.ui.theme.Lilas
@@ -32,10 +35,13 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    //SplashScreen(rememberNavController())
-                    //HomeScreen(rememberNavController())
-                    //PatientListScreen(3)
-                    PatientRegistrationScreen()
+                    val navController = rememberNavController()
+                    NavHost(navController, startDestination = "splash") {
+                        composable("splash") { SplashScreen(navController) }
+                        composable("home") { HomeScreen(navController) }
+                        composable("patientList") { PatientListScreen(navController, nPatient = 0) } // substitua 0 pelo número de pacientes
+                        composable("patientRegistration") { PatientRegistrationScreen() }
+                    }
                 }
             }
         }
