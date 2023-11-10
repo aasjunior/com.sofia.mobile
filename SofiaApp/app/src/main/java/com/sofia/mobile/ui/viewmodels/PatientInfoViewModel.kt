@@ -1,55 +1,32 @@
 package com.sofia.mobile.ui.viewmodels
 
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class PatientInfoViewModel : ViewModel() {
-    val savedStateHandle = SavedStateHandle()
+    private val _nome = MutableStateFlow<String>("")
+    private val _sobrenome = MutableStateFlow<String>("")
+    private val _sexo = MutableStateFlow<String>("")
+    private val _etnia = MutableStateFlow<String>("")
 
-    var nomePaciente by mutableStateOf("")
-    var sobrenomePaciente by mutableStateOf("")
-    var selectedOptionText by mutableStateOf("")
-    var sexoState = mutableIntStateOf(0)
+    val nome = _nome.asStateFlow()
+    val sobrenome = _sobrenome.asStateFlow()
+    val sexo = _sexo.asStateFlow()
+    val etnia = _etnia.asStateFlow()
 
-    init {
-        savedStateHandle.set("nomePaciente", nomePaciente)
-        savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("selectedOptionText", selectedOptionText)
-        savedStateHandle.set("sexoState", sexoState)
+    fun updateNome(novoNome: String) {
+        _nome.value = novoNome
     }
 
-    fun onSave() {
-        savedStateHandle.set("nomePaciente", nomePaciente)
-        savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("selectedOptionText", selectedOptionText)
-        savedStateHandle.set("sexoState", sexoState)
-    }
-
-    fun onRestore() {
-        nomePaciente = savedStateHandle.get("nomePaciente") ?: ""
-        sobrenomePaciente = savedStateHandle.get("sobrenomePaciente") ?: ""
-        selectedOptionText = savedStateHandle.get("selectedOptionText") ?: ""
-        sexoState = savedStateHandle.get("sexoState") ?: mutableIntStateOf(0)
-    }
-
-    fun onNomePacienteChange(novoNomePaciente: String) {
-        nomePaciente = novoNomePaciente
-    }
-
-    fun onSobrenomePacienteChange(novoSobrenomePaciente: String) {
-        sobrenomePaciente = novoSobrenomePaciente
-    }
-
-    fun onSelectedOptionChange(novaSelectedOptionText: String) {
-        selectedOptionText = novaSelectedOptionText
-    }
-
-    fun onSexoStateSelected(novoSexoState: MutableIntState) {
-        sexoState = novoSexoState
+    fun updateSobrenome(novoSobrenome: String) {
+        _sobrenome.value = novoSobrenome
     }
 }
