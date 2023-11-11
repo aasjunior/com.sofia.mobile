@@ -30,6 +30,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.models.Etnia
 import com.sofia.mobile.models.Paciente
@@ -50,6 +52,7 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientListScreen(
+    navController: NavController,
     nPatient: Int
 ){
     val paciente1 = Paciente("Pedro Rodriguez", LocalDate.of(1990, 4, 15), Etnia.NEGRA, Sexo.MASCULINO, false, false, false)
@@ -121,13 +124,13 @@ fun PatientListScreen(
                 if(isCardOpen.value){
                     CustomOptionsCard(
                         options = listOf(
-                            "Novo" to {  },
+                            "Novo" to { navController.navigate("patientRegistration") },
                             "Deletar" to { isDeleteMode.value = !isDeleteMode.value }
                         )
                     )
                 }else{
                     FloatingAddButton(
-                        onClick = {}
+                        onClick = { navController.navigate("patientRegistration") }
                     )
                 }
 
@@ -153,5 +156,5 @@ fun PatientListScreen(
 @Preview
 @Composable
 fun PatientListScreenPreview(){
-    PatientListScreen(3)
+    PatientListScreen(navController = rememberNavController(), 3)
 }

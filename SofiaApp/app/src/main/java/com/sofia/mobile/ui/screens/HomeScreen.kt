@@ -53,7 +53,7 @@ fun HomeScreen(
                 )
                 StarButton(
                     text = "Listar Pacientes",
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("patientList") },
                     iconId = R.drawable.ic_star_doubt
                 )
                 StarButton(

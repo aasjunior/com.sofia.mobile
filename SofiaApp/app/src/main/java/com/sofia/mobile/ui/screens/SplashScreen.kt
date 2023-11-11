@@ -46,11 +46,14 @@ fun SplashScreen(navController: NavController) {
 
     if (showSecondBox.value) {
         SecondSplashScreen()
+        LaunchedEffect(Unit) {
+            delay(2000)
+            navController.navigate("home")
+        }
     } else {
         FirstSplashScreen()
     }
 }
-
 @Composable
 fun FirstSplashScreen(){
     Box(

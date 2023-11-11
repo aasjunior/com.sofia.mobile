@@ -28,12 +28,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -51,8 +50,7 @@ import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 @Composable
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
-
-    val patientInfoViewModel = PatientInfoViewModel()
+    val pvm: PatientInfoViewModel = viewModel()
 
     Column(
         modifier = Modifier
@@ -63,11 +61,17 @@ fun PatientForm(){
         FormProgress(currentStep)
         when(currentStep){
             0 -> FormInfo(
-                pvm = patientInfoViewModel,
+                pvm = pvm,
                 onNext = { currentStep++ }
             )
-            1 -> FormPerfil { currentStep++ }
-            2 -> FormResponsavel { currentStep++ }
+            1 -> FormPerfil(
+                pvm = pvm,
+                onNext = { currentStep++ }
+            )
+            2 -> FormResponsavel(
+                pvm = pvm,
+                onNext = { currentStep++ }
+            )
         }
 
         Row(
@@ -76,10 +80,12 @@ fun PatientForm(){
         ){
             when(currentStep){
                 0 -> {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End){
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ){
                         CustomButton(text = "Próximo", onClick = {
-                            if(isFormInfoValid(viewModel = patientInfoViewModel)){
-                                patientInfoViewModel.onSave()
+                            if(isFormInfoValid(pvm = pvm)) {
                                 currentStep++
                             }
                         })
@@ -87,7 +93,6 @@ fun PatientForm(){
                 }
                 1 -> {
                     CustomButton(text = "Voltar", onClick = {
-                        patientInfoViewModel.onRestore()
                         currentStep--
                     })
                     CustomButton(text = "Próximo", onClick = { currentStep++ })
@@ -108,15 +113,10 @@ fun FormInfo(
     pvm: PatientInfoViewModel,
     onNext: () -> Unit
 ){
-    var nomePaciente by rememberSaveable { mutableStateOf(pvm.nomePaciente) }
-    var sobrenomePaciente by rememberSaveable { mutableStateOf(pvm.sobrenomePaciente) }
-    var sexo by rememberSaveable { mutableStateOf(pvm.sexoState) }
-    var etnia by rememberSaveable { mutableStateOf(pvm.etnia) }
-
-    pvm.onNomePacienteChange(nomePaciente)
-    pvm.onSobrenomePacienteChange(sobrenomePaciente)
-    pvm.onSexoStateSelected(sexo)
-    pvm.onSelectedOptionChange(etnia)
+    val nome by pvm.nome.collectAsState()
+    val sobrenome by pvm.sobrenome.collectAsState()
+    val sexo by pvm.sexo.collectAsState()
+    val etnia by pvm.etnia.collectAsState()
 
     val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
 
@@ -137,8 +137,8 @@ fun FormInfo(
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = pvm.nomePaciente,
-                onValueChange = { nomePaciente = it },
+                value = nome,
+                onValueChange = { pvm.updateNome(it) },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = false,
@@ -158,8 +158,8 @@ fun FormInfo(
 
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
-                value = pvm.sobrenomePaciente,
-                onValueChange = { sobrenomePaciente = it },
+                value = sobrenome,
+                onValueChange = { pvm.updateSobrenome(it) },
                 label = { Text("Sobrenome") },
                 enabled = true,
                 readOnly = false,
@@ -180,7 +180,7 @@ fun FormInfo(
             OutlineTextRadioButton(
                 label = "Sexo",
                 options = listOf("Feminino", "Masculino"),
-                state = sexo
+                pvm = pvm
             )
 
             val datePickerState = rememberDatePickerState(
@@ -195,13 +195,21 @@ fun FormInfo(
                 title = null
             )
 
+
             Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = etnia)
         }
     }
 }
 
 @Composable
-fun FormPerfil(onNext: () -> Unit) {
+fun FormPerfil(
+    pvm: PatientInfoViewModel,
+    onNext: () -> Unit
+) {
+    val casosFamilia = pvm.casosFamilia.collectAsState()
+    val complicacoesGravidez = pvm.complicacoesGravidez.collectAsState()
+    val prematuro = pvm.prematuro.collectAsState()
+
     ElevatedCard(
         modifier = Modifier
             .padding(8.dp)
@@ -216,23 +224,25 @@ fun FormPerfil(onNext: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            val stateP1 = remember { mutableIntStateOf(0) }
             OutlineRadioButton(
                 label = "Nasceu prematuro?",
                 options = listOf("Sim", "Não"),
-                state = stateP1
+                state = prematuro,
+                onOptionSelected = pvm::updatePrematuro
             )
-            val stateP2 = remember { mutableIntStateOf(0) }
+
             OutlineRadioButton(
                 label = "Há alguém na família diagnosticado com autismo?",
                 options = listOf("Sim", "Não"),
-                state = stateP2
+                state = casosFamilia,
+                onOptionSelected = pvm::updateCasosFamilia
             )
-            val stateP3 = remember { mutableIntStateOf(0) }
+
             OutlineRadioButton(
                 label = "A mãe teve complicações na gravidez?",
                 options = listOf("Sim", "Não"),
-                state = stateP3
+                state = complicacoesGravidez,
+                onOptionSelected = pvm::updateComplicacoesGravidez
             )
 
         }
@@ -240,11 +250,14 @@ fun FormPerfil(onNext: () -> Unit) {
 }
 
 @Composable
-fun FormResponsavel(onNext: () -> Unit) {
-    var nomeResponsavel by rememberSaveable { mutableStateOf("") }
-    var sobrenomeResponsavel by rememberSaveable { mutableStateOf("") }
-    var celularResponsavel by rememberSaveable { mutableStateOf("") }
-    var emailResponsavel by rememberSaveable { mutableStateOf("") }
+fun FormResponsavel(
+    pvm: PatientInfoViewModel,
+    onNext: () -> Unit
+) {
+    val nomeResponsavel by pvm.nomeResponsavel.collectAsState()
+    val sobrenomeResponsavel by pvm.sobrenomeResponsavel.collectAsState()
+    val celularResponsavel by pvm.celular.collectAsState()
+    val emailResponsavel by pvm.email.collectAsState()
 
     ElevatedCard(
         modifier = Modifier
@@ -262,7 +275,7 @@ fun FormResponsavel(onNext: () -> Unit) {
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = nomeResponsavel,
-                onValueChange = { nomeResponsavel = it },
+                onValueChange = { pvm.updateNomeResponsavel(it) },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = true,
@@ -283,7 +296,7 @@ fun FormResponsavel(onNext: () -> Unit) {
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = sobrenomeResponsavel,
-                onValueChange = { sobrenomeResponsavel = it },
+                onValueChange = { pvm.updateSobrenomeResponsavel(it) },
                 label = { Text("Nome") },
                 enabled = true,
                 readOnly = true,
@@ -320,8 +333,8 @@ fun FormResponsavel(onNext: () -> Unit) {
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = celularResponsavel,
-                onValueChange = { celularResponsavel = it },
-                label = { Text("Celular") },
+                onValueChange = { pvm.updateCelular(it) },
+                label = { Text("Email") },
                 enabled = true,
                 readOnly = true,
                 textStyle = MaterialTheme.typography.bodyMedium,
@@ -337,7 +350,7 @@ fun FormResponsavel(onNext: () -> Unit) {
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = emailResponsavel,
-                onValueChange = { emailResponsavel = it },
+                onValueChange = { pvm.updateEmail(it) },
                 label = { Text("Email") },
                 enabled = true,
                 readOnly = true,
@@ -355,10 +368,10 @@ fun FormResponsavel(onNext: () -> Unit) {
     }
 }
 
-fun isFormInfoValid(viewModel: PatientInfoViewModel): Boolean {
-    return viewModel.nomePaciente.isNotEmpty() &&
-            viewModel.sobrenomePaciente.isNotEmpty() //&&
-            //viewModel.selectedOptionText.isNotEmpty()
+fun isFormInfoValid(pvm: PatientInfoViewModel): Boolean {
+    return pvm.nome.value.isNotEmpty() &&
+            pvm.sobrenome.value.isNotEmpty() //&&
+    //viewModel.selectedOptionText.isNotEmpty()
 }
 
 @Composable

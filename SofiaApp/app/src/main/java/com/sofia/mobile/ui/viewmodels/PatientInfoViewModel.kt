@@ -7,49 +7,87 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class PatientInfoViewModel : ViewModel() {
-    val savedStateHandle = SavedStateHandle()
+    private val _nome = MutableStateFlow<String>("")
+    private val _sobrenome = MutableStateFlow<String>("")
+    private val _sexo = MutableStateFlow<Int?>(null)
+    private val _casosFamilia = MutableStateFlow<Int?>(null)
+    private val _complicacoesGravidez = MutableStateFlow<Int?>(null)
+    private val _prematuro = MutableStateFlow<Int?>(null)
+    private val _etnia = MutableStateFlow<String>("")
 
-    var nomePaciente by mutableStateOf("")
-    var sobrenomePaciente by mutableStateOf("")
-    var etnia by mutableStateOf("")
-    var sexoState = mutableIntStateOf(0)
+    private val _nomeResponsavel = MutableStateFlow<String>("")
+    private val _sobrenomeResponsavel = MutableStateFlow<String>("")
+    private val _parentesco = MutableStateFlow<String>("")
+    private val _email = MutableStateFlow<String>("")
+    private val _celular = MutableStateFlow<String>("")
 
-    init {
-        savedStateHandle.set("nomePaciente", nomePaciente)
-        savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("etnia", etnia)
-        savedStateHandle.set("sexoState", sexoState)
+    val nome = _nome.asStateFlow()
+    val sobrenome = _sobrenome.asStateFlow()
+    val sexo = _sexo.asStateFlow()
+    val casosFamilia = _casosFamilia.asStateFlow()
+    val complicacoesGravidez = _complicacoesGravidez.asStateFlow()
+    val prematuro = _prematuro.asStateFlow()
+    val etnia = _etnia.asStateFlow()
+
+    val nomeResponsavel = _nomeResponsavel.asStateFlow()
+    val sobrenomeResponsavel = _sobrenomeResponsavel.asStateFlow()
+    val parentesco = _parentesco.asStateFlow()
+    val email = _email.asStateFlow()
+    val celular = _celular.asStateFlow()
+
+    fun updateNome(novoNome: String) {
+        _nome.value = novoNome
     }
 
-    fun onSave() {
-        savedStateHandle.set("nomePaciente", nomePaciente)
-        savedStateHandle.set("sobrenomePaciente", sobrenomePaciente)
-        savedStateHandle.set("etnia", etnia)
-        savedStateHandle.set("sexoState", sexoState)
+    fun updateSobrenome(novoSobrenome: String) {
+        _sobrenome.value = novoSobrenome
     }
 
-    fun onRestore() {
-        nomePaciente = savedStateHandle.get("nomePaciente") ?: ""
-        sobrenomePaciente = savedStateHandle.get("sobrenomePaciente") ?: ""
-        etnia = savedStateHandle.get("etnia") ?: ""
-        sexoState = savedStateHandle.get("sexoState") ?: mutableIntStateOf(0)
+    fun updateSexo(novoSexo: Int) {
+        _sexo.value = novoSexo
     }
 
-    fun onNomePacienteChange(novoNomePaciente: String) {
-        nomePaciente = novoNomePaciente
+    fun updateCasosFamilia(novoCasosFamilia: Int) {
+        _casosFamilia.value = novoCasosFamilia
     }
 
-    fun onSobrenomePacienteChange(novoSobrenomePaciente: String) {
-        sobrenomePaciente = novoSobrenomePaciente
+    fun updateComplicacoesGravidez(novoComplicacoesGravidez: Int) {
+        _complicacoesGravidez.value = novoComplicacoesGravidez
     }
 
-    fun onSelectedOptionChange(novaEtnia: String) {
-        etnia = novaEtnia
+    fun updatePrematuro(novoPrematuro: Int) {
+        _prematuro.value = novoPrematuro
     }
 
-    fun onSexoStateSelected(novoSexoState: MutableIntState) {
-        sexoState = novoSexoState
+    fun updateNomeResponsavel(novoNomeResponsavel: String) {
+        _nomeResponsavel.value = novoNomeResponsavel
     }
+
+    fun updateSobrenomeResponsavel(novoSobrenomeResponsavel: String) {
+        _sobrenomeResponsavel.value = novoSobrenomeResponsavel
+    }
+
+    fun updateParentesco(novoParentesco: String) {
+        _parentesco.value = novoParentesco
+    }
+
+    fun updateEmail(novoEmail: String) {
+        _email.value = novoEmail
+    }
+
+    fun updateCelular(novoCelular: String) {
+        _celular.value = novoCelular
+    }
+
+    /*
+    suspend fun SendData(){
+        SQLite()
+        SendRemote()
+    }
+
+     */
 }

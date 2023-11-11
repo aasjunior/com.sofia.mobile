@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.components.inputs
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,37 +7,35 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
-import com.sofia.mobile.ui.theme.Lilas
-import com.sofia.mobile.ui.theme.White
+import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 
 @Composable
 fun OutlineTextRadioButton(
     modifier: Modifier = Modifier,
     label: String,
     options: List<String>,
-    state: MutableState<Int>
+    pvm: PatientInfoViewModel
 ) {
+    val sexo by pvm.sexo.collectAsState()
     Column(
         modifier = Modifier
             .width(264.dp)
@@ -70,14 +67,14 @@ fun OutlineTextRadioButton(
                         modifier = Modifier
                             .padding(end = 16.dp)
                             .selectable(
-                                selected = (state.value == index),
-                                onClick = { state.value = index }
+                                selected = (sexo == index),
+                                onClick = { pvm.updateSexo(index) }
                             ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         RadioButton(
-                            selected = state.value == index,
+                            selected = sexo == index,
                             onClick = null // null because we're handling onClick above
                         )
                         Text(
@@ -98,7 +95,8 @@ fun OutlineRadioButton(
     modifier: Modifier = Modifier,
     label: String,
     options: List<String>,
-    state: MutableState<Int>
+    state: State<Int?>,
+    onOptionSelected: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -122,7 +120,7 @@ fun OutlineRadioButton(
                         .padding(16.dp)
                         .selectable(
                             selected = (state.value == index),
-                            onClick = { state.value = index }
+                            onClick = { onOptionSelected(index) }
                         ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceAround
@@ -142,6 +140,7 @@ fun OutlineRadioButton(
     }
 }
 
+/*
 @Preview
 @Composable
 fun OutlinedTextRadioButtonPreview(){
@@ -149,10 +148,11 @@ fun OutlinedTextRadioButtonPreview(){
     OutlineTextRadioButton(
         label = "Sexo",
         options = listOf("Feminino", "Masculino"),
-        state = state
+        state = sexo
     )
 }
-
+*/
+/*
 @Preview
 @Composable
 fun OutlineRadioButtonPreview(){
@@ -163,3 +163,4 @@ fun OutlineRadioButtonPreview(){
         state = state
     )
 }
+*/
