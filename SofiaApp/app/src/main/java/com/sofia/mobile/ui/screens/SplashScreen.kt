@@ -34,7 +34,6 @@ const val sizeSorridentStar = 180
 const val paddingBottom = 28
 val textBottomStyle = SofiaTypography.text2.copy(color = BrillantPurple)
 
-
 @Composable
 fun SplashScreen(navController: NavController) {
     val showSecondBox = remember { mutableStateOf(false) }

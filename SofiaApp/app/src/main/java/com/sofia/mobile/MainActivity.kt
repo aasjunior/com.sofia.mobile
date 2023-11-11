@@ -21,6 +21,7 @@ import com.sofia.mobile.ui.theme.Gray2
 import com.sofia.mobile.ui.theme.Lilas
 import com.sofia.mobile.ui.theme.SofiaTheme
 import com.sofia.mobile.ui.theme.White
+import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 import com.sofia.mobile.ui.viewmodels.SearchViewModel
 
 class MainActivity : ComponentActivity() {
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val searchViewModel: SearchViewModel by viewModels()
+        val patientInfoViewModel by viewModels<PatientInfoViewModel>()
         setContent {
             SofiaTheme(darkTheme = false){
                 Surface(
