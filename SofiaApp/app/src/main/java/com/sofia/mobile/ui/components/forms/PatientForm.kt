@@ -99,6 +99,8 @@ fun PatientForm(){
                         CustomButton(text = "Próximo", onClick = {
                             if(isFormInfoValid(pvm = pvm)) {
                                 currentStep++
+                            }else{
+                                snackbarMessage = "Preencha todos os campos."
                             }
                         })
                     }
@@ -107,18 +109,28 @@ fun PatientForm(){
                     CustomButton(text = "Voltar", onClick = {
                         currentStep--
                     })
-                    CustomButton(text = "Próximo", onClick = { currentStep++ })
+                    CustomButton(text = "Próximo", onClick = {
+                        if(isFormPerfilValid(pvm = pvm)) {
+                            currentStep++
+                        }else{
+                            snackbarMessage = "Preencha todos os campos."
+                        }
+                    })
                 }
                 2 -> {
                     CustomButton(text = "Voltar", onClick = { currentStep-- })
                     CustomButton(text = "Salvar", onClick = {
-                        courotineScope.launch {
-                            try{
-                                snackbarMessage = pvm.sendData()
-                            }catch(e: Exception) {
-                                // Registre o erro aqui
-                                Log.e("PatientForm", "Ocorreu um erro ao enviar os dados", e)
+                        if(isFormResponsavelValid(pvm = pvm)) {
+                            courotineScope.launch {
+                                try{
+                                    snackbarMessage = pvm.sendData()
+                                }catch(e: Exception) {
+                                    // Registre o erro aqui
+                                    Log.e("PatientForm", "Ocorreu um erro ao enviar os dados", e)
+                                }
                             }
+                        }else{
+                            snackbarMessage = "Preencha todos os campos."
                         }
                     })
 
@@ -346,7 +358,7 @@ fun FormResponsavel(
                 onValueChange = { pvm.updateNomeResponsavel(it) },
                 label = { Text("Nome") },
                 enabled = true,
-                readOnly = true,
+                readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 placeholder = {
                     Text(text = "Primeiro Nome")
@@ -367,7 +379,7 @@ fun FormResponsavel(
                 onValueChange = { pvm.updateSobrenomeResponsavel(it) },
                 label = { Text("Sobrenome") },
                 enabled = true,
-                readOnly = true,
+                readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 placeholder = {
                     Text(text = "Sobrenome")
@@ -451,7 +463,7 @@ fun FormResponsavel(
                 onValueChange = { pvm.updateCelular(it) },
                 label = { Text("Email") },
                 enabled = true,
-                readOnly = true,
+                readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
@@ -468,7 +480,7 @@ fun FormResponsavel(
                 onValueChange = { pvm.updateEmail(it) },
                 label = { Text("Email") },
                 enabled = true,
-                readOnly = true,
+                readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
@@ -485,7 +497,24 @@ fun FormResponsavel(
 
 fun isFormInfoValid(pvm: PatientViewModel): Boolean {
     return pvm.nome.value.isNotEmpty() &&
-            pvm.sobrenome.value.isNotEmpty()
+            pvm.sobrenome.value.isNotEmpty() &&
+            pvm.dataNascimento.value != null &&
+            pvm.sexo.value != null &&
+            pvm.etnia.value != null
+}
+
+fun isFormPerfilValid(pvm: PatientViewModel): Boolean {
+    return pvm.casosFamilia.value != null &&
+            pvm.complicacoesGravidez.value != null &&
+            pvm.prematuro.value != null
+}
+
+fun isFormResponsavelValid(pvm: PatientViewModel): Boolean {
+    return pvm.nomeResponsavel.value.isNotEmpty() &&
+            pvm.sobrenomeResponsavel.value.isNotEmpty() &&
+            pvm.celular.value.isNotEmpty() &&
+            pvm.email.value.isNotEmpty() &&
+            pvm.parentesco.value != null
 }
 
 @Composable
