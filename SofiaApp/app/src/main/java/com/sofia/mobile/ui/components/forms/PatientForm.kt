@@ -30,6 +30,8 @@ import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
@@ -39,6 +41,7 @@ import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
+import com.sofia.mobile.ui.components.inputs.CustomDatePicker
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.text.body2
@@ -208,6 +211,8 @@ fun FormInfo(
                 options = Sexo.values().toList(),
                 pvm = pvm
             )
+            
+            CustomDatePicker(pvm = pvm)
 /*
             val datePickerState = rememberDatePickerState(
                 initialSelectedDateMillis = 1685112333816, // epoch/unix timestamp

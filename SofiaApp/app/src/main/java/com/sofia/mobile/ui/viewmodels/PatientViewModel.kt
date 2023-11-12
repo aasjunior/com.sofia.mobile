@@ -7,11 +7,14 @@ import com.sofia.mobile.domain.Sexo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class PatientViewModel(private val repository: PacienteRepository) : ViewModel() {
     private val _nome = MutableStateFlow<String>("")
     private val _sobrenome = MutableStateFlow<String>("")
     private val _sexo = MutableStateFlow<Sexo?>(null)
+    private val _dataNascimento = MutableStateFlow<LocalDate?>(null)
     private val _casosFamilia = MutableStateFlow<Int?>(null)
     private val _complicacoesGravidez = MutableStateFlow<Int?>(null)
     private val _prematuro = MutableStateFlow<Int?>(null)
@@ -26,6 +29,7 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     val nome = _nome.asStateFlow()
     val sobrenome = _sobrenome.asStateFlow()
     val sexo: StateFlow<Sexo?> = _sexo.asStateFlow()
+    val dataNascimento: StateFlow<LocalDate?> = _dataNascimento.asStateFlow()
     val casosFamilia = _casosFamilia.asStateFlow()
     val complicacoesGravidez = _complicacoesGravidez.asStateFlow()
     val prematuro = _prematuro.asStateFlow()
@@ -47,6 +51,10 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
 
     fun updateSexo(novoSexo: Sexo) {
         _sexo.value = novoSexo
+    }
+
+    fun updateDataNascimento(date: LocalDate) {
+        _dataNascimento.value = date
     }
 
     fun updateCasosFamilia(novoCasosFamilia: Int) {
@@ -82,17 +90,24 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     }
 
     suspend fun sendData(): String {
-        return if (sexo.value != null) {
-            try {
-                val patient = Paciente(nome.value, sobrenome.value, sexo.value!!)
+        return if(sexo.value != null && dataNascimento.value != null){
+            try{
+                val patient = Paciente(
+                    nome = nome.value,
+                    sobrenome = sobrenome.value,
+                    sexo = sexo.value!!,
+                    //dataNascimento = LocalDate.of(2021, 2, 2)
+                    dataNascimento = dataNascimento.value!!.format(DateTimeFormatter.ofPattern("yyy-MM-dd"))
+                )
                 repository.savePatient(patient)
                 "Dados enviados com sucesso!"
-            } catch (e: Exception) {
+            }catch(e: Exception){
                 e.printStackTrace()
-                "Ocorreu um erro ao enviar os dados: ${e.message}"
+                "Ocorreu um erro ao enviar os dados: ${e.message} ${dataNascimento.value}"
             }
-        } else {
-            "O campo sexo é obrigatório."
+        }else{
+            "Os campos sexo e data de nascimento são obrigatórios."
         }
     }
+
 }
