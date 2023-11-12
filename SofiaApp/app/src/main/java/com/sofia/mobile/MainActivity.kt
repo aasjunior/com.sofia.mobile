@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         composable("splash") { SplashScreen(navController) }
                         composable("home") { HomeScreen(navController) }
                         composable("patientList") { PatientListScreen(navController, nPatient = 3) } // substitua 0 pelo número de pacientes
-                        composable("patientRegistration") { PatientRegistrationScreen() }
+                        composable("patientRegistration") { PatientRegistrationScreen(navController) }
                     }
                 }
             }

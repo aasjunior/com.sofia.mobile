@@ -15,7 +15,7 @@ import com.sofia.mobile.ui.theme.SoftPurple
 @Composable
 fun FloatingAddButton(onClick: () -> Unit){
     SmallFloatingActionButton(
-        onClick = { /*TODO*/ },
+        onClick = { onClick },
         containerColor = SoftPurple,
         contentColor = Gray3,
         elevation = FloatingActionButtonDefaults.elevation(4.dp),

@@ -123,10 +123,10 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
                     responsavel = responsavel
                 )
                 repository.savePatient(paciente)
-                "Dados enviados com sucesso!"
+                "sucesso"
             }catch(e: Exception){
                 e.printStackTrace()
-                "Ocorreu um erro ao enviar os dados: ${e.message} ${dataNascimento.value}"
+                "Ocorreu um erro ao enviar os dados: ${e.message}"
             }
         }else{
             "Os campos sexo e data de nascimento são obrigatórios."

@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -37,6 +39,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
@@ -47,6 +50,7 @@ import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
+import com.sofia.mobile.ui.components.popup.Alert
 import com.sofia.mobile.ui.components.text.body2
 import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
@@ -56,18 +60,19 @@ import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
 import kotlinx.coroutines.launch
 
 @Composable
-fun PatientForm(){
+fun PatientForm(navController: NavController){
     var currentStep by remember { mutableStateOf(0) }
     val apiService = RetrofitInstance.api
     val pacienteRepository = PacienteRepository(apiService)
     val pvm: PatientViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
     val courotineScope = rememberCoroutineScope()
-    var snackbarMessage by remember { mutableStateOf("") }
+    var showDialog by remember { mutableStateOf(false) }
+    var showDialogSuccess by remember { mutableStateOf(false) }
+    var alertMessage by remember { mutableStateOf("Preencha todos os campos.") }
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState()),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         FormProgress(currentStep)
@@ -85,7 +90,6 @@ fun PatientForm(){
                 onNext = { currentStep++ }
             )
         }
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -100,7 +104,7 @@ fun PatientForm(){
                             if(isFormInfoValid(pvm = pvm)) {
                                 currentStep++
                             }else{
-                                snackbarMessage = "Preencha todos os campos."
+                                showDialog = true
                             }
                         })
                     }
@@ -113,7 +117,7 @@ fun PatientForm(){
                         if(isFormPerfilValid(pvm = pvm)) {
                             currentStep++
                         }else{
-                            snackbarMessage = "Preencha todos os campos."
+                            showDialog = true
                         }
                     })
                 }
@@ -123,31 +127,53 @@ fun PatientForm(){
                         if(isFormResponsavelValid(pvm = pvm)) {
                             courotineScope.launch {
                                 try{
-                                    snackbarMessage = pvm.sendData()
+                                    alertMessage = pvm.sendData()
+                                    if(alertMessage == "sucesso"){
+                                        showDialogSuccess = true
+                                    }else{
+                                        showDialog = true
+                                    }
+
                                 }catch(e: Exception) {
                                     // Registre o erro aqui
                                     Log.e("PatientForm", "Ocorreu um erro ao enviar os dados", e)
                                 }
                             }
                         }else{
-                            snackbarMessage = "Preencha todos os campos."
+                            showDialog = true
                         }
                     })
-
                 }
             }
         }
-        if(snackbarMessage.isNotEmpty()) {
-            Snackbar(
-                modifier = Modifier.padding(16.dp),
-                action = {
-                    TextButton(onClick = { snackbarMessage = "" }) {
-                        Text("Fechar")
+        if(showDialog) {
+            AlertDialog(
+                onDismissRequest = { showDialog == false },
+                title = { Text("Mensagem") },
+                text = { Text(alertMessage) },
+                confirmButton = {
+                    Button(onClick = { showDialog = false }) {
+                        Text("Ok")
                     }
                 }
-            ) {
-                Text(snackbarMessage)
-            }
+            )
+        }
+
+        if(showDialogSuccess){
+            AlertDialog(
+                onDismissRequest = { showDialog == false },
+                title = { Text("Mensagem") },
+                text = { Text("Dados cadastrados com sucesso.") },
+                confirmButton = {
+                    Button(onClick = {
+                        navController.navigate("patientList")
+                        showDialog = false
+
+                    }) {
+                        Text("Ok")
+                    }
+                }
+            )
         }
     }
 }
@@ -461,7 +487,7 @@ fun FormResponsavel(
                 modifier = Modifier.width(264.dp),
                 value = celularResponsavel,
                 onValueChange = { pvm.updateCelular(it) },
-                label = { Text("Email") },
+                label = { Text("Celular") },
                 enabled = true,
                 readOnly = false,
                 textStyle = MaterialTheme.typography.bodyMedium,
