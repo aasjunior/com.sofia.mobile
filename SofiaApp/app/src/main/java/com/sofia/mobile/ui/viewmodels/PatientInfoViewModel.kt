@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.sofia.mobile.data.PacienteRepository
+import com.sofia.mobile.domain.Paciente
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -85,11 +86,14 @@ class PatientInfoViewModel(private val repository: PacienteRepository) : ViewMod
         _celular.value = novoCelular
     }
 
-    /*
-    suspend fun SendData(){
-        SQLite()
-        SendRemote()
+    suspend fun sendData(): String{
+        return try {
+            val patient = Paciente(nome.value, sobrenome.value)
+            repository.savePatient(patient)
+            "Dados enviados com sucesso!"
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Ocorreu um erro ao enviar os dados: ${e.message}"
+        }
     }
-
-     */
 }

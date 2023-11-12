@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://localhost:8080"
+    private const val BASE_URL = "http://10.0.2.2:8080"
 
     val api: SofiaApiService by lazy {
         Retrofit.Builder()

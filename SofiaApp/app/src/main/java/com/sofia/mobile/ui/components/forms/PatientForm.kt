@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.components.forms
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.R
@@ -42,6 +46,8 @@ import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
 import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun PatientForm(){
@@ -49,6 +55,9 @@ fun PatientForm(){
     val apiService = RetrofitInstance.api
     val pacienteRepository = PacienteRepository(apiService)
     val pvm: PatientInfoViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
+    val courotineScope = rememberCoroutineScope()
+    var snackbarMessage by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,10 +105,31 @@ fun PatientForm(){
                 }
                 2 -> {
                     CustomButton(text = "Voltar", onClick = { currentStep-- })
-                    CustomButton(text = "Salvar", onClick = {})
+                    CustomButton(text = "Salvar", onClick = {
+                        courotineScope.launch {
+                            try{
+                                snackbarMessage = pvm.sendData()
+                            }catch(e: Exception) {
+                                // Registre o erro aqui
+                                Log.e("PatientForm", "Ocorreu um erro ao enviar os dados", e)
+                            }
+                        }
+                    })
+
                 }
             }
-
+        }
+        if(snackbarMessage.isNotEmpty()) {
+            Snackbar(
+                modifier = Modifier.padding(16.dp),
+                action = {
+                    TextButton(onClick = { snackbarMessage = "" }) {
+                        Text("Fechar")
+                    }
+                }
+            ) {
+                Text(snackbarMessage)
+            }
         }
     }
 }
@@ -389,7 +419,7 @@ fun FormProgress(currentStep: Int) {
             when(currentStep){
                 0 -> FormProgressStep1()
                 1 -> FormProgressStep2()
-                3 -> FormProgressStep3()
+                2 -> FormProgressStep3()
             }
         }
     }
