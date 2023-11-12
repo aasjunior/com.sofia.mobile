@@ -4,7 +4,8 @@ import java.time.LocalDate
 
 data class Paciente(
     val nome: String,
-    val sobrenome: String/*,
+    val sobrenome: String,
+    val sexo: Sexo,/*,
     val etnia: Etnia,
     val sexo: Sexo,
     val dataNascimento: LocalDate*/

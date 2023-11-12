@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,17 +22,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
-import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
+import com.sofia.mobile.ui.viewmodels.PatientViewModel
 
 @Composable
 fun OutlineTextRadioButton(
     modifier: Modifier = Modifier,
     label: String,
-    options: List<String>,
-    pvm: PatientInfoViewModel
+    options: List<Sexo>,
+    pvm: PatientViewModel
 ) {
     val sexo by pvm.sexo.collectAsState()
     Column(
@@ -62,28 +62,27 @@ fun OutlineTextRadioButton(
                 modifier = Modifier.width(264.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                options.forEachIndexed { index, option ->
+                options.forEach { option ->
                     Row(
                         modifier = Modifier
                             .padding(end = 16.dp)
                             .selectable(
-                                selected = (sexo == index),
-                                onClick = { pvm.updateSexo(index) }
+                                selected = (sexo == option),
+                                onClick = { pvm.updateSexo(option) }
                             ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         RadioButton(
-                            selected = sexo == index,
+                            selected = sexo == option,
                             onClick = null // null because we're handling onClick above
                         )
                         Text(
-                            text = option,
+                            text = option.value,
                             style = body1.copy(color = BrillantPurple),
                             modifier = Modifier.padding(start = 4.dp)
                         )
                     }
-
                 }
             }
         }

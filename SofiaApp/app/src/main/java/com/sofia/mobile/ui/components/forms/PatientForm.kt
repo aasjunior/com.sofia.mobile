@@ -37,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
+import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
@@ -44,9 +45,8 @@ import com.sofia.mobile.ui.components.text.body2
 import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
-import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
+import com.sofia.mobile.ui.viewmodels.PatientViewModel
 import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -54,7 +54,7 @@ fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
     val apiService = RetrofitInstance.api
     val pacienteRepository = PacienteRepository(apiService)
-    val pvm: PatientInfoViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
+    val pvm: PatientViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
     val courotineScope = rememberCoroutineScope()
     var snackbarMessage by remember { mutableStateOf("") }
 
@@ -137,7 +137,7 @@ fun PatientForm(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormInfo(
-    pvm: PatientInfoViewModel,
+    pvm: PatientViewModel,
     onNext: () -> Unit
 ){
     val nome by pvm.nome.collectAsState()
@@ -205,7 +205,7 @@ fun FormInfo(
 
             OutlineTextRadioButton(
                 label = "Sexo",
-                options = listOf("Feminino", "Masculino"),
+                options = Sexo.values().toList(),
                 pvm = pvm
             )
 /*
@@ -229,7 +229,7 @@ fun FormInfo(
 
 @Composable
 fun FormPerfil(
-    pvm: PatientInfoViewModel,
+    pvm: PatientViewModel,
     onNext: () -> Unit
 ) {
     val casosFamilia = pvm.casosFamilia.collectAsState()
@@ -277,7 +277,7 @@ fun FormPerfil(
 
 @Composable
 fun FormResponsavel(
-    pvm: PatientInfoViewModel,
+    pvm: PatientViewModel,
     onNext: () -> Unit
 ) {
     val nomeResponsavel by pvm.nomeResponsavel.collectAsState()
@@ -394,7 +394,7 @@ fun FormResponsavel(
     }
 }
 
-fun isFormInfoValid(pvm: PatientInfoViewModel): Boolean {
+fun isFormInfoValid(pvm: PatientViewModel): Boolean {
     return pvm.nome.value.isNotEmpty() &&
             pvm.sobrenome.value.isNotEmpty()
 }

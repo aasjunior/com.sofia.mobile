@@ -6,9 +6,9 @@ import com.sofia.mobile.data.PacienteRepository
 
 class PatientViewModelFactory(private val repository: PacienteRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PatientInfoViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(PatientViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PatientInfoViewModel(repository) as T
+            return PatientViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,22 +1,17 @@
 package com.sofia.mobile.ui.viewmodels
 
-import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Paciente
+import com.sofia.mobile.domain.Sexo
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class PatientInfoViewModel(private val repository: PacienteRepository) : ViewModel() {
+class PatientViewModel(private val repository: PacienteRepository) : ViewModel() {
     private val _nome = MutableStateFlow<String>("")
     private val _sobrenome = MutableStateFlow<String>("")
-    private val _sexo = MutableStateFlow<Int?>(null)
+    private val _sexo = MutableStateFlow<Sexo?>(null)
     private val _casosFamilia = MutableStateFlow<Int?>(null)
     private val _complicacoesGravidez = MutableStateFlow<Int?>(null)
     private val _prematuro = MutableStateFlow<Int?>(null)
@@ -30,7 +25,7 @@ class PatientInfoViewModel(private val repository: PacienteRepository) : ViewMod
 
     val nome = _nome.asStateFlow()
     val sobrenome = _sobrenome.asStateFlow()
-    val sexo = _sexo.asStateFlow()
+    val sexo: StateFlow<Sexo?> = _sexo.asStateFlow()
     val casosFamilia = _casosFamilia.asStateFlow()
     val complicacoesGravidez = _complicacoesGravidez.asStateFlow()
     val prematuro = _prematuro.asStateFlow()
@@ -50,7 +45,7 @@ class PatientInfoViewModel(private val repository: PacienteRepository) : ViewMod
         _sobrenome.value = novoSobrenome
     }
 
-    fun updateSexo(novoSexo: Int) {
+    fun updateSexo(novoSexo: Sexo) {
         _sexo.value = novoSexo
     }
 
@@ -86,14 +81,18 @@ class PatientInfoViewModel(private val repository: PacienteRepository) : ViewMod
         _celular.value = novoCelular
     }
 
-    suspend fun sendData(): String{
-        return try {
-            val patient = Paciente(nome.value, sobrenome.value)
-            repository.savePatient(patient)
-            "Dados enviados com sucesso!"
-        } catch (e: Exception) {
-            e.printStackTrace()
-            "Ocorreu um erro ao enviar os dados: ${e.message}"
+    suspend fun sendData(): String {
+        return if (sexo.value != null) {
+            try {
+                val patient = Paciente(nome.value, sobrenome.value, sexo.value!!)
+                repository.savePatient(patient)
+                "Dados enviados com sucesso!"
+            } catch (e: Exception) {
+                e.printStackTrace()
+                "Ocorreu um erro ao enviar os dados: ${e.message}"
+            }
+        } else {
+            "O campo sexo é obrigatório."
         }
     }
 }
