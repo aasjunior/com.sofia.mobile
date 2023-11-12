@@ -1,8 +1,10 @@
 package com.sofia.mobile.models
 
+import com.sofia.mobile.domain.Etnia
+import com.sofia.mobile.domain.Sexo
 import java.time.LocalDate
 
-class Paciente(
+class PacienteModel(
     private val nome: String,
     private val dataNascimento: LocalDate,
     private val etnia: Etnia,

@@ -35,7 +35,6 @@ fun CustomButton(
         modifier = Modifier
             .width(154.dp)
             .padding(16.dp)
-            .shadow(5.dp, shape = RoundedCornerShape(50)) // Para adicionar sombra
     ) {
         Text(
             text = text,
