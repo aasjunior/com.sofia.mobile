@@ -49,14 +49,10 @@ fun OutlineTextRadioButton(
                 .clipToBounds()
                 .zIndex(2f) // Aumente o zIndex para que a borda fique atrás da label
         ) {
-            /*Text(
+            Text(
                 text = label,
                 style = h3.copy(color = BrillantPurple),
-                modifier = Modifier
-                    .offset(y = (-30).dp) // Ajuste o offset para que a label fique mais acima
-                    .zIndex(1f) // Defina o zIndex da label para que fique na frente da borda
-                    .background(White, shape = RoundedCornerShape(4.dp))
-            )*/
+            )
 
             Row(
                 modifier = Modifier.width(264.dp),
