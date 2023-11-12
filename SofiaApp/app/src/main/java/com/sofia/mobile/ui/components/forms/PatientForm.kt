@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -28,8 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
@@ -39,9 +43,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
+import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
+import com.sofia.mobile.ui.components.inputs.CustomSelectBox
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.text.body2
@@ -147,7 +153,7 @@ fun FormInfo(
     val sobrenome by pvm.sobrenome.collectAsState()
     val sexo by pvm.sexo.collectAsState()
     val etnia by pvm.etnia.collectAsState()
-    val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
+
 
     ElevatedCard(
         modifier = Modifier
@@ -211,23 +217,55 @@ fun FormInfo(
                 options = Sexo.values().toList(),
                 pvm = pvm
             )
-            
-            CustomDatePicker(pvm = pvm)
-/*
-            val datePickerState = rememberDatePickerState(
-                initialSelectedDateMillis = 1685112333816, // epoch/unix timestamp
-                initialDisplayMode = DisplayMode.Input,
-            )
-            DatePicker(
-                modifier = Modifier.widthIn(min = 264.dp),
-                state = datePickerState,
-                showModeToggle = false,
-                headline = null,
-                title = null
-            )
 
-            Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = etnia)
-*/
+            CustomDatePicker(pvm = pvm)
+            val options = Etnia.values().map { it.name }
+            var expanded by remember { mutableStateOf(false) }
+            var selectedOptionText by remember { mutableStateOf(options[0]) }
+
+            ExposedDropdownMenuBox(
+                modifier = Modifier,
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded },
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .width(264.dp)
+                        .menuAnchor(),
+                    readOnly = true,
+                    shape = RoundedCornerShape(12.dp),
+                    value = etnia?.let { it.toString() } ?: "",
+                    onValueChange = {},
+                    label = { Text("Etnia") },
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = BrillantPurple,
+                        unfocusedBorderColor = BrillantPurple,
+                        unfocusedTextColor = BrillantPurple,
+                        focusedLabelColor = BrillantPurple
+                    )
+                )
+
+                ExposedDropdownMenu(
+                    modifier = Modifier,
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                ) {
+                    options.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            modifier = Modifier,
+                            text = { Text(selectionOption) },
+                            onClick = {
+                                selectedOptionText = selectionOption
+                                expanded = false
+                                pvm.updateEtnia(Etnia.valueOf(selectionOption))
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        )
+                    }
+                }
+            }
         }
     }
 }

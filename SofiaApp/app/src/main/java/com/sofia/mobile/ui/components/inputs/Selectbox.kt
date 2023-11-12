@@ -1,106 +1,94 @@
 package com.sofia.mobile.ui.components.inputs
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import com.sofia.mobile.ui.components.text.body1
-import com.sofia.mobile.ui.components.text.body2
-import com.sofia.mobile.ui.components.text.h3
+import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.ui.theme.BrillantPurple
-import com.sofia.mobile.ui.theme.Lilas
-import com.sofia.mobile.ui.theme.White
+import com.sofia.mobile.ui.viewmodels.PatientViewModel
+import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Selectbox(label: String, options: List<String>, selectedOptionVM: String) {
-    var selectedOptionText = selectedOptionVM
+fun CustomSelectBox(
+    options: List<Etnia>,
+    label: String,
+    //selectedOption: MutableState<T?>,
+    pvm: PatientViewModel
+    //onOptionSelected: (T) -> Unit
+) {
+    val etnia by pvm.etnia.collectAsState()
+
     var expanded by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .width(264.dp)
-            .height(100.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-               // .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
-                //.padding(16.dp)
-                //.zIndex(0f)
-        ) {
-/*            Text(
-                text = label,
-                style = h3.copy(color = BrillantPurple),
-                modifier = Modifier
-                    .offset(y = (-30).dp)
-                    .zIndex(1f)
-                    .background(White, shape = RoundedCornerShape(4.dp))
-            )*/
-            ExposedDropdownMenuBox(
-                modifier = Modifier,
-                expanded = expanded,
-                onExpandedChange = { expanded = !expanded },
-            ) {
-                TextField(
-                    modifier = Modifier.menuAnchor(),
-                    readOnly = true,
-                    label = {Text(label)},
-                    value = selectedOptionText,
-                    onValueChange = {},
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                    //colors = ExposedDropdownMenuDefaults.textFieldColors()
-                )
+    val optionsL = listOf("Option 1", "Option 2", "Option 3", "Option 4")
+    var selectedOptionText by remember { mutableStateOf(optionsL[0]) }
 
-                ExposedDropdownMenu(
-                    modifier = Modifier,
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                ) {
-                    options.forEach { selectionOption ->
-                        DropdownMenuItem(
-                            modifier = Modifier,
-                            text = { Text(selectionOption) },
-                            onClick = {
-                                selectedOptionText = selectionOption
-                                expanded = false
-                            },
-                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
-                        )
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+    ) {
+        OutlinedTextField(
+            value = etnia.toString(),
+            onValueChange = { },
+            Modifier
+                .padding(8.dp)
+                .width(264.dp)
+                .onFocusEvent {
+                    if (it.isFocused) {
+                        expanded = true
                     }
-                }
+                },
+            label = {
+                Text(label)
+            },
+            textStyle = MaterialTheme.typography.bodyMedium,
+            readOnly = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = BrillantPurple,
+                unfocusedBorderColor = BrillantPurple,
+                unfocusedTextColor = BrillantPurple,
+                focusedLabelColor = BrillantPurple
+            ),
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
+        )
+
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            optionsL.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option) },
+                    onClick = {
+                        /*pvm.updateEtnia(option)*/
+                        selectedOptionText = option
+                        expanded = false
+                    },
+                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+
+                )
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun SelectboxPreview(){
-    val ethnicities = listOf("Branca", "Parda", "Preta", "Amarela", "Indígena")
-    Selectbox(label = "Etnia", options = ethnicities, selectedOptionVM = "Branca")
 }

@@ -2,6 +2,7 @@ package com.sofia.mobile.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.sofia.mobile.data.PacienteRepository
+import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Paciente
 import com.sofia.mobile.domain.Sexo
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,7 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     private val _casosFamilia = MutableStateFlow<Int?>(null)
     private val _complicacoesGravidez = MutableStateFlow<Int?>(null)
     private val _prematuro = MutableStateFlow<Int?>(null)
-    private val _etnia = MutableStateFlow<String>("")
+    private val _etnia = MutableStateFlow<Etnia?>(null)
 
     private val _nomeResponsavel = MutableStateFlow<String>("")
     private val _sobrenomeResponsavel = MutableStateFlow<String>("")
@@ -33,7 +34,8 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     val casosFamilia = _casosFamilia.asStateFlow()
     val complicacoesGravidez = _complicacoesGravidez.asStateFlow()
     val prematuro = _prematuro.asStateFlow()
-    val etnia = _etnia.asStateFlow()
+    val etnia: StateFlow<Etnia?> = _etnia.asStateFlow()
+
 
     val nomeResponsavel = _nomeResponsavel.asStateFlow()
     val sobrenomeResponsavel = _sobrenomeResponsavel.asStateFlow()
@@ -56,6 +58,13 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     fun updateDataNascimento(date: LocalDate) {
         _dataNascimento.value = date
     }
+
+    fun updateEtnia(novaEtnia: Etnia?) {
+        if (novaEtnia != null) {
+            _etnia.value = novaEtnia
+        }
+    }
+
 
     fun updateCasosFamilia(novoCasosFamilia: Int) {
         _casosFamilia.value = novoCasosFamilia
