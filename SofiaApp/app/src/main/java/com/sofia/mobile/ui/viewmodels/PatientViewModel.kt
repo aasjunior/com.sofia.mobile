@@ -99,14 +99,16 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     }
 
     suspend fun sendData(): String {
-        return if(sexo.value != null && dataNascimento.value != null){
+        return if(sexo.value != null && dataNascimento.value != null && etnia.value != null){
             try{
                 val patient = Paciente(
                     nome = nome.value,
                     sobrenome = sobrenome.value,
                     sexo = sexo.value!!,
                     //dataNascimento = LocalDate.of(2021, 2, 2)
-                    dataNascimento = dataNascimento.value!!.format(DateTimeFormatter.ofPattern("yyy-MM-dd"))
+                    dataNascimento = dataNascimento.value!!
+                        .format(DateTimeFormatter.ofPattern("yyy-MM-dd")),
+                    etnia = etnia.value!!
                 )
                 repository.savePatient(patient)
                 "Dados enviados com sucesso!"

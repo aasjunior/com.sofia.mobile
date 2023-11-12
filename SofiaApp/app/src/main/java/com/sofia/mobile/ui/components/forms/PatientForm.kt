@@ -33,9 +33,6 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
@@ -47,7 +44,6 @@ import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
-import com.sofia.mobile.ui.components.inputs.CustomSelectBox
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
 import com.sofia.mobile.ui.components.text.body2
@@ -366,12 +362,12 @@ fun FormResponsavel(
                 modifier = Modifier.width(264.dp),
                 value = sobrenomeResponsavel,
                 onValueChange = { pvm.updateSobrenomeResponsavel(it) },
-                label = { Text("Nome") },
+                label = { Text("Sobrenome") },
                 enabled = true,
                 readOnly = true,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 placeholder = {
-                    Text(text = "Primeiro Nome")
+                    Text(text = "Sobrenome")
                 },
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
