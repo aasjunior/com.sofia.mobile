@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.text.body1
+import com.sofia.mobile.ui.components.text.body2
+import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
@@ -39,46 +41,39 @@ fun OutlineTextRadioButton(
     Column(
         modifier = Modifier
             .width(264.dp)
-            .height(120.dp),
+            .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        Box(
-            modifier = Modifier
-                .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
-                .padding(16.dp)
-                .clipToBounds()
-                .zIndex(2f) // Aumente o zIndex para que a borda fique atrás da label
-        ) {
-            Text(
-                text = label,
-                style = h3.copy(color = BrillantPurple),
-            )
+        Text(
+            text = label,
+            style = body2.copy(color = BrillantPurple),
+        )
 
-            Row(
-                modifier = Modifier.width(264.dp),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                options.forEach { option ->
-                    Row(
-                        modifier = Modifier
-                            .padding(end = 16.dp)
-                            .selectable(
-                                selected = (sexo == option),
-                                onClick = { pvm.updateSexo(option) }
-                            ),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        RadioButton(
-                            selected = sexo == option,
-                            onClick = null // null because we're handling onClick above
-                        )
-                        Text(
-                            text = option.value,
-                            style = body1.copy(color = BrillantPurple),
-                            modifier = Modifier.padding(start = 4.dp)
-                        )
-                    }
+        Row(
+            modifier = Modifier.width(264.dp),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            options.forEach { option ->
+                Row(
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .selectable(
+                            selected = (sexo == option),
+                            onClick = { pvm.updateSexo(option) }
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    RadioButton(
+                        selected = sexo == option,
+                        onClick = null // null because we're handling onClick above
+                    )
+                    Text(
+                        text = option.value,
+                        style = fs12.copy(color = BrillantPurple),
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
                 }
             }
         }

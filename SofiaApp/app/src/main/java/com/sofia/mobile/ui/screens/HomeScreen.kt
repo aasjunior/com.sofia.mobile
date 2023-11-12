@@ -59,8 +59,8 @@ fun HomeScreen(
                     iconId = R.drawable.ic_star_doubt
                 )
                 StarButton(
-                    text = "A decidir",
-                    onClick = { /*TODO*/ },
+                    text = "Cadastrar paciente",
+                    onClick = { navController.navigate("patientRegistration") },
                     iconId = R.drawable.ic_star_laugh
                 )
             }
