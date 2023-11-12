@@ -31,6 +31,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.R
+import com.sofia.mobile.api.RetrofitInstance
+import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
@@ -39,12 +41,14 @@ import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.viewmodels.PatientInfoViewModel
+import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
 
 @Composable
 fun PatientForm(){
     var currentStep by remember { mutableStateOf(0) }
-    val pvm: PatientInfoViewModel = viewModel()
-
+    val apiService = RetrofitInstance.api
+    val pacienteRepository = PacienteRepository(apiService)
+    val pvm: PatientInfoViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
     Column(
         modifier = Modifier
             .fillMaxWidth()

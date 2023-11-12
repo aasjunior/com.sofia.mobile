@@ -1,4 +1,4 @@
-package com.sofia.mobile.models
+package com.sofia.mobile.domain
 
 enum class Etnia {
     BRANCA,

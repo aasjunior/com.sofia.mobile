@@ -8,10 +8,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.sofia.mobile.data.PacienteRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class PatientInfoViewModel : ViewModel() {
+class PatientInfoViewModel(private val repository: PacienteRepository) : ViewModel() {
     private val _nome = MutableStateFlow<String>("")
     private val _sobrenome = MutableStateFlow<String>("")
     private val _sexo = MutableStateFlow<Int?>(null)
