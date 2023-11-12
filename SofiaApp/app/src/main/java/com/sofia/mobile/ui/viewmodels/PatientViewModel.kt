@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Paciente
+import com.sofia.mobile.domain.Parentesco
 import com.sofia.mobile.domain.Sexo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class PatientViewModel(private val repository: PacienteRepository) : ViewModel() {
+    //Paciente
     private val _nome = MutableStateFlow<String>("")
     private val _sobrenome = MutableStateFlow<String>("")
     private val _sexo = MutableStateFlow<Sexo?>(null)
@@ -21,9 +23,10 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     private val _prematuro = MutableStateFlow<Int?>(null)
     private val _etnia = MutableStateFlow<Etnia?>(null)
 
+    //Responsavel
     private val _nomeResponsavel = MutableStateFlow<String>("")
     private val _sobrenomeResponsavel = MutableStateFlow<String>("")
-    private val _parentesco = MutableStateFlow<String>("")
+    private val _parentesco = MutableStateFlow<Parentesco?>(null)
     private val _email = MutableStateFlow<String>("")
     private val _celular = MutableStateFlow<String>("")
 
@@ -39,7 +42,7 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
 
     val nomeResponsavel = _nomeResponsavel.asStateFlow()
     val sobrenomeResponsavel = _sobrenomeResponsavel.asStateFlow()
-    val parentesco = _parentesco.asStateFlow()
+    val parentesco: StateFlow<Parentesco?> = _parentesco.asStateFlow()
     val email = _email.asStateFlow()
     val celular = _celular.asStateFlow()
 
@@ -86,7 +89,7 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
         _sobrenomeResponsavel.value = novoSobrenomeResponsavel
     }
 
-    fun updateParentesco(novoParentesco: String) {
+    fun updateParentesco(novoParentesco: Parentesco) {
         _parentesco.value = novoParentesco
     }
 

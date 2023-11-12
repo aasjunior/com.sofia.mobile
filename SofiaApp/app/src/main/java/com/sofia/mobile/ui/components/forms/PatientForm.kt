@@ -41,6 +41,7 @@ import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Etnia
+import com.sofia.mobile.domain.Parentesco
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
@@ -314,6 +315,7 @@ fun FormPerfil(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormResponsavel(
     pvm: PatientViewModel,
@@ -321,6 +323,7 @@ fun FormResponsavel(
 ) {
     val nomeResponsavel by pvm.nomeResponsavel.collectAsState()
     val sobrenomeResponsavel by pvm.sobrenomeResponsavel.collectAsState()
+    val parentesco by pvm.parentesco.collectAsState()
     val celularResponsavel by pvm.celular.collectAsState()
     val emailResponsavel by pvm.email.collectAsState()
 
@@ -379,7 +382,54 @@ fun FormResponsavel(
                 )
             )
 
-            //Selectbox(label = "Parentesco", listOf("Mãe", "Pai", "Irmão(ã)"))
+            val options = Parentesco.values().map { it.descricao }
+            var expanded by remember { mutableStateOf(false) }
+            var selectedOptionText by remember { mutableStateOf(options[0]) }
+
+            ExposedDropdownMenuBox(
+                modifier = Modifier,
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded },
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .width(264.dp)
+                        .menuAnchor(),
+                    readOnly = true,
+                    shape = RoundedCornerShape(12.dp),
+                    value = parentesco?.let { it.descricao } ?: "",
+                    onValueChange = {},
+                    label = { Text("Parentesco") },
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = BrillantPurple,
+                        unfocusedBorderColor = BrillantPurple,
+                        unfocusedTextColor = BrillantPurple,
+                        focusedLabelColor = BrillantPurple
+                    )
+                )
+
+                ExposedDropdownMenu(
+                    modifier = Modifier,
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                ) {
+                    options.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            modifier = Modifier,
+                            text = { Text(selectionOption) },
+                            onClick = {
+                                selectedOptionText = selectionOption
+                                expanded = false
+                                pvm.updateParentesco(Parentesco.values().first { it.descricao == selectionOption })
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                        )
+                    }
+                }
+            }
+
         }
     }
     ElevatedCard(
