@@ -52,6 +52,6 @@ O Material 3 é a mais recente versão do Material Design, que introduz novos co
 
 <p align="center">
    <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
-   <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin"/>
+   <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white"/>
    <img src="https://img.shields.io/badge/Jetpack%20Compose-FF4081?style=for-the-badge&logo=jetpack&logoColor=white" alt="Jetpack Compose"/>
 </p>
