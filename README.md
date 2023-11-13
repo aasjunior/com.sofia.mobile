@@ -18,6 +18,12 @@ O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpac
 * Android Studio
 * VSCode
 
+## Dependências
+
+Este projeto depende da seguinte API:
+
+* [Sofia API](https://github.com/aasjunior/com.sofia.restapi.git)
+
 ## Configuração do Projeto
 
 1. Clone o repositório para sua máquina local usando o seguinte comando
@@ -27,12 +33,10 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 
 2. Abra o projeto pelo Android Studio
 
-3. Certifique-se de que o JDK está instalado e configurado corretamente.
+3. Certifique-se de que o JDK está instalado e configurado corretamente
 
-4. Certifique-se de que o MySQL está instalado e funcionando corretamente.
+4. Certifique-se de que o MySQL está instalado e funcionando corretamente
 
-## Dependências
+5. Configure a API Sofia pelo VS Code. A API estará rodando em `http://localhost:8080`
 
-Este projeto depende da seguinte API:
-
-* [Sofia API](https://github.com/aasjunior/com.sofia.restapi.git)
+6. Execute o Emulador do Android Studio
