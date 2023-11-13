@@ -46,6 +46,17 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 6. Execute o Emulador do Android Studio
 <br>
 
+## Problemas Conhecidos
+
+### Erro de Caracteres Não-ASCII
+
+Se você encontrar um erro relacionado a caracteres não-ASCII durante a execução ou compilação do projeto, existem duas soluções possíveis:
+
+1. **Mover o projeto para um diretório diferente**: Certifique-se de que o novo diretório não contém caracteres não-ASCII no caminho.
+
+2. **Adicionar uma linha ao arquivo gradle.properties**: Você pode adicionar a linha 'android.overridePathCheck=true' ao arquivo gradle.properties no diretório do projeto. Isso desativará a verificação do caminho do projeto.
+<br>
+
 ## UI
 A interface do usuário deste aplicativo foi construída usando **Jetpack Compose** e **Material 3**.
 
