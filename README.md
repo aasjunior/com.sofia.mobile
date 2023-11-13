@@ -40,3 +40,18 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 5. Configure a API Sofia pelo VS Code. A API estará rodando em `http://localhost:8080`
 
 6. Execute o Emulador do Android Studio
+
+## UI
+A interface do usuário deste aplicativo foi construída usando **Jetpack Compose** e **Material 3**.
+
+O Jetpack Compose é uma moderna toolkit de UI para Android que simplifica e acelera o desenvolvimento da interface do usuário. Ele permite a criação de interfaces de usuário concisas e idiomáticas com menos código e ferramentas poderosas para visualização de layout.
+
+O Material 3 é a mais recente versão do Material Design, que introduz novos componentes, estilos e recursos para ajudar a criar experiências de usuário mais expressivas e dinâmicas.
+
+## Tecnologias
+
+<p align="center">
+   <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
+   <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin"/>
+   <img src="https://img.shields.io/badge/Jetpack%20Compose-FF4081?style=for-the-badge&logo=jetpack&logoColor=white" alt="Jetpack Compose"/>
+</p>
