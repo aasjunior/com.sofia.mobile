@@ -2,5 +2,6 @@
     <string name="app_name">Sofia</string>
     <string name="welcome_card_text">Veja as principais descobertas no tratamento do TEA!</string>
     <string name="patient_list_header">Listagem de Pacientes</string>
-    <string name="patient_registration_header">Cadastro de Paciente</string>
+    <string name="patient_registration_header_01">Cadastro de Paciente</string>
+    <string name="patient_registration_header_02">Cadastro de Responsável</string>
 </resources>

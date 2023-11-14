@@ -23,7 +23,8 @@ import com.sofia.mobile.ui.theme.Lilas
 @Composable
 fun CustomTopAppBar() {
     CenterAlignedTopAppBar(
-        modifier = Modifier.height(50.dp),
+        modifier = Modifier
+            .height(59.dp),
         title = {
             Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically){
                 SearchableTopBar(
@@ -36,21 +37,31 @@ fun CustomTopAppBar() {
             }
         },
         navigationIcon = {
-            IconButton(onClick = { /* doSomething() */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = "Menu",
-                    tint = BrillantPurple
-                )
-            }
+           Row(
+               modifier = Modifier.height(59.dp),
+               verticalAlignment = Alignment.CenterVertically
+           ){
+               IconButton(onClick = { /* doSomething() */ }) {
+                   Icon(
+                       imageVector = Icons.Filled.Menu,
+                       contentDescription = "Menu",
+                       tint = BrillantPurple
+                   )
+               }
+           }
         },
         actions = {
-            IconButton(onClick = { /* doSomething() */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Email,
-                    contentDescription = "SMS Navigation",
-                    tint = BrillantPurple
-                )
+            Row(
+                modifier = Modifier.height(59.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                IconButton(onClick = { /* doSomething() */ }) {
+                    Icon(
+                        imageVector = Icons.Filled.Email,
+                        contentDescription = "SMS Navigation",
+                        tint = BrillantPurple
+                    )
+                }
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(

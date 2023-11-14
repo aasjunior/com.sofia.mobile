@@ -43,10 +43,6 @@ fun PatientRegistrationScreen(navController: NavController){
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ){
             Spacer(modifier = Modifier.height(12.dp))
-            Text(
-                text = stringResource(id = R.string.patient_registration_header),
-                style = h3.copy(color = BrillantPurple)
-            )
             PatientForm(navController)
         }
     }

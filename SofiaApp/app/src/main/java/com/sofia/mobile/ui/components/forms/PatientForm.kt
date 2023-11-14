@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
@@ -33,13 +31,14 @@ import com.sofia.mobile.ui.components.inputs.ImagePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
 import com.sofia.mobile.data.PacienteRepository
@@ -47,12 +46,13 @@ import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Parentesco
 import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
+import com.sofia.mobile.ui.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
-import com.sofia.mobile.ui.components.inputs.OutlineRadioButton
-import com.sofia.mobile.ui.components.inputs.OutlineTextRadioButton
-import com.sofia.mobile.ui.components.popup.Alert
+import com.sofia.mobile.ui.components.inputs.OutlinedRadioButton
+import com.sofia.mobile.ui.components.inputs.OutlinedTextRadioButton
 import com.sofia.mobile.ui.components.text.body2
 import com.sofia.mobile.ui.components.text.fs12
+import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
@@ -75,6 +75,15 @@ fun PatientForm(navController: NavController){
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        var textHeader = if(currentStep == 2)
+                             R.string.patient_registration_header_02
+                         else
+                             R.string.patient_registration_header_01
+
+        Text(
+            text = stringResource(id = textHeader),
+            style = h3.copy(color = BrillantPurple)
+        )
         FormProgress(currentStep)
         when(currentStep){
             0 -> FormInfo(
@@ -110,7 +119,7 @@ fun PatientForm(navController: NavController){
                     }
                 }
                 1 -> {
-                    CustomButton(text = "Voltar", onClick = {
+                    CustomOutlinedButton(text = "Voltar", onClick = {
                         currentStep--
                     })
                     CustomButton(text = "Próximo", onClick = {
@@ -122,7 +131,9 @@ fun PatientForm(navController: NavController){
                     })
                 }
                 2 -> {
-                    CustomButton(text = "Voltar", onClick = { currentStep-- })
+                    CustomOutlinedButton(text = "Voltar", onClick = {
+                        currentStep--
+                    })
                     CustomButton(text = "Salvar", onClick = {
                         if(isFormResponsavelValid(pvm = pvm)) {
                             courotineScope.launch {
@@ -247,13 +258,14 @@ fun FormInfo(
                 )
             )
 
-            OutlineTextRadioButton(
+            OutlinedTextRadioButton(
                 label = "Sexo",
                 options = Sexo.values().toList(),
                 pvm = pvm
             )
 
             CustomDatePicker(pvm = pvm)
+
             val options = Etnia.values().map { it.name }
             var expanded by remember { mutableStateOf(false) }
             var selectedOptionText by remember { mutableStateOf(options[0]) }
@@ -328,21 +340,21 @@ fun FormPerfil(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            OutlineRadioButton(
+            OutlinedRadioButton(
                 label = "Nasceu prematuro?",
                 options = listOf("Sim", "Não"),
                 state = prematuro,
                 onOptionSelected = pvm::updatePrematuro
             )
 
-            OutlineRadioButton(
+            OutlinedRadioButton(
                 label = "Há alguém na família diagnosticado com autismo?",
                 options = listOf("Sim", "Não"),
                 state = casosFamilia,
                 onOptionSelected = pvm::updateCasosFamilia
             )
 
-            OutlineRadioButton(
+            OutlinedRadioButton(
                 label = "A mãe teve complicações na gravidez?",
                 options = listOf("Sim", "Não"),
                 state = complicacoesGravidez,
@@ -641,6 +653,12 @@ fun FormProgressStep3(){
     }
 }
 
+@Preview
+@Composable
+fun PatientFormPreview(){
+    PatientForm(rememberNavController())
+}
+
 /*
 @Preview
 @Composable
@@ -648,11 +666,9 @@ fun FormInfoPreview(){
     FormInfo()
 }
 
-
 @Preview
 @Composable
 fun FormProgressPreview(){
-    FormProgress(1)
+     FormProgress(1)
 }
-
 */
