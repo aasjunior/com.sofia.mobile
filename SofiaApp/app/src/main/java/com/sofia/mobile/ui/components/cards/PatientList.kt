@@ -45,7 +45,7 @@ fun CharacterHeader(character: Char) {
 
 @Composable
 fun PatientList(patients: List<PacienteModel>) {
-    val grouped = patients.groupBy { it.getNome()[0].uppercase()[0] }
+    val grouped = patients.groupBy { it.nome[0].uppercase()[0] }
     val listState = rememberLazyListState()
 
     LazyColumn(state = listState) {
@@ -73,7 +73,7 @@ fun PatientList(patients: List<PacienteModel>) {
                                     contentDescription = "Cute Star"
                                 )
                                 Text(
-                                    text = patient.getNome(),
+                                    text = patient.nome,
                                     style = body1
                                 )
                             }
@@ -103,10 +103,10 @@ fun PatientCheckList(
     patients: List<PacienteModel>,
     totalChecked: MutableState<Int>,
 ) {
-    val grouped = patients.groupBy { it.getNome()[0].uppercase()[0] }
+    val grouped = patients.groupBy { it.nome[0].uppercase()[0] }
     val listState = rememberLazyListState()
     val allChecked = remember { mutableStateOf(false) }
-    val patientCheckedStates = remember { patients.associate { it.getNome() to mutableStateOf(false) } }
+    val patientCheckedStates = remember { patients.associate { it.nome to mutableStateOf(false) } }
 
     LazyColumn(state = listState) {
         item {
@@ -142,7 +142,7 @@ fun PatientCheckList(
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     patientsForInitial.forEach { patient ->
-                        val isChecked = patientCheckedStates[patient.getNome()]!!
+                        val isChecked = patientCheckedStates[patient.nome]!!
 
                         Column{
                             Row(
@@ -159,7 +159,7 @@ fun PatientCheckList(
                                     },
                                 )
                                 Text(
-                                    text = patient.getNome(),
+                                    text = patient.nome,
                                     style = body1
                                 )
                             }
@@ -170,7 +170,7 @@ fun PatientCheckList(
         }
     }
 }
-
+/*
 @Preview
 @Composable
 fun PatientListPreview() {
@@ -182,7 +182,8 @@ fun PatientListPreview() {
 
     PatientList(patients)
 }
-
+*/
+/*
 @Preview
 @Composable
 fun PatientCheckListPreview() {
@@ -195,3 +196,4 @@ fun PatientCheckListPreview() {
     val totalChecked = remember { mutableStateOf(0) }
     PatientCheckList(patients, totalChecked)
 }
+*/

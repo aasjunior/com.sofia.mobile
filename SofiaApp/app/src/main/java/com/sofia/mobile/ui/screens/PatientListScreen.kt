@@ -13,8 +13,13 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,9 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
+import com.sofia.mobile.api.RetrofitInstance
+import com.sofia.mobile.api.SofiaApiService
+import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.models.PacienteModel
 import com.sofia.mobile.domain.Sexo
@@ -39,6 +48,9 @@ import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
+import com.sofia.mobile.ui.viewmodels.PatientListViewModel
+import com.sofia.mobile.ui.viewmodels.PatientListViewModelFactory
+import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
 import java.time.LocalDate
 
 @Composable
@@ -46,15 +58,36 @@ fun PatientListScreen(
     navController: NavController,
     nPatient: Int
 ){
-    val pacienteModel1 = PacienteModel("Pedro Rodriguez", LocalDate.of(1990, 4, 15), Etnia.PARDA, Sexo.MASCULINO, false, false, false)
-    val pacienteModel2 = PacienteModel("Maria Silva", LocalDate.of(1990, 4, 15), Etnia.PRETA, Sexo.FEMININO, false, false, false)
-    val pacienteModel3 = PacienteModel("Paula Lima dos Santo", LocalDate.of(1990, 4, 15), Etnia.BRANCA, Sexo.FEMININO, false, false, false)
-
-    val patients: List<PacienteModel> = listOf(pacienteModel1, pacienteModel2, pacienteModel3).sortedBy { it.getNome() }
+    val apiService = RetrofitInstance.api
+    val pacienteRepository = PacienteRepository(apiService)
+    val viewModel: PatientListViewModel = viewModel(factory = PatientListViewModelFactory(pacienteRepository))
 
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }
     val totalChecked = remember { mutableStateOf(0) }
+
+    // Iniciar a busca de pacientes quando o composable for criado
+    LaunchedEffect(Unit) {
+        viewModel.fetchPatients()
+    }
+
+    // Observar a lista de pacientes e mostrar na tela
+    val patients = viewModel.patients.value
+    val errorMessage = viewModel.errorMessage.value
+
+    // Cria um SnackbarHostState
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    // Mostra a Snackbar quando errorMessage é alterado
+    LaunchedEffect(errorMessage) {
+        if (!errorMessage.isNullOrEmpty()) {
+            snackbarHostState.showSnackbar(
+                message = errorMessage,
+                actionLabel = "Fechar"
+            )
+            viewModel.errorMessage.value = null
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -74,6 +107,9 @@ fun PatientListScreen(
                     )
                 }
             }
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
         }
     ) { innerPadding ->
         Column(
