@@ -200,7 +200,7 @@ fun PatientListScreen(
             if(isDeleteMode.value) {
                 PatientCheckList(viewModel)
             }else{
-                PatientList(patients)
+                PatientList(navController, patients)
             }
             if(showDialog.value){
                 ConfirmAlertDialog(

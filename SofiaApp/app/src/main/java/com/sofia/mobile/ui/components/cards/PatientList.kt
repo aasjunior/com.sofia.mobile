@@ -1,6 +1,7 @@
 package com.sofia.mobile.ui.components.cards
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.models.PacienteModel
 import com.sofia.mobile.ui.components.inputs.RoundCheckbox
@@ -40,7 +42,7 @@ fun CharacterHeader(character: Char) {
 }
 
 @Composable
-fun PatientList(patients: List<PacienteModel>) {
+fun PatientList(navController: NavController, patients: List<PacienteModel>) {
     val grouped = patients.groupBy { it.nome[0].uppercase()[0] }
     val listState = rememberLazyListState()
 
@@ -59,9 +61,15 @@ fun PatientList(patients: List<PacienteModel>) {
                     Column{
                         patientsForInitial.forEachIndexed { index, patient ->
                             Row(
-                                modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 18.dp, vertical = 11.dp)
+                                    .clickable {
+                                        // Navegue para a tela PatientProfileScreen com o ID do paciente
+                                        navController.navigate("patientProfile/${patient.id}")
+                                    },
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(20.dp)
+                                horizontalArrangement = Arrangement.spacedBy(20.dp),
                             ) {
                                 Image(
                                     modifier = Modifier.size(32.dp),
