@@ -72,7 +72,7 @@ fun PatientListScreen(
     }
 
     // Observar a lista de pacientes e mostrar na tela
-    val patients = viewModel.patients.value
+    val patients = viewModel.patients.value.sortedBy { it.nome.lowercase() }
     val errorMessage = viewModel.errorMessage.value
 
     // Cria um SnackbarHostState
@@ -137,7 +137,7 @@ fun PatientListScreen(
                     )
 
                     Text(
-                        text = "$nPatient pacientes cadastrados",
+                        text = "${patients.size} pacientes cadastrados",
                         style = body1.copy(color = Gray1)
                     )
                 }
