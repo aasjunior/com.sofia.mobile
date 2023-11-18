@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -54,6 +53,6 @@ fun StarButton(
 
 @Preview
 @Composable
-fun StarButtonPreview(){
+private fun StarButtonPreview(){
     StarButton(text = "Nova Consulta", onClick = { /*TODO*/ }, iconId = R.drawable.ic_star_laugh)
 }

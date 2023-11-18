@@ -29,8 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
-import com.sofia.mobile.api.RetrofitInstance
-import com.sofia.mobile.data.PacienteRepository
+import com.sofia.mobile.repository.RepositoryProvider
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.buttons.FloatingAddButton
 import com.sofia.mobile.ui.components.cards.CustomOptionsCard
@@ -44,17 +43,16 @@ import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
+import com.sofia.mobile.ui.viewmodels.GenericViewModelFactory
 import com.sofia.mobile.ui.viewmodels.PatientListViewModel
-import com.sofia.mobile.ui.viewmodels.PatientListViewModelFactory
 
 @Composable
 fun PatientListScreen(
-    navController: NavController,
-    nPatient: Int
+    navController: NavController
 ){
-    val apiService = RetrofitInstance.api
-    val pacienteRepository = PacienteRepository(apiService)
-    val viewModel: PatientListViewModel = viewModel(factory = PatientListViewModelFactory(pacienteRepository))
+    val viewModel: PatientListViewModel = viewModel(
+        factory = GenericViewModelFactory { PatientListViewModel(RepositoryProvider.pacienteRepository) }
+    )
     val showDialog = remember { mutableStateOf(false) }
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }
@@ -224,5 +222,5 @@ fun PatientListScreen(
 @Preview
 @Composable
 fun PatientListScreenPreview(){
-    PatientListScreen(navController = rememberNavController(), 3)
+    PatientListScreen(navController = rememberNavController())
 }

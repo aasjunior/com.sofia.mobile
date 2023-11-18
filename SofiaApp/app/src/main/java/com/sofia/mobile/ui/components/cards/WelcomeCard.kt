@@ -99,6 +99,6 @@ fun WelcomeCard(
 
 @Preview
 @Composable
-fun WelcomeCardPreview(){
+private fun WelcomeCardPreview(){
     WelcomeCard(name = "Amanda", navController = rememberNavController())
 }

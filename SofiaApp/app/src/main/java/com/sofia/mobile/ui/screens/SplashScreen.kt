@@ -121,7 +121,7 @@ fun SecondSplashScreen(){
 
 @Preview
 @Composable
-fun FirstSplashScreenPreview(){
+private fun FirstSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             FirstSplashScreen()
@@ -131,7 +131,7 @@ fun FirstSplashScreenPreview(){
 
 @Preview
 @Composable
-fun SecondSplashScreenPreview(){
+private fun SecondSplashScreenPreview(){
     SofiaTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             SecondSplashScreen()

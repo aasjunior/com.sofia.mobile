@@ -71,6 +71,6 @@ fun ImagePicker(){
 
 @Preview
 @Composable
-fun ImagePickerPreview(){
+private fun ImagePickerPreview(){
     ImagePicker()
 }

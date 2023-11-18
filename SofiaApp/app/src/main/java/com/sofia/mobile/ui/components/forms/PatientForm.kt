@@ -40,11 +40,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
-import com.sofia.mobile.api.RetrofitInstance
-import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.domain.Parentesco
 import com.sofia.mobile.domain.Sexo
+import com.sofia.mobile.repository.RepositoryProvider
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.components.inputs.CustomDatePicker
@@ -55,16 +54,16 @@ import com.sofia.mobile.ui.components.text.fs12
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
+import com.sofia.mobile.ui.viewmodels.GenericViewModelFactory
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
-import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
 import kotlinx.coroutines.launch
 
 @Composable
 fun PatientForm(navController: NavController){
     var currentStep by remember { mutableStateOf(0) }
-    val apiService = RetrofitInstance.api
-    val pacienteRepository = PacienteRepository(apiService)
-    val pvm: PatientViewModel = viewModel(factory = PatientViewModelFactory(pacienteRepository))
+    val pvm: PatientViewModel = viewModel(
+        factory = GenericViewModelFactory { PatientViewModel(RepositoryProvider.pacienteRepository) }
+    )
     val courotineScope = rememberCoroutineScope()
     var showDialog by remember { mutableStateOf(false) }
     var showDialogSuccess by remember { mutableStateOf(false) }
@@ -655,20 +654,6 @@ fun FormProgressStep3(){
 
 @Preview
 @Composable
-fun PatientFormPreview(){
+private fun PatientFormPreview(){
     PatientForm(rememberNavController())
 }
-
-/*
-@Preview
-@Composable
-fun FormInfoPreview(){
-    FormInfo()
-}
-
-@Preview
-@Composable
-fun FormProgressPreview(){
-     FormProgress(1)
-}
-*/

@@ -1,7 +1,6 @@
 package com.sofia.mobile.ui.components.buttons
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +11,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -75,12 +73,12 @@ fun CustomOutlinedButton(
 
 @Preview
 @Composable
-fun CustomButtonPreview(){
+private fun CustomButtonPreview(){
     CustomButton(text = "Deletar", onClick = {})
 }
 
 @Preview
 @Composable
-fun CustomOutlinedButtonPreview(){
+private fun CustomOutlinedButtonPreview(){
     CustomOutlinedButton(text = "Voltar", onClick = {})
 }

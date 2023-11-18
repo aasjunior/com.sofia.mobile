@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.BrillantPurple
-import com.sofia.mobile.ui.theme.Lilas
 
 @Composable
 fun RoundCheckbox(
@@ -50,7 +49,7 @@ fun RoundCheckbox(
 
 @Preview
 @Composable
-fun RoundCheckboxPreview(){
+private fun RoundCheckboxPreview(){
     Row{
         RoundCheckbox(checked = false, onCheckedChange = {})
         RoundCheckbox(checked = true, onCheckedChange = {})

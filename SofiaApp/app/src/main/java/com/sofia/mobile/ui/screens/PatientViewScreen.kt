@@ -11,9 +11,9 @@ fun PatientViewScreen(
 ){
 
 }
-
+/*
 @Preview
 @Composable
 private fun PatientViewScreenPreview(){
     PatientViewScreen()
-}
+}*/

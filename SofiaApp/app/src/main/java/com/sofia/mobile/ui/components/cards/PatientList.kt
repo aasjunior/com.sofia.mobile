@@ -11,29 +11,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.R
-import com.sofia.mobile.domain.Etnia
 import com.sofia.mobile.models.PacienteModel
-import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.inputs.RoundCheckbox
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
 import com.sofia.mobile.ui.theme.Lilas
 import com.sofia.mobile.ui.viewmodels.PatientListViewModel
-import java.time.LocalDate
 
 @Composable
 fun CharacterHeader(character: Char) {
@@ -84,7 +79,7 @@ fun PatientList(patients: List<PacienteModel>) {
                                     modifier = Modifier.fillMaxWidth(),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Divider(
+                                    HorizontalDivider(
                                         modifier = Modifier.fillMaxWidth(0.8f),
                                         color = Gray3,
                                         thickness = 1.dp
@@ -170,30 +165,3 @@ fun PatientCheckList(
         }
     }
 }
-/*
-@Preview
-@Composable
-fun PatientListPreview() {
-    val pacienteModel1 = PacienteModel("Pedro Rodriguez", LocalDate.of(1990, 4, 15), Etnia.PRETA, Sexo.MASCULINO, false, false, false)
-    val pacienteModel2 = PacienteModel("Maria Silva", LocalDate.of(1990, 4, 15), Etnia.PRETA, Sexo.FEMININO, false, false, false)
-    val pacienteModel3 = PacienteModel("Paula Lima dos Santo", LocalDate.of(1990, 4, 15), Etnia.PARDA, Sexo.FEMININO, false, false, false)
-
-    val patients: List<PacienteModel> = listOf(pacienteModel1, pacienteModel2, pacienteModel3).sortedBy { it.getNome() }
-
-    PatientList(patients)
-}
-*/
-/*
-@Preview
-@Composable
-fun PatientCheckListPreview() {
-    val pacienteModel1 = PacienteModel("Pedro Rodriguez", LocalDate.of(1990, 4, 15), Etnia.PRETA, Sexo.MASCULINO, false, false, false)
-    val pacienteModel2 = PacienteModel("Maria Silva", LocalDate.of(1990, 4, 15), Etnia.PARDA, Sexo.FEMININO, false, false, false)
-    val pacienteModel3 = PacienteModel("Paula Lima dos Santo", LocalDate.of(1990, 4, 15), Etnia.BRANCA, Sexo.FEMININO, false, false, false)
-
-    val patients: List<PacienteModel> = listOf(pacienteModel1, pacienteModel2, pacienteModel3).sortedBy { it.getNome() }
-
-    val totalChecked = remember { mutableStateOf(0) }
-    PatientCheckList(patients, totalChecked)
-}
-*/
