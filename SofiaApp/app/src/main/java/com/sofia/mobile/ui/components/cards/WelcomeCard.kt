@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
-import com.sofia.mobile.ui.components.text.UnderlinedTextWithNavigation
+import com.sofia.mobile.ui.components.text.UnderlinedTextNavigation
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h2
 import com.sofia.mobile.ui.theme.Black
@@ -84,7 +84,7 @@ fun WelcomeCard(
                         )
 
                         Spacer(modifier = Modifier.height(16.dp))
-                        UnderlinedTextWithNavigation(text = "Saiba mais", onClick = { navController.navigate("destination_screen") })
+                        UnderlinedTextNavigation(text = "Saiba mais", onClick = { navController.navigate("destination_screen") })
                     }
                     Image(
                         modifier = Modifier.size(100.dp),

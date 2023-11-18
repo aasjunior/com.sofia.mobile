@@ -9,7 +9,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import com.sofia.mobile.ui.theme.SoftPurple
 
 @Composable
-fun UnderlinedTextWithNavigation(
+fun UnderlinedTextNavigation(
     text: String,
     color: Color = SoftPurple,
     onClick: () -> Unit

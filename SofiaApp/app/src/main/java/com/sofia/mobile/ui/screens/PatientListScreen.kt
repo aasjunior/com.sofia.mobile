@@ -37,6 +37,8 @@ import com.sofia.mobile.ui.components.cards.CustomOptionsCard
 import com.sofia.mobile.ui.components.cards.PatientCheckList
 import com.sofia.mobile.ui.components.cards.PatientList
 import com.sofia.mobile.ui.components.navbar.appbar.CustomTopAppBar
+import com.sofia.mobile.ui.components.popup.ConfirmAlertDialog
+import com.sofia.mobile.ui.components.text.UnderlinedTextNavigation
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
 import com.sofia.mobile.ui.theme.BrillantPurple
@@ -53,7 +55,7 @@ fun PatientListScreen(
     val apiService = RetrofitInstance.api
     val pacienteRepository = PacienteRepository(apiService)
     val viewModel: PatientListViewModel = viewModel(factory = PatientListViewModelFactory(pacienteRepository))
-
+    val showDialog = remember { mutableStateOf(false) }
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }
 
@@ -64,12 +66,11 @@ fun PatientListScreen(
 
     // Observar a lista de pacientes e mostrar na tela
     val patients = viewModel.patients.value.sortedBy { it.nome.lowercase() }
-    val errorMessage = viewModel.errorMessage.value
 
-    // Cria um SnackbarHostState
+    // Observar a mensagens de sucesso e erro e mostrar na tela
     val snackbarHostState = remember { SnackbarHostState() }
-    // Observar a mensagem de sucesso e mostrar na tela
     val successMessage = viewModel.successMessage.value
+    val errorMessage = viewModel.errorMessage.value
 
     LaunchedEffect(successMessage, errorMessage) {
         when {
@@ -92,20 +93,22 @@ fun PatientListScreen(
 
     val options = mutableListOf<Pair<String, () -> Unit>>()
     options.add("Novo" to { navController.navigate("patientRegistration") })
-    if (isDeleteMode.value) {
-        options.add("Cancelar" to {
-            isDeleteMode.value = !isDeleteMode.value
-            if (!isDeleteMode.value) {
-                viewModel.deselectAllPatients()
-            }
-        })
-    } else {
-        options.add("Deletar" to {
-            isDeleteMode.value = !isDeleteMode.value
-            if (!isDeleteMode.value) {
-                viewModel.deselectAllPatients()
-            }
-        })
+    if(patients.isNotEmpty()){
+        if(isDeleteMode.value){
+            options.add("Cancelar" to {
+                isDeleteMode.value = !isDeleteMode.value
+                if(!isDeleteMode.value){
+                    viewModel.deselectAllPatients()
+                }
+            })
+        }else{
+            options.add("Deletar" to {
+                isDeleteMode.value = !isDeleteMode.value
+                if(!isDeleteMode.value){
+                    viewModel.deselectAllPatients()
+                }
+            })
+        }
     }
 
     Scaffold(
@@ -122,7 +125,10 @@ fun PatientListScreen(
                 ){
                     CustomButton(
                         text = "Deletar",
-                        onClick = { viewModel.deleteSelectedPatients() }
+                        onClick = {
+                            if(viewModel.totalChecked > 0)
+                                showDialog.value = true
+                        }
                     )
                 }
             }
@@ -162,26 +168,34 @@ fun PatientListScreen(
                 }
             }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(0.9f),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                if(isCardOpen.value){
-                    CustomOptionsCard(options)
-                }else{
-                    FloatingAddButton(
-                        onClick = { navController.navigate("patientRegistration") }
-                    )
-                }
+            if(patients.isEmpty()){
+                isDeleteMode.value = false
+                UnderlinedTextNavigation(
+                    text = "Cadastrar novo paciente",
+                    onClick =  { navController.navigate("patientRegistration") }
+                )
+            }else {
+                Row(
+                    modifier = Modifier.fillMaxWidth(0.9f),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (isCardOpen.value) {
+                        CustomOptionsCard(options)
+                    } else {
+                        FloatingAddButton(
+                            onClick = { navController.navigate("patientRegistration") }
+                        )
+                    }
 
-                IconButton(onClick = { isCardOpen.value = !isCardOpen.value }){
-                    Icon(
-                        modifier = Modifier.size(32.dp),
-                        imageVector = Icons.Filled.MoreVert,
-                        contentDescription = null,
-                        tint = SoftPurple
-                    )
+                    IconButton(onClick = { isCardOpen.value = !isCardOpen.value }) {
+                        Icon(
+                            modifier = Modifier.size(32.dp),
+                            imageVector = Icons.Filled.MoreVert,
+                            contentDescription = null,
+                            tint = SoftPurple
+                        )
+                    }
                 }
             }
 
@@ -189,6 +203,19 @@ fun PatientListScreen(
                 PatientCheckList(viewModel)
             }else{
                 PatientList(patients)
+            }
+            if(showDialog.value){
+                ConfirmAlertDialog(
+                    title = "Confirmação de exclusão",
+                    text = "Tem certeza de que deseja excluir os pacientes selecionados?",
+                    onConfirm = {
+                        viewModel.deleteSelectedPatients()
+                        showDialog.value = false
+                    },
+                    onDismiss = {
+                        showDialog.value = false
+                    }
+                )
             }
         }
     }

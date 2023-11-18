@@ -98,6 +98,7 @@ fun PatientList(patients: List<PacienteModel>) {
         }
     }
 }
+
 @Composable
 fun PatientCheckList(
     viewModel: PatientListViewModel
@@ -150,7 +151,11 @@ fun PatientCheckList(
                                     checked = patient.isSelected,
                                     onCheckedChange = { checked ->
                                         viewModel.selectPatient(patient, checked)
-                                        allChecked.value = patients.all { it.isSelected }
+                                        if(!checked){
+                                            allChecked.value = false
+                                        }else{
+                                            allChecked.value = patients.all { it.isSelected }
+                                        }
                                     },
                                 )
                                 Text(
