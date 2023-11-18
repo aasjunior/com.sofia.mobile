@@ -2,6 +2,7 @@ package com.sofia.mobile.api
 
 import com.sofia.mobile.domain.Paciente
 import com.sofia.mobile.models.PacienteModel
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -19,5 +20,6 @@ interface SofiaApiService {
     suspend fun updatePatient(@Path("id") id: Long, @Body patient: PacienteModel): PacienteModel
 
     @DELETE("/pacientes/{id}")
-    suspend fun deletePatient(@Path("id") id: Long)
+    suspend fun deletePatient(@Path("id") id: Long): Response<Unit>
+
 }

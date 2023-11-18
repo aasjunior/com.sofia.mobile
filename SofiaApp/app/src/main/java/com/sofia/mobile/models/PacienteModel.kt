@@ -16,5 +16,7 @@ data class PacienteModel(
     val complicacoesGravidez: Boolean,
     val prematuro: Boolean,
     val responsavel: ResponsavelModel,
-    val dataCadastro: LocalDateTime
+    val dataCadastro: LocalDateTime,
+
+    var isSelected: Boolean = false
 )

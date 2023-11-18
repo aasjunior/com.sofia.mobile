@@ -13,11 +13,9 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -32,11 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.api.RetrofitInstance
-import com.sofia.mobile.api.SofiaApiService
 import com.sofia.mobile.data.PacienteRepository
-import com.sofia.mobile.domain.Etnia
-import com.sofia.mobile.models.PacienteModel
-import com.sofia.mobile.domain.Sexo
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.buttons.FloatingAddButton
 import com.sofia.mobile.ui.components.cards.CustomOptionsCard
@@ -50,8 +44,6 @@ import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
 import com.sofia.mobile.ui.viewmodels.PatientListViewModel
 import com.sofia.mobile.ui.viewmodels.PatientListViewModelFactory
-import com.sofia.mobile.ui.viewmodels.PatientViewModelFactory
-import java.time.LocalDate
 
 @Composable
 fun PatientListScreen(
@@ -64,7 +56,6 @@ fun PatientListScreen(
 
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }
-    val totalChecked = remember { mutableStateOf(0) }
 
     // Iniciar a busca de pacientes quando o composable for criado
     LaunchedEffect(Unit) {
@@ -77,16 +68,44 @@ fun PatientListScreen(
 
     // Cria um SnackbarHostState
     val snackbarHostState = remember { SnackbarHostState() }
+    // Observar a mensagem de sucesso e mostrar na tela
+    val successMessage = viewModel.successMessage.value
 
-    // Mostra a Snackbar quando errorMessage é alterado
-    LaunchedEffect(errorMessage) {
-        if (!errorMessage.isNullOrEmpty()) {
-            snackbarHostState.showSnackbar(
-                message = errorMessage,
-                actionLabel = "Fechar"
-            )
-            viewModel.errorMessage.value = null
+    LaunchedEffect(successMessage, errorMessage) {
+        when {
+            !successMessage.isNullOrEmpty() -> {
+                snackbarHostState.showSnackbar(
+                    message = successMessage,
+                    actionLabel = "Fechar"
+                )
+                viewModel.successMessage.value = null
+            }
+            !errorMessage.isNullOrEmpty() -> {
+                snackbarHostState.showSnackbar(
+                    message = errorMessage,
+                    actionLabel = "Fechar"
+                )
+                viewModel.errorMessage.value = null
+            }
         }
+    }
+
+    val options = mutableListOf<Pair<String, () -> Unit>>()
+    options.add("Novo" to { navController.navigate("patientRegistration") })
+    if (isDeleteMode.value) {
+        options.add("Cancelar" to {
+            isDeleteMode.value = !isDeleteMode.value
+            if (!isDeleteMode.value) {
+                viewModel.deselectAllPatients()
+            }
+        })
+    } else {
+        options.add("Deletar" to {
+            isDeleteMode.value = !isDeleteMode.value
+            if (!isDeleteMode.value) {
+                viewModel.deselectAllPatients()
+            }
+        })
     }
 
     Scaffold(
@@ -103,7 +122,7 @@ fun PatientListScreen(
                 ){
                     CustomButton(
                         text = "Deletar",
-                        onClick = {}
+                        onClick = { viewModel.deleteSelectedPatients() }
                     )
                 }
             }
@@ -127,7 +146,7 @@ fun PatientListScreen(
             ){
                 if(isDeleteMode.value){
                     Text(
-                        text = "${totalChecked.value} selecionado(s)",
+                        text = "${viewModel.totalChecked} selecionado(s)",
                         style = h3.copy(color = BrillantPurple)
                     )
                 }else{
@@ -149,12 +168,7 @@ fun PatientListScreen(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 if(isCardOpen.value){
-                    CustomOptionsCard(
-                        options = listOf(
-                            "Novo" to { navController.navigate("patientRegistration") },
-                            "Deletar" to { isDeleteMode.value = !isDeleteMode.value }
-                        )
-                    )
+                    CustomOptionsCard(options)
                 }else{
                     FloatingAddButton(
                         onClick = { navController.navigate("patientRegistration") }
@@ -172,7 +186,7 @@ fun PatientListScreen(
             }
 
             if(isDeleteMode.value) {
-                PatientCheckList(patients, totalChecked)
+                PatientCheckList(viewModel)
             }else{
                 PatientList(patients)
             }

@@ -32,6 +32,7 @@ import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
 import com.sofia.mobile.ui.theme.Lilas
+import com.sofia.mobile.ui.viewmodels.PatientListViewModel
 import java.time.LocalDate
 
 @Composable
@@ -97,16 +98,14 @@ fun PatientList(patients: List<PacienteModel>) {
         }
     }
 }
-
 @Composable
 fun PatientCheckList(
-    patients: List<PacienteModel>,
-    totalChecked: MutableState<Int>,
+    viewModel: PatientListViewModel
 ) {
+    val patients = viewModel.patients.value
     val grouped = patients.groupBy { it.nome[0].uppercase()[0] }
     val listState = rememberLazyListState()
     val allChecked = remember { mutableStateOf(false) }
-    val patientCheckedStates = remember { patients.associate { it.nome to mutableStateOf(false) } }
 
     LazyColumn(state = listState) {
         item {
@@ -120,8 +119,7 @@ fun PatientCheckList(
                     checked = allChecked.value,
                     onCheckedChange = { checked ->
                         allChecked.value = checked
-                        patientCheckedStates.values.forEach { it.value = checked }
-                        totalChecked.value = if (checked) patients.size else 0
+                        viewModel.selectAllPatients(checked)
                     }
                 )
                 Text(
@@ -142,8 +140,6 @@ fun PatientCheckList(
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     patientsForInitial.forEach { patient ->
-                        val isChecked = patientCheckedStates[patient.nome]!!
-
                         Column{
                             Row(
                                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
@@ -151,11 +147,10 @@ fun PatientCheckList(
                                 horizontalArrangement = Arrangement.spacedBy(20.dp)
                             ) {
                                 RoundCheckbox(
-                                    checked = isChecked.value,
+                                    checked = patient.isSelected,
                                     onCheckedChange = { checked ->
-                                        isChecked.value = checked
-                                        totalChecked.value += if (checked) 1 else -1
-                                        allChecked.value = totalChecked.value == patients.size
+                                        viewModel.selectPatient(patient, checked)
+                                        allChecked.value = patients.all { it.isSelected }
                                     },
                                 )
                                 Text(
