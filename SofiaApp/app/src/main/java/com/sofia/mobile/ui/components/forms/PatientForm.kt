@@ -32,11 +32,8 @@ import com.sofia.mobile.ui.viewmodels.PatientViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun PatientForm(navController: NavController){
+fun PatientForm(navController: NavController, pvm: PatientViewModel){
     var currentStep by remember { mutableStateOf(0) }
-    val pvm: PatientViewModel = viewModel(
-        factory = GenericViewModelFactory { PatientViewModel(RepositoryProvider.pacienteRepository) }
-    )
     val courotineScope = rememberCoroutineScope()
     var showDialog by remember { mutableStateOf(false) }
     var showDialogSuccess by remember { mutableStateOf(false) }
@@ -161,5 +158,8 @@ fun PatientForm(navController: NavController){
 @Preview
 @Composable
 private fun PatientFormPreview(){
-    PatientForm(rememberNavController())
+    val pvm: PatientViewModel = viewModel(
+        factory = GenericViewModelFactory { PatientViewModel(RepositoryProvider.pacienteRepository) }
+    )
+    PatientForm(rememberNavController(), pvm)
 }
