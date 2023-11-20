@@ -1,8 +1,10 @@
 package com.sofia.mobile.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.repository.RepositoryProvider
 import com.sofia.mobile.ui.components.forms.PatientForm
 import com.sofia.mobile.ui.components.navbar.appbar.CustomTopAppBar
+import com.sofia.mobile.ui.theme.BackgroundSoftLilas
 import com.sofia.mobile.ui.viewmodels.GenericViewModelFactory
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
 
@@ -36,7 +39,8 @@ fun PatientRegistrationScreen(navController: NavController){
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxWidth()
+                .fillMaxSize()
+                .background(BackgroundSoftLilas)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)

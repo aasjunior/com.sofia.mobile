@@ -1,9 +1,11 @@
 package com.sofia.mobile.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -40,6 +42,7 @@ import com.sofia.mobile.ui.components.popup.ConfirmAlertDialog
 import com.sofia.mobile.ui.components.text.UnderlinedTextNavigation
 import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.components.text.h3
+import com.sofia.mobile.ui.theme.BackgroundSoftLilas
 import com.sofia.mobile.ui.theme.BrillantPurple
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.SoftPurple
@@ -133,12 +136,14 @@ fun PatientListScreen(
         },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
-        }
+        },
+        containerColor = BackgroundSoftLilas
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxWidth(),
+                .fillMaxSize()
+                .background(BackgroundSoftLilas),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {

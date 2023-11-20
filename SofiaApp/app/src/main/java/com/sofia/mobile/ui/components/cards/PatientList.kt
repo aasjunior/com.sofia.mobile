@@ -1,6 +1,7 @@
 package com.sofia.mobile.ui.components.cards
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +31,7 @@ import com.sofia.mobile.ui.components.text.body1
 import com.sofia.mobile.ui.theme.Gray1
 import com.sofia.mobile.ui.theme.Gray3
 import com.sofia.mobile.ui.theme.Lilas
+import com.sofia.mobile.ui.theme.White
 import com.sofia.mobile.ui.viewmodels.PatientListViewModel
 
 @Composable
@@ -58,7 +60,9 @@ fun PatientList(navController: NavController, patients: List<PacienteModel>) {
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp)
                 ) {
-                    Column{
+                    Column(
+                        modifier = Modifier.background(White)
+                    ){
                         patientsForInitial.forEachIndexed { index, patient ->
                             Row(
                                 modifier = Modifier
@@ -144,7 +148,7 @@ fun PatientCheckList(
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     patientsForInitial.forEach { patient ->
-                        Column{
+                        Column(modifier = Modifier.fillMaxWidth().background(White)){
                             Row(
                                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
                                 verticalAlignment = Alignment.CenterVertically,

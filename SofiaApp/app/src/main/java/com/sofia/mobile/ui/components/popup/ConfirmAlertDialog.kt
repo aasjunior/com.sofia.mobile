@@ -2,10 +2,13 @@ package com.sofia.mobile.ui.components.popup
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.Gray3
 
 @Composable
 fun ConfirmAlertDialog(
@@ -29,7 +32,11 @@ fun ConfirmAlertDialog(
                     onClick = {
                         onConfirm()
                         openDialog.value = false
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = BrillantPurple,
+                        contentColor = Gray3
+                    )
                 ) {
                     Text("Sim")
                 }

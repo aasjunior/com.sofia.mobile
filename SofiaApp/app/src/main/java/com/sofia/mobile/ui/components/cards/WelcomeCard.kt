@@ -1,6 +1,7 @@
 package com.sofia.mobile.ui.components.cards
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,7 +55,8 @@ fun WelcomeCard(
         Box(
             modifier = Modifier
                 .padding(horizontal = 25.dp, vertical = 15.dp)
-                .width(260.dp),
+                .width(260.dp)
+                .background(White),
             contentAlignment = Alignment.Center
         ) {
             Column(

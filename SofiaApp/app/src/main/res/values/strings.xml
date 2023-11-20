@@ -4,4 +4,10 @@
     <string name="patient_list_header">Listagem de Pacientes</string>
     <string name="patient_registration_header_01">Cadastro de Paciente</string>
     <string name="patient_registration_header_02">Cadastro de Responsável</string>
+    <string name="patient_registration_success">Dados cadastrados com sucesso.</string>
+    <string name="patient_registration_alert">Preencha todos os campos.</string>
+    <string name="patient_profile_header">Visualização do Paciente</string>
+    <string name="patient_edit_header_01">Atualização do Paciente</string>
+    <string name="patient_edit_header_02">Atualização do Responsável</string>
+    <string name="patient_edit_success">Dados atualizados com sucesso.</string>
 </resources>

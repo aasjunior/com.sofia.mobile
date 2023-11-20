@@ -1,12 +1,14 @@
 package com.sofia.mobile.ui.components.forms
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,12 +23,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImagePainter
 import com.sofia.mobile.R
 import com.sofia.mobile.repository.RepositoryProvider
 import com.sofia.mobile.ui.components.buttons.CustomButton
 import com.sofia.mobile.ui.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.components.text.h3
+import com.sofia.mobile.ui.theme.BackgroundSoftLilas
 import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.Gray3
+import com.sofia.mobile.ui.theme.White
 import com.sofia.mobile.ui.viewmodels.GenericViewModelFactory
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
 import kotlinx.coroutines.launch
@@ -42,23 +48,32 @@ fun PatientForm(
     var showDialog by remember { mutableStateOf(false) }
     var showDialogSuccess by remember { mutableStateOf(false) }
     var alertMessage by remember { mutableStateOf("Preencha todos os campos.") }
-
+    var textHeader by remember { mutableStateOf(R.string.patient_registration_header_01) }
+    var successMessage by remember { mutableStateOf(R.string.patient_registration_success) }
     val onSend: suspend ()->String = if(isEditMode){
         {pvm.updatePatient()}
     }else{
         {pvm.sendData()}
     }
 
+    if(isEditMode){
+        textHeader = if(currentStep == 2)
+                        R.string.patient_edit_header_02
+                     else
+                        R.string.patient_edit_header_01
+        successMessage = R.string.patient_edit_success
+    }else{
+        textHeader = if(currentStep == 2)
+                        R.string.patient_registration_header_02
+                     else
+                        R.string.patient_registration_header_01
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var textHeader = if(currentStep == 2)
-                             R.string.patient_registration_header_02
-                         else
-                             R.string.patient_registration_header_01
 
         Text(
             text = stringResource(id = textHeader),
@@ -140,7 +155,13 @@ fun PatientForm(
                 title = { Text("Mensagem") },
                 text = { Text(alertMessage) },
                 confirmButton = {
-                    Button(onClick = { showDialog = false }) {
+                    Button(
+                        onClick = { showDialog = false },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = BrillantPurple,
+                            contentColor = Gray3
+                        )
+                    ) {
                         Text("Ok")
                     }
                 }
@@ -151,7 +172,7 @@ fun PatientForm(
             AlertDialog(
                 onDismissRequest = { !showDialog },
                 title = { Text("Mensagem") },
-                text = { Text("Dados cadastrados com sucesso.") },
+                text = { Text(stringResource(id = successMessage)) },
                 confirmButton = {
                     Button(onClick = {
                         navController.navigate("patientList")

@@ -1,8 +1,11 @@
 package com.sofia.mobile.ui.components.forms
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,6 +35,7 @@ import com.sofia.mobile.ui.components.inputs.ImagePicker
 import com.sofia.mobile.ui.components.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.components.inputs.OutlinedTextRadioButton
 import com.sofia.mobile.ui.theme.BrillantPurple
+import com.sofia.mobile.ui.theme.White
 import com.sofia.mobile.ui.viewmodels.PatientViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,10 +57,11 @@ fun FormInfo(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .background(White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
             ImagePicker()
 
             OutlinedTextField(
@@ -156,6 +161,7 @@ fun FormInfo(
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
@@ -177,11 +183,11 @@ fun FormPerfil(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .background(White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedRadioButton(
                 label = "Nasceu prematuro?",
                 options = listOf("Sim", "Não"),
@@ -202,7 +208,7 @@ fun FormPerfil(
                 state = complicacoesGravidez,
                 onOptionSelected = pvm::updateComplicacoesGravidez
             )
-
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
@@ -227,10 +233,11 @@ fun FormResponsavel(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .background(White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = nomeResponsavel,
@@ -320,7 +327,7 @@ fun FormResponsavel(
                     }
                 }
             }
-
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
     ElevatedCard(
@@ -332,10 +339,11 @@ fun FormResponsavel(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .background(White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 modifier = Modifier.width(264.dp),
                 value = celularResponsavel,
@@ -370,6 +378,7 @@ fun FormResponsavel(
                     focusedLabelColor = BrillantPurple
                 )
             )
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
