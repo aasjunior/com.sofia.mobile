@@ -1,7 +1,6 @@
 package com.sofia.mobile.ui.viewmodels
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.sofia.mobile.data.PacienteRepository
 import com.sofia.mobile.domain.Etnia

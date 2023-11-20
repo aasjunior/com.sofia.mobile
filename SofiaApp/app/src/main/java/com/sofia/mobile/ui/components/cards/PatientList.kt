@@ -106,7 +106,7 @@ fun PatientList(navController: NavController, patients: List<PacienteModel>) {
 fun PatientCheckList(
     viewModel: PatientListViewModel
 ) {
-    val patients = viewModel.patients.value
+    val patients = viewModel.patients.value.sortedBy { it.nome }
     val grouped = patients.groupBy { it.nome[0].uppercase()[0] }
     val listState = rememberLazyListState()
     val allChecked = remember { mutableStateOf(false) }

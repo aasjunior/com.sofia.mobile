@@ -65,7 +65,9 @@ fun PatientProfileCard(
         ){
             ImagePicker()
 
-            Column {
+            Column(
+                modifier = Modifier.fillMaxWidth(0.7f)
+            ){
                 Text(
                     text = "${paciente.nome} ${paciente.sobrenome}",
                     style = h3.copy(BrillantPurple)
@@ -104,7 +106,7 @@ private fun PatientProfileCardPreview(){
     val paciente = PacienteModel(
         id = 1,
         nome = "Luana",
-        sobrenome = "Santos",
+        sobrenome = "Santos da Silva",
         sexo = Sexo.FEMININO,
         dataNascimento = LocalDate.of(2018, 12, 12).toString(),
         etnia = Etnia.PARDA,
