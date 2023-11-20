@@ -4,7 +4,6 @@ enum class Etnia {
     BRANCA,
     PRETA,
     PARDA,
-    AMARELA,
     INDIGENA,
     OUTRO
 }
