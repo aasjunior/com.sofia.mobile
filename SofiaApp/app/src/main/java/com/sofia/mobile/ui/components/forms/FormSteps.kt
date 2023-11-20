@@ -275,7 +275,7 @@ fun FormResponsavel(
 
             val options = Parentesco.values().map { it.descricao }
             var expanded by remember { mutableStateOf(false) }
-            var selectedOptionText by remember { mutableStateOf(options[0]) }
+            val selectedOptionText by pvm.selectedOptionText.collectAsState()
 
             ExposedDropdownMenuBox(
                 modifier = Modifier,
@@ -289,7 +289,7 @@ fun FormResponsavel(
                         .menuAnchor(),
                     readOnly = true,
                     shape = RoundedCornerShape(12.dp),
-                    value = parentesco?.let { it.descricao } ?: "",
+                    value = selectedOptionText,
                     onValueChange = {},
                     label = { Text("Parentesco") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
@@ -311,7 +311,7 @@ fun FormResponsavel(
                             modifier = Modifier,
                             text = { Text(selectionOption) },
                             onClick = {
-                                selectedOptionText = selectionOption
+                                pvm._selectedOptionText.value = selectionOption
                                 expanded = false
                                 pvm.updateParentesco(Parentesco.values().first { it.descricao == selectionOption })
                             },

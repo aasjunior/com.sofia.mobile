@@ -30,7 +30,8 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
     private val _complicacoesGravidez = MutableStateFlow<Int?>(null)
     private val _prematuro = MutableStateFlow<Int?>(null)
     private val _dataCadastro = MutableStateFlow<LocalDateTime?>(null)
-
+    val _selectedOptionText = MutableStateFlow<String>("")
+    val selectedOptionText: StateFlow<String> = _selectedOptionText.asStateFlow()
 
     val nome = _nome.asStateFlow()
     val sobrenome = _sobrenome.asStateFlow()
@@ -158,6 +159,8 @@ class PatientViewModel(private val repository: PacienteRepository) : ViewModel()
         _email.value = paciente.responsavel.email
         _celular.value = paciente.responsavel.telefone
         _dataCadastro.value = LocalDateTime.parse(paciente.dataCadastro)
+
+        _selectedOptionText.value = paciente.responsavel.parentesco
     }
 
     suspend fun updatePatient(): String{
