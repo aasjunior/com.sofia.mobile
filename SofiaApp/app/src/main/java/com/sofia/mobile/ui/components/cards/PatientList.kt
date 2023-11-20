@@ -77,7 +77,7 @@ fun PatientList(navController: NavController, patients: List<PacienteModel>) {
                                     contentDescription = "Cute Star"
                                 )
                                 Text(
-                                    text = patient.nome,
+                                    text = "${patient.nome} ${patient.sobrenome}",
                                     style = body1
                                 )
                             }
@@ -162,7 +162,7 @@ fun PatientCheckList(
                                     },
                                 )
                                 Text(
-                                    text = patient.nome,
+                                    text = "${patient.nome} ${patient.sobrenome}",
                                     style = body1
                                 )
                             }
