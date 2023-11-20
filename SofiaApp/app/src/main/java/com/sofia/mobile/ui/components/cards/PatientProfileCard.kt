@@ -41,7 +41,8 @@ import java.time.LocalDateTime
 
 @Composable
 fun PatientProfileCard(
-    paciente: PacienteModel
+    paciente: PacienteModel,
+    onClick: () -> Unit
 ){
     ElevatedCard(
         modifier = Modifier
@@ -77,7 +78,7 @@ fun PatientProfileCard(
             Column(
 
             ){
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = onClick ) {
                     Icon(
                         imageVector = Icons.Filled.Edit,
                         contentDescription = "Menu",
@@ -105,13 +106,13 @@ private fun PatientProfileCardPreview(){
         nome = "Luana",
         sobrenome = "Santos",
         sexo = Sexo.FEMININO,
-        dataNascimento = LocalDate.of(2018, 12, 12),
+        dataNascimento = LocalDate.of(2018, 12, 12).toString(),
         etnia = Etnia.PARDA,
         casosFamilia = true,
         complicacoesGravidez = true,
         prematuro = true,
         responsavel = responsavel,
-        dataCadastro = LocalDateTime.now()
+        dataCadastro = LocalDateTime.now().toString()
     )
-    PatientProfileCard(paciente)
+    PatientProfileCard(paciente, {})
 }

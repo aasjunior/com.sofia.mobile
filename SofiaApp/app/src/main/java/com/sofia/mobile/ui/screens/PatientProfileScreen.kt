@@ -26,17 +26,17 @@ fun PatientProfileScreen(
     navController: NavController,
     patientId: Long
 ){
-    // Obtenha uma instância do ViewModel
+    // Obtem uma instância do ViewModel
     val viewModel: PatientProfileViewModel = viewModel(
         factory = GenericViewModelFactory { PatientProfileViewModel(RepositoryProvider.pacienteRepository) }
     )
 
-    // Busque os detalhes do paciente quando o componente for montado
+    // Busca os detalhes do paciente quando o componente é montado
     LaunchedEffect(patientId) {
         viewModel.fetchPatient(patientId)
     }
 
-    // Observe o estado do paciente e exiba os detalhes do paciente
+    // Observa o estado do paciente e exibe os detalhes do paciente
     val paciente = viewModel.patient.value
     val errorMessage = viewModel.errorMessage.value
 
@@ -54,7 +54,10 @@ fun PatientProfileScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Spacer(modifier = Modifier.height(12.dp))
-                PatientProfileCard(paciente)
+                PatientProfileCard(
+                    paciente = paciente,
+                    onClick = { navController.navigate("patientEdit/${paciente.id}") }
+                )
             }
         }
     } else if(errorMessage != null){

@@ -8,5 +8,11 @@ enum class Parentesco(val descricao: String){
     TIA("Tia"),
     TIO("Tio"),
     AVO1("Avó"),
-    AVO2("Avô")
+    AVO2("Avô");
+
+    companion object {
+        fun fromDescricao(descricao: String): Parentesco? {
+            return values().find { it.descricao == descricao }
+        }
+    }
 }

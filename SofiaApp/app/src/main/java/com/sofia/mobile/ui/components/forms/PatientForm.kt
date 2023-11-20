@@ -32,12 +32,23 @@ import com.sofia.mobile.ui.viewmodels.PatientViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun PatientForm(navController: NavController, pvm: PatientViewModel){
+fun PatientForm(
+    navController: NavController,
+    pvm: PatientViewModel,
+    isEditMode: Boolean = false
+){
     var currentStep by remember { mutableStateOf(0) }
     val courotineScope = rememberCoroutineScope()
     var showDialog by remember { mutableStateOf(false) }
     var showDialogSuccess by remember { mutableStateOf(false) }
     var alertMessage by remember { mutableStateOf("Preencha todos os campos.") }
+
+    val onSend: suspend ()->String = if(isEditMode){
+        {pvm.updatePatient()}
+    }else{
+        {pvm.sendData()}
+    }
+
 
     Column(
         modifier = Modifier
@@ -104,7 +115,7 @@ fun PatientForm(navController: NavController, pvm: PatientViewModel){
                         if(isFormResponsavelValid(pvm = pvm)) {
                             courotineScope.launch {
                                 try{
-                                    alertMessage = pvm.sendData()
+                                    alertMessage = onSend()
                                     if(alertMessage == "sucesso"){
                                         showDialogSuccess = true
                                     }else{

@@ -16,7 +16,7 @@ interface SofiaApiService {
     @POST("/pacientes")
     suspend fun savePatient(@Body patient: Paciente): Paciente
 
-    @PUT("/pacientes/{id}")
+    @PATCH("/pacientes/{id}")
     suspend fun updatePatient(@Path("id") id: Long, @Body patient: PacienteModel): PacienteModel
 
     @DELETE("/pacientes/{id}")
