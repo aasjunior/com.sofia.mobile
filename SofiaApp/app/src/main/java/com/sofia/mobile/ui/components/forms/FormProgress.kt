@@ -37,6 +37,7 @@ fun FormProgress(currentStep: Int) {
     ElevatedCard(
         modifier = Modifier
             .height(80.dp)
+            .padding(8.dp)
             .fillMaxWidth(0.9f),
         shape = RoundedCornerShape(10.dp),
     ) {
@@ -44,7 +45,6 @@ fun FormProgress(currentStep: Int) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(80.dp)
-                .padding(4.dp)
                 .background(White),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,

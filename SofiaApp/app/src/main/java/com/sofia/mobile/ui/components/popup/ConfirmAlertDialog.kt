@@ -46,7 +46,11 @@ fun ConfirmAlertDialog(
                     onClick = {
                         openDialog.value = false
                         onDismiss()
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = BrillantPurple,
+                        contentColor = Gray3
+                    )
                 ) {
                     Text("Não")
                 }
