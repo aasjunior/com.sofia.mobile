@@ -1,18 +1,29 @@
-# Sofia Mobile 
+# Sofia Mobile 💜
+
+<p align="justify"> Sofia é um Software Orientado por Inteligência Artificial para Auxílio ao Pré-diagnóstico de Crianças de 0 a 4 Anos com Manifestações Comportamentais do Transtorno do Espectro Autista (TEA). O aplicativo mobile CAD (computer aided design) é destinado ao auxílio de profissionais da saúde na triagem e identificação de sinais do TEA. <strong> 💜 Nosso Objetivo 💜 </strong> é promover a acessibilidade ao diagnóstico precoce de TEA! 💜 </p>
 
 <p align="center">
-   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge" #vitrinedev/>
+  <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/ce5ba98e-c63a-4fb7-a311-ced454084bc7" width="700" alt="ilustracao">
 </p>
-<br>
 
-## Descrição do projeto 
+### Descrição do projeto 💜
 
 <p align="justify">
-O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpack Compose, projetado para integrar ao Sofia: Software Orientado por Inteligência Artificial para Auxílio ao Pré-diagnóstico de Crianças com Manifestações Comportamentais do Transtorno do Espectro Autista (TEA). O aplicativo será utilizado e integrado ao sistema CAD para auxiliar profissionais a coletar informações sobre os pacientes e na utilização de ferramentas de triagem para melhorar acurácia na identificação de sinais do TEA.
+O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpack Compose, com banco de dados MySQL. Até o momento, foram desenvolvidas as telas de splash, home, cadastro de um novo paciente, listagem de pacientes cadastrados e visualização individual.
+</p>
+
+<p align="center">
+  <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/35a123c0-4e46-4803-b91a-3e306a18d657" width="200" alt="logo">
+  <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/1aa4def9-496e-4285-bccc-a16f2b3a5ae8" width="200" alt="bem vindo">
+   
+  <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/55f28fab-5d3f-4fb3-9921-4d94e592be53" width="200" alt="home">
+  <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/662fb921-1500-419c-92ba-f3a8b3ef59e2" width="200" alt="cadastro">
 </p>
 <br>
+ 
+Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista aqui](https://youtu.be/ArjSy3HSWuY) 💜
 
-## Pré-Requisitos
+## Pré-Requisitos 💜
 
 * JDK (Java Development Kit)
 * MySQL
@@ -21,14 +32,14 @@ O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpac
 * VSCode
 <br>
 
-## Dependências
+## Dependências 💜
 
 Este projeto depende da seguinte API:
 
 * [Sofia API](https://github.com/aasjunior/com.sofia.restapi.git)
 <br>
 
-## Configuração do Projeto
+## Configuração do Projeto 💜
 
 1. Clone o repositório para sua máquina local usando o seguinte comando
 ```
@@ -46,9 +57,9 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 6. Execute o Emulador do Android Studio
 <br>
 
-## Problemas Conhecidos
+## Problemas Conhecidos 💜
 
-### Erro de Caracteres Não-ASCII
+### Erro de Caracteres Não-ASCII 
 
 Se você encontrar um erro relacionado a caracteres não-ASCII durante a execução ou compilação do projeto, existem duas soluções possíveis:
 
@@ -62,13 +73,22 @@ A interface do usuário deste aplicativo foi construída usando **Jetpack Compos
 
 O Jetpack Compose é uma moderna toolkit de UI para Android que simplifica e acelera o desenvolvimento da interface do usuário. Ele permite a criação de interfaces de usuário concisas e idiomáticas com menos código e ferramentas poderosas para visualização de layout.
 
-O Material 3 é a mais recente versão do Material Design, que introduz novos componentes, estilos e recursos para ajudar a criar experiências de usuário mais expressivas e dinâmicas.
-<br>
+<div>O Material 3 é a mais recente versão do Material Design, que introduz novos componentes, estilos e recursos para ajudar a criar experiências de usuário mais expressivas e dinâmicas.
+<br> </div>
 
-## Tecnologias
-
+## Tecnologias 💜
 <p align="center">
-   <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
+   <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/adc364c7-8401-4326-ad56-3807673b85f2" width="600px" alt="Android"/>
+   <div align="center"><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
    <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white"/>
-   <img src="https://img.shields.io/badge/Jetpack%20Compose-FF4081?style=for-the-badge&logo=jetpack&logoColor=white" alt="Jetpack Compose"/>
+   <img src="https://img.shields.io/badge/Jetpack%20Compose-FF4081?style=for-the-badge&logo=jetpack&logoColor=white" alt="Jetpack Compose"/></div>
 </p>
+
+## Nosso Time AJA 💜
+You can see more about us in our profile:
+* [Amanda](https://github.com/mandis-ncs)
+* [Junior](https://github.com/aasjunior)
+* [Aline](https://github.com/AlineLauriano)
+
+###### Aviso
+Esta é uma iniciativa acadêmica, sendo assim, não possui todas as funcionalidades e características de uma aplicação real.
