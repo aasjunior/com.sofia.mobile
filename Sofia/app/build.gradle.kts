@@ -72,4 +72,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha02")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.0-alpha05")
 }

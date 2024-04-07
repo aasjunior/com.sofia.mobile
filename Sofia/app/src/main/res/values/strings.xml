@@ -36,6 +36,10 @@
 
     <!-- Drawer -->
     <string name="drawer_perfil">My profile</string>
+    <string name="drawer_home" translatable="false">Home</string>
+    <string name="drawer_register" translatable="false">Register</string>
+    <string name="drawer_menu_description" translatable="false">Menu navigation button</string>
+    <string name="drawer_home_description" translatable="false">Home navigation button</string>
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alert</string>

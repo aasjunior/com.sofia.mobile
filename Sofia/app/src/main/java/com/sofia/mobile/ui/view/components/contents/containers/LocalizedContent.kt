@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.contents
+package com.sofia.mobile.ui.view.components.contents.containers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
