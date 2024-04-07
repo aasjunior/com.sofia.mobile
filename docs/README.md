@@ -300,3 +300,6 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.0-alpha05")
 }
 ```
+
+# NavGraph
+# Autenticação
