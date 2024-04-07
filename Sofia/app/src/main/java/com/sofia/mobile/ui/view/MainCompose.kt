@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.sofia.mobile.ui.navigation.introGraph
 import com.sofia.mobile.ui.navigation.mainGraph
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
@@ -47,8 +48,9 @@ fun MainCompose(
                 ) {
                     NavHost(
                         navController = navHostController,
-                        startDestination = NavRoutes.MainRoute.name
+                        startDestination = NavRoutes.IntroRoute.name
                     ){
+                        introGraph(navHostController)
                         mainGraph(navHostController, drawerState)
                     }
                 }
