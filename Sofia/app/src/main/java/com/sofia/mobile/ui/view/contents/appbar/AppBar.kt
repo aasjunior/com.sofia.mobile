@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.contents.appbar
+package com.sofia.mobile.ui.view.contents.appbar
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.size

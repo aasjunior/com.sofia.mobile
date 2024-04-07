@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.contents.appbar
+package com.sofia.mobile.ui.view.contents.appbar
 
 import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes

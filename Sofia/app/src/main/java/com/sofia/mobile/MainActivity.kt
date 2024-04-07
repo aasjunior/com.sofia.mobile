@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.ui.theme.SofiaTheme
-import com.sofia.mobile.ui.view.components.contents.containers.LocalizedContent
+import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 import kotlinx.coroutines.flow.StateFlow
 

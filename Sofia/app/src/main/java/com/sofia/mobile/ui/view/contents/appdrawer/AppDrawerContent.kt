@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.contents.appdrawer
+package com.sofia.mobile.ui.view.contents.appdrawer
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

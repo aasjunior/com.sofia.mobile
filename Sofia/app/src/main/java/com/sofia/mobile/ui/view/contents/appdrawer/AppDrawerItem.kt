@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.contents.appdrawer
+package com.sofia.mobile.ui.view.contents.appdrawer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
