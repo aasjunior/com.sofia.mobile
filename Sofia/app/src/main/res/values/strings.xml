@@ -55,6 +55,9 @@
     <string name="alert_email_exists">Email already registered!</string>
     <string name="alert_empty_field">Fill in all fields!</string>
 
+    <!-- Exceptions -->
+    <string name="error_no_localizedcontext">No LocalizedContext provided!</string>
+
     <!-- LoginScreen -->
     <string name="login_welcome">Welcome</string>
     <string name="login_header">Log in to your account</string>

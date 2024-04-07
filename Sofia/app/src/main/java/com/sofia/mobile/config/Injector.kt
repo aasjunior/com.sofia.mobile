@@ -7,7 +7,7 @@ object Injector {
     private lateinit var languageManager: LanguageManager
 
     fun initialize(context: Context){
-        languageManager = LanguageManager(context)
+        languageManager = LanguageManager(context.applicationContext)
     }
 
     fun provideLanguageManager(): LanguageManager = languageManager

@@ -20,9 +20,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.ui.theme.SofiaTheme
+import com.sofia.mobile.ui.view.components.contents.LocalizedContent
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 import kotlinx.coroutines.flow.StateFlow
 
@@ -37,7 +39,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ){
                     val pvm: PatientViewModel = viewModel()
-                    FormScreen(pvm)
+                    LocalizedContent {
+                        FormScreen(pvm)
+                    }
                 }
             }
         }
@@ -73,7 +77,7 @@ fun FirstStageForm(
         Spacer(modifier = Modifier.height(10.dp))
 
         FormField(
-            label = "FirstName",
+            label = stringResource(id = R.string.form_firstname),
             stateFlow = patientState.firstName,
             onValueChange = {
                 patientState.updateFirstName(it)
@@ -81,7 +85,7 @@ fun FirstStageForm(
         )
 
         Button(onClick = onContinue) {
-            Text(text = "Próximo")
+            Text(text = stringResource(id = R.string.btn_next))
         }
     }
 }
@@ -97,7 +101,7 @@ fun SecondStageForm(
         Spacer(modifier = Modifier.height(10.dp))
 
         FormField(
-            label = "FirstName",
+            label = stringResource(id = R.string.form_firstname),
             stateFlow = guardianState.firstName,
             onValueChange = {
                 guardianState.updateFirstName(it)
@@ -105,7 +109,7 @@ fun SecondStageForm(
         )
 
         Button(onClick = onBack) {
-            Text(text = "Voltar")
+            Text(text = stringResource(id = R.string.btn_back))
         }
     }
 }

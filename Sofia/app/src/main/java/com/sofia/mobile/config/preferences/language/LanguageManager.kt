@@ -8,7 +8,7 @@ class LanguageManager(private val context: Context) {
     private val languagePreferences = LanguagePreferences(context)
 
     var currentLanguage: Language
-        get() = languagePreferences.language ?: Language.EN_US
+        get() = languagePreferences.language ?: Language.PT_BR
         set(value) {
             languagePreferences.saveLanguage(value)
         }

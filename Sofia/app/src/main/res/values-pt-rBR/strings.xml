@@ -49,6 +49,9 @@
     <string name="alert_email_exists">E-mail já cadastrado!</string>
     <string name="alert_empty_field">Preencha todos os campos!</string>
 
+    <!-- Exceptions -->
+    <string name="error_no_localizedcontext">Nenhum LocalizedContext fornecido!</string>
+
     <!-- LoginScreen -->
     <string name="login_welcome">Bem vindo</string>
     <string name="login_header">Faça o login na sua conta</string>
