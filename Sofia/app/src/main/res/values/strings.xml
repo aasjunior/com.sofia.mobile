@@ -1,3 +1,109 @@
 <resources>
-    <string name="app_name">Sofia</string>
+    <!-- App Info -->
+    <string name="app_name" translatable="false">Sofia</string>
+    <string name="app_copyright" translatable="false">By AJA Group</string>
+
+    <!-- Form fields -->
+    <string name="form_email" translatable="false">Email</string>
+    <string name="form_password">Password</string>
+    <string name="form_confirm_password">Confirm Password</string>
+    <string name="form_firstname">First Name</string>
+    <string name="firstname_placeholder">Enter first name</string>
+    <string name="form_lastname">Last Name</string>
+    <string name="lastname_placeholder">Enter last name</string>
+    <string name="form_phone">Phone</string>
+    <string name="form_yes">Yes</string>
+    <string name="form_no">No</string>
+
+    <!-- Buttons -->
+    <string name="btn_login" translatable="false">Login</string>
+    <string name="btn_login_google" translatable="false">Continue with Google</string>
+    <string name="btn_login_facebook" translatable="false">Continue with Facebook</string>
+    <string name="btn_begin">Start</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_new_consultation">New Consultation</string>
+    <string name="btn_list_patient">List Patients</string>
+    <string name="btn_register_patient">Register Patient</string>
+    <string name="btn_new">New</string>
+    <string name="btn_delete">Delete</string>
+
+    <!-- Links -->
+    <string name="link_learnmore">Learn more</string>
+    <string name="link_seemore">See more</string>
+
+    <!-- Drawer -->
+    <string name="drawer_perfil">My profile</string>
+
+    <!-- Alert Dialog -->
+    <string name="alert_title">Alert</string>
+    <string name="alert_confirm_description">Are you sure you want to </string>
+    <string name="alert_confirm_delete_patient">delete this patient?</string>
+    <string name="alert_not_be_undone">This action cannot be undone in the future.</string>
+    <string name="alert_create_patient">Patient successfully registered!</string>
+    <string name="alert_update_patient">Patient successfully updated!</string>
+    <string name="alert_delete_patient">Patient successfully deleted!</string>
+    <string name="alert_create_user">User successfully registered!</string>
+    <string name="alert_update_user">User successfully updated!</string>
+    <string name="alert_delete_user">User successfully deleted!</string>
+    <string name="alert_invalid_user">Invalid password or email!</string>
+    <string name="alert_invalid_password">Invalid password!</string>
+    <string name="alert_invalid_confirm_password">Different passwords!</string>
+    <string name="alert_invalid_email">Invalid email!</string>
+    <string name="alert_email_exists">Email already registered!</string>
+    <string name="alert_empty_field">Fill in all fields!</string>
+
+    <!-- LoginScreen -->
+    <string name="login_welcome">Welcome</string>
+    <string name="login_header">Log in to your account</string>
+    <string name="login_forgive">Forgot your password?</string>
+    <string name="login_forgive_link">Recover here</string>
+    <string name="login_register">Don\'t have an account?</string>
+    <string name="login_register_link">Sign up</string>
+
+    <string name="register_header">Register</string>
+    <string name="register_login">Already have an account?</string>
+    <string name="register_logon_link">Log in</string>
+
+    <!-- Loading Screen -->
+    <string name="loading_title">Loading</string>
+    <string name="loading_message">We\'re preparing everything for you</string>
+
+    <!-- Start Screen -->
+    <string name="begin_title">Let\'s get started!</string>
+    <string name="begin_message_01">All set, let\'s begin!</string>
+    <string name="begin_message_02">Join this mission with SOFIA.</string>
+
+    <!-- Home Screen -->
+    <string name="main_welcome">Hello, %s!</string>
+    <string name="main_description">Explore the latest discoveries in autism treatment!</string>
+    <string name="main_recent">Recent</string>
+
+    <!-- Patient List Screen -->
+    <string name="list_title">Patient List</string>
+    <string name="list_subtitle">%s registered patients</string>
+
+    <!-- Patient View Screen -->
+    <string name="patient_title">Patient View</string>
+    <string name="patient_info">Some information</string>
+
+    <!-- Patient Registration Screen -->
+    <string name="patient_form_title">Patient Registration</string>
+
+    <string name="patient_form_step_01">Information</string>
+    <string name="patient_form_gender">Gender</string>
+    <string name="patient_form_birth">Date of Birth</string>
+    <string name="patient_form_ethnicity">Ethnicity</string>
+
+    <string name="patient_form_step_02">Profile</string>
+    <string name="patient_form_q01">Were they born prematurely?</string>
+    <string name="patient_form_q02">Is there a family member diagnosed with autism?</string>
+    <string name="patient_form_q03">Did the mother have complications during pregnancy?</string>
+
+    <string name="patient_form_step_03">Guardian</string>
+    <string name="patient_form_title_02">Guardian Registration</string>
+    <string name="patient_form_kinship">Relationship</string>
+
 </resources>

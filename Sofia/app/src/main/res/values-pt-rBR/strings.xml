@@ -1,2 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Form fields -->
+    <string name="form_password">Senha</string>
+    <string name="form_confirm_password">Confirmar Senha</string>
+    <string name="form_firstname">Nome</string>
+    <string name="firstname_placeholder">Primeiro nome</string>
+    <string name="form_lastname">Sobrenome</string>
+    <string name="lastname_placeholder">Sobrenome</string>
+    <string name="form_phone">Celular</string>
+    <string name="form_yes">Sim</string>
+    <string name="form_no">Não</string>
+
+
+    <!-- Buttons -->
+    <string name="btn_begin">Começar</string>
+    <string name="btn_next">Próximo</string>
+    <string name="btn_back">Voltar</string>
+    <string name="btn_save">Salvar</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_new_consultation">Nova Consulta</string>
+    <string name="btn_list_patient">Listar Pacientes</string>
+    <string name="btn_register_patient">Cadastrar Paciente</string>
+    <string name="btn_new">Novo</string>
+    <string name="btn_delete">Deletar</string>
+
+    <!-- Links -->
+    <string name="link_learnmore">Saíba mais</string>
+    <string name="link_seemore">Veja mais</string>
+
+    <!-- Drawer -->
+    <string name="drawer_perfil">Meu perfil</string>
+
+    <!-- Alert Dialog -->
+    <string name="alert_title">Alerta</string>
+    <string name="alert_confirm_description">Tem certeza que quer </string>
+    <string name="alert_confirm_delete_patient">excluir este paciente?</string>
+    <string name="alert_not_be_undone">Essa ação não poderá ser desfeita futuramente.</string>
+    <string name="alert_create_patient">Paciente cadastrado com sucesso!</string>
+    <string name="alert_update_patient">Paciente atualizado com sucesso!</string>
+    <string name="alert_delete_patient">Paciente deletado com sucesso!</string>
+    <string name="alert_create_user">Usuário cadastrado com sucesso!</string>
+    <string name="alert_update_user">Usuário atualizado com sucesso!</string>
+    <string name="alert_delete_user">Usuário deletado com sucesso!</string>
+    <string name="alert_invalid_user">Senha ou email inválidos!</string>
+    <string name="alert_invalid_password">Senha inválida!</string>
+    <string name="alert_invalid_confirm_password">Senhas diferentes!</string>
+    <string name="alert_invalid_email">E-mail inválido!</string>
+    <string name="alert_email_exists">E-mail já cadastrado!</string>
+    <string name="alert_empty_field">Preencha todos os campos!</string>
+
+    <!-- LoginScreen -->
+    <string name="login_welcome">Bem vindo</string>
+    <string name="login_header">Faça o login na sua conta</string>
+    <string name="login_forgive">Esqueceu a senha?</string>
+    <string name="login_forgive_link">Recupere aqui</string>
+    <string name="login_register">Não tem uma conta?</string>
+    <string name="login_register_link">Cadastre-se</string>
+
+    <string name="register_header">Faça seu cadastro</string>
+    <string name="register_login">Já tem uma conta?</string>
+    <string name="register_logon_link">Faça login</string>
+
+    <!-- Loading Screen -->
+    <string name="loading_title">Carregando</string>
+    <string name="loading_message">Estamos preparando tudo para você</string>
+
+    <!-- Start Screen -->
+    <string name="begin_title">Vamos começar!</string>
+    <string name="begin_message_01">Tudo pronto, vamos começar!</string>
+    <string name="begin_message_02">Junte-se nessa missão com SOFIA.</string>
+
+    <!-- Home Screen -->
+    <string name="main_welcome">Olá, %s!</string>
+    <string name="main_description">Veja as principais descobertas no tratamento do TEA!</string>
+    <string name="main_recent">Recentes</string>
+
+    <!-- Patient List Screen -->
+    <string name="list_title">Listagem de Pacientes</string>
+    <string name="list_subtitle">%s pacientes cadastrados</string>
+
+    <!-- Patient View Screen -->
+    <string name="patient_title">Visualização do Paciente</string>
+    <string name="patient_info">Alguma informação</string>
+
+    <!-- Patient Registration Screen -->
+    <string name="patient_form_title">Cadastro de Paciente</string>
+
+    <string name="patient_form_step_01">Informações</string>
+    <string name="patient_form_gender">Sexo</string>
+    <string name="patient_form_birth">Data de nascimento</string>
+    <string name="patient_form_ethnicity">Etnia</string>
+
+    <string name="patient_form_step_02">Perfil</string>
+    <string name="patient_form_q01">Nasceu prematuro?</string>
+    <string name="patient_form_q02">Há alguém na família diagnosticado com autismo?</string>
+    <string name="patient_form_q03">A mãe teve complicações na gravidez?</string>
+
+    <string name="patient_form_step_03">Responsável</string>
+    <string name="patient_form_title_02">Cadastro de Responsável</string>
+    <string name="patient_form_kinship">Parentesco</string>
+</resources>
