@@ -41,7 +41,7 @@ fun <T> AppDrawerItem(
                 .padding(8.dp)
         ){
             Icon(
-                painter = painterResource(id = item.drawableId),
+                imageVector = item.drawableId,
                 contentDescription = stringResource(id = item.descriptionId),
                 modifier = Modifier
                     .size(24.dp)
