@@ -42,18 +42,19 @@
     <string name="alert_create_user">Usuário cadastrado com sucesso!</string>
     <string name="alert_update_user">Usuário atualizado com sucesso!</string>
     <string name="alert_delete_user">Usuário deletado com sucesso!</string>
-    <string name="alert_invalid_user">Senha ou email inválidos!</string>
-    <string name="alert_invalid_password">Senha inválida!</string>
-    <string name="alert_invalid_confirm_password">Senhas diferentes!</string>
-    <string name="alert_invalid_email">E-mail inválido!</string>
     <string name="alert_email_exists">E-mail já cadastrado!</string>
     <string name="alert_empty_field">Preencha todos os campos!</string>
+
+    <string name="invalid_user">Senha ou email inválidos!</string>
+    <string name="invalid_password">Senha inválida!</string>
+    <string name="invalid_confirm_password">Senhas diferentes!</string>
+    <string name="invalid_email">E-mail inválido!</string>
 
     <!-- Exceptions -->
     <string name="error_no_localizedcontext">Nenhum LocalizedContext fornecido!</string>
 
     <!-- LoginScreen -->
-    <string name="login_welcome">Bem vindo</string>
+    <string name="login_welcome">Bem-vindo</string>
     <string name="login_header">Faça o login na sua conta</string>
     <string name="login_forgive">Esqueceu a senha?</string>
     <string name="login_forgive_link">Recupere aqui</string>

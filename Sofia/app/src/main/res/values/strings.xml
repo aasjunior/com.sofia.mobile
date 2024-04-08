@@ -52,12 +52,13 @@
     <string name="alert_create_user">User successfully registered!</string>
     <string name="alert_update_user">User successfully updated!</string>
     <string name="alert_delete_user">User successfully deleted!</string>
-    <string name="alert_invalid_user">Invalid password or email!</string>
-    <string name="alert_invalid_password">Invalid password!</string>
-    <string name="alert_invalid_confirm_password">Different passwords!</string>
-    <string name="alert_invalid_email">Invalid email!</string>
     <string name="alert_email_exists">Email already registered!</string>
     <string name="alert_empty_field">Fill in all fields!</string>
+
+    <string name="invalid_user">Invalid password or email!</string>
+    <string name="invalid_password">Invalid password!</string>
+    <string name="invalid_confirm_password">Passwords do not match!</string>
+    <string name="invalid_email">Invalid email!</string>
 
     <!-- Exceptions -->
     <string name="error_no_localizedcontext">No LocalizedContext provided!</string>
@@ -112,5 +113,4 @@
     <string name="patient_form_step_03">Guardian</string>
     <string name="patient_form_title_02">Guardian Registration</string>
     <string name="patient_form_kinship">Relationship</string>
-
 </resources>

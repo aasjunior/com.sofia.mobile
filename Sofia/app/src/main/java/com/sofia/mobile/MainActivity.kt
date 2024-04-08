@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.view.MainCompose
+import com.sofia.mobile.ui.view.components.form.inputs.textfields.FormField
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
-import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -97,20 +96,4 @@ fun SecondStageForm(
             Text(text = stringResource(id = R.string.btn_back))
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FormField(
-    label: String,
-    stateFlow: StateFlow<String>,
-    onValueChange: (String) -> Unit
-){
-    val value by stateFlow.collectAsState()
-
-    OutlinedTextField(
-        label = { Text(label) },
-        value = value,
-        onValueChange = onValueChange
-    )
 }
