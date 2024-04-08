@@ -25,12 +25,12 @@ object SofiaTypography{
         fontSize = 28.sp
     )
 
-    val text1 = TextStyle(
+    val textRegular = TextStyle(
         fontFamily = poppins.regular,
         fontSize = 14.sp
     )
 
-    val text2 = TextStyle(
+    val textSemibold = TextStyle(
         fontFamily = poppins.semibold,
         fontSize = 14.sp
     )
@@ -43,6 +43,11 @@ object SofiaTypography{
     val text16 = TextStyle(
         fontFamily = poppins.medium,
         fontSize = 16.sp
+    )
+
+    val link = TextStyle(
+        fontFamily = poppins.regular,
+        fontSize = 14.sp
     )
 }
 

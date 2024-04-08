@@ -3,7 +3,7 @@ package com.sofia.mobile.ui.view.contents
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-data class Dimensions(val screenWidth: Dp){
+data class RelativeDimensions(val screenWidth: Dp){
     val contentWidth: Dp = screenWidth * DimensionsPercent.ContentWidth
 
     val formField: Dp = screenWidth * DimensionsPercent.FormField
@@ -12,13 +12,17 @@ data class Dimensions(val screenWidth: Dp){
     val cardPadding1: Dp = screenWidth * DimensionsPercent.CardPadding1
     val cardPadding2: Dp = screenWidth * DimensionsPercent.CardPadding2
     val cardPadding3: Dp = screenWidth * DimensionsPercent.CardPadding3
+}
 
+object Dimensions{
     val formFild264: Dp = 264.dp
     val formFild315: Dp = 315.dp
 
     val padding15: Dp = 15.dp
     val padding20: Dp = 20.dp
     val padding24: Dp = 24.dp
+
+    val roundedCorner12 = 12.dp
 }
 
 

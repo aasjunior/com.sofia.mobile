@@ -24,6 +24,7 @@ import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
 import com.sofia.mobile.ui.theme.SofiaTypography
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.copyright
 import kotlinx.coroutines.delay
 
 @Composable
@@ -65,7 +66,7 @@ fun SplashScreen(
         ){
             Text(
                 text = stringResource(id = R.string.app_copyright),
-                style = Style.textBottomStyle
+                style = copyright
             )
         }
     }
@@ -104,8 +105,6 @@ private object Style{
     val sizeSecondLogo = 256.dp
     val sizeSorridentStar = 180.dp
     val paddingBottom = 28.dp
-
-    val textBottomStyle = SofiaTypography.text2.copy(color = BrillantPurple)
 
     @DrawableRes val logo = R.drawable.ic_logo_sofia
     @DrawableRes val sorridentStar = R.drawable.ic_sorrident_star
