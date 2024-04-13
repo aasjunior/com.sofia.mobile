@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
 import com.sofia.mobile.ui.view.components.Copyright
@@ -45,7 +46,7 @@ fun SplashScreen(
             SecondStage()
             LaunchedEffect(Unit){
                 delay(2000)
-                navController.navigate(MainNavOptions.HomeScreen.name)
+                navController.navigate(IntroNavOptions.LoginScreen.name)
             }
         }else{
             FirstStage(

@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.navigation
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -11,6 +12,7 @@ import com.sofia.mobile.ui.view.screens.intro.LoginScreen
 import com.sofia.mobile.ui.view.screens.intro.RegisterScreen
 import com.sofia.mobile.ui.view.screens.intro.SplashScreen
 import com.sofia.mobile.ui.view.screens.intro.WelcomeScreen
+import com.sofia.mobile.ui.viewmodel.LoginViewModel
 
 fun NavGraphBuilder.introGraph(navHostController: NavHostController){
     navigation(
@@ -20,8 +22,13 @@ fun NavGraphBuilder.introGraph(navHostController: NavHostController){
         composable(IntroNavOptions.SplashScreen.name){
             SplashScreen(navController = navHostController)
         }
-        composable(IntroNavOptions.LoadingScreen.name){
-            LoginScreen(navController = navHostController)
+        composable(IntroNavOptions.LoginScreen.name){
+            val loginViewModel: LoginViewModel = viewModel()
+
+            LoginScreen(
+                navController = navHostController,
+                loginViewModel = loginViewModel
+            )
         }
         composable(IntroNavOptions.RegisterScreen.name){
             RegisterScreen(navController = navHostController)
