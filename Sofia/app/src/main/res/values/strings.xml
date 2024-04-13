@@ -66,13 +66,13 @@
     <!-- LoginScreen -->
     <string name="login_welcome">Welcome</string>
     <string name="login_header">Log in to your account</string>
-    <string name="login_forgive">Forgot your password?</string>
+    <string name="login_forgive">Forgot your password?&#32;</string>
     <string name="login_forgive_link">Recover here</string>
-    <string name="login_register">Don\'t have an account?</string>
+    <string name="login_register">Don\'t have an account?&#32;</string>
     <string name="login_register_link">Sign up</string>
 
     <string name="register_header">Register</string>
-    <string name="register_login">Already have an account?</string>
+    <string name="register_login">Already have an account?&#32;</string>
     <string name="register_logon_link">Log in</string>
 
     <!-- Loading Screen -->

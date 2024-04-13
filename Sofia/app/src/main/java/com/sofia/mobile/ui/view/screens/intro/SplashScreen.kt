@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.view.screens.intro
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -16,15 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
-import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
-import com.sofia.mobile.ui.theme.SofiaTypography
-import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.copyright
+import com.sofia.mobile.ui.view.components.Copyright
+import com.sofia.mobile.ui.view.components.Logo
 import kotlinx.coroutines.delay
 
 @Composable
@@ -64,10 +60,7 @@ fun SplashScreen(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = Style.paddingBottom)
         ){
-            Text(
-                text = stringResource(id = R.string.app_copyright),
-                style = copyright
-            )
+            Copyright()
         }
     }
 }
@@ -75,14 +68,10 @@ fun SplashScreen(
 @Composable
 private fun FirstStage(modifier: Modifier){
     Row(modifier = modifier){
-        Image(
-            painter = painterResource(id = Style.logo),
-            contentDescription = "Logo",
-            modifier = Modifier.size(Style.sizeFirstLogo)
-        )
+        Logo(modifier = Modifier.size(Style.sizeFirstLogo))
     }
     Image(
-        painter = painterResource(id = Style.sorridentStar),
+        painter = painterResource(id = R.drawable.ic_sorrident_star),
         contentDescription = "Sorrident Star",
         modifier = Modifier.size(Style.sizeSorridentStar)
     )
@@ -90,10 +79,9 @@ private fun FirstStage(modifier: Modifier){
 
 @Composable
 private fun SecondStage(){
-    Image(
-        painter = painterResource(id = Style.sorridentStar),
-        contentDescription = "Sorrident Star",
-        modifier = Modifier.size(Style.sizeSecondLogo)
+    Logo(
+        modifier = Modifier.size(Style.sizeSecondLogo),
+        logo = R.drawable.ic_sorrident_star
     )
 }
 
@@ -105,7 +93,4 @@ private object Style{
     val sizeSecondLogo = 256.dp
     val sizeSorridentStar = 180.dp
     val paddingBottom = 28.dp
-
-    @DrawableRes val logo = R.drawable.ic_logo_sofia
-    @DrawableRes val sorridentStar = R.drawable.ic_sorrident_star
 }

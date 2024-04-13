@@ -56,13 +56,13 @@
     <!-- LoginScreen -->
     <string name="login_welcome">Bem-vindo</string>
     <string name="login_header">Faça o login na sua conta</string>
-    <string name="login_forgive">Esqueceu a senha?</string>
+    <string name="login_forgive">Esqueceu a senha?&#32;</string>
     <string name="login_forgive_link">Recupere aqui</string>
-    <string name="login_register">Não tem uma conta?</string>
+    <string name="login_register">Não tem uma conta?&#32;</string>
     <string name="login_register_link">Cadastre-se</string>
 
     <string name="register_header">Faça seu cadastro</string>
-    <string name="register_login">Já tem uma conta?</string>
+    <string name="register_login">Já tem uma conta?&#32;</string>
     <string name="register_logon_link">Faça login</string>
 
     <!-- Loading Screen -->
