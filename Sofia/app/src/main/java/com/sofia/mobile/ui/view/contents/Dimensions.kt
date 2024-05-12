@@ -9,6 +9,8 @@ data class RelativeDimensions(val screenWidth: Dp){
     val formField: Dp = screenWidth * DimensionsPercent.FormField
     val formFieldIntro: Dp = screenWidth * DimensionsPercent.FormFieldIntro
 
+    val btnWidth: Dp = screenWidth * DimensionsPercent.ButtonWidth
+
     val cardPadding1: Dp = screenWidth * DimensionsPercent.CardPadding1
     val cardPadding2: Dp = screenWidth * DimensionsPercent.CardPadding2
     val cardPadding3: Dp = screenWidth * DimensionsPercent.CardPadding3
@@ -22,7 +24,10 @@ object Dimensions{
     val padding20: Dp = 20.dp
     val padding24: Dp = 24.dp
 
+    val spacerValue: Dp = 16.dp
     val roundedCorner12 = 12.dp
+
+    val heightLogo: Dp = 24.dp
 }
 
 
@@ -31,6 +36,8 @@ private object DimensionsPercent{
 
     const val FormField = 0.733f // 240 de 360
     const val FormFieldIntro = 0.839f // 302 de 360
+
+    const val ButtonWidth = 0.413f // 149 de 360
 
     const val CardPadding1 = 0.042f // 15 de 360
     const val CardPadding2 = 0.055f // 20 de 360

@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
+import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
@@ -79,10 +80,10 @@ fun CustomTextField(
                     PasswordVisualTransformation()
                 else visualTransformation,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BrillantPurple,
-                unfocusedBorderColor = BrillantPurple,
-                textColor = BrillantPurple,
-                focusedLabelColor = BrillantPurple
+                focusedBorderColor = SoftPurple,
+                unfocusedBorderColor = SoftPurple,
+                textColor = SoftPurple,
+                focusedLabelColor = SoftPurple
             ),
             trailingIcon = {
                 if(isPassword){

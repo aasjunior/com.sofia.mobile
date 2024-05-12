@@ -25,15 +25,7 @@ fun ClickableLinkText(
         text = annotatedString,
         style = style,
         onClick = { offset ->
-            val annotation = annotatedString.getStringAnnotations(
-                tag = "URL",
-                start = offset,
-                end = offset
-            ).firstOrNull()
-
-            if(annotation != null){
-                onClick()
-            }
+            onClick()
         }
     )
 }

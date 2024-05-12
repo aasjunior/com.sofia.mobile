@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
+import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.screens.intro.LoadingScreen
 import com.sofia.mobile.ui.view.screens.intro.LoginScreen
 import com.sofia.mobile.ui.view.screens.intro.RegisterScreen
@@ -14,7 +15,7 @@ import com.sofia.mobile.ui.view.screens.intro.SplashScreen
 import com.sofia.mobile.ui.view.screens.intro.WelcomeScreen
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
 
-fun NavGraphBuilder.introGraph(navHostController: NavHostController){
+fun NavGraphBuilder.introGraph(navHostController: NavHostController, rd: RelativeDimensions){
     navigation(
         startDestination = IntroNavOptions.SplashScreen.name,
         route = NavRoutes.IntroRoute.name
@@ -27,11 +28,18 @@ fun NavGraphBuilder.introGraph(navHostController: NavHostController){
 
             LoginScreen(
                 navController = navHostController,
-                loginViewModel = loginViewModel
+                loginViewModel = loginViewModel,
+                relativeDimensions = rd
             )
         }
         composable(IntroNavOptions.RegisterScreen.name){
-            RegisterScreen(navController = navHostController)
+            val loginViewModel: LoginViewModel = viewModel()
+
+            RegisterScreen(
+                navController = navHostController,
+                loginViewModel = loginViewModel,
+                relativeDimensions = rd
+            )
         }
         composable(IntroNavOptions.LoadingScreen.name){
             LoadingScreen(navController = navHostController)

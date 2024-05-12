@@ -8,20 +8,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
-import com.sofia.mobile.ui.view.contents.containers.BaseScreen
+import com.sofia.mobile.ui.view.contents.RelativeDimensions
+import com.sofia.mobile.ui.view.contents.containers.BaseContent
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.mainGraph(
     navHostController: NavHostController,
-    drawerState: DrawerState
+    drawerState: DrawerState,
+    rd: RelativeDimensions
 ){
     navigation(
         startDestination = MainNavOptions.HomeScreen.name,
         route = NavRoutes.MainRoute.name
     ){
         composable(MainNavOptions.HomeScreen.name){
-            BaseScreen(navController = navHostController, drawerState = drawerState) {
+            BaseContent(navController = navHostController, drawerState = drawerState) {
                 HomeScreen(navController = navHostController)
             }
         }

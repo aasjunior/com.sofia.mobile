@@ -17,6 +17,7 @@ import com.sofia.mobile.ui.navigation.mainGraph
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaTheme
+import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.appdrawer.AppDrawerContent
 import com.sofia.mobile.ui.view.contents.appdrawer.DrawerParams
 import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
@@ -24,6 +25,7 @@ import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainCompose(
+    rd: RelativeDimensions,
     navHostController: NavHostController = rememberNavController(),
     drawerState: DrawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed
@@ -50,8 +52,8 @@ fun MainCompose(
                         navController = navHostController,
                         startDestination = NavRoutes.IntroRoute.name
                     ){
-                        introGraph(navHostController)
-                        mainGraph(navHostController, drawerState)
+                        introGraph(navHostController, rd)
+                        mainGraph(navHostController, drawerState, rd)
                     }
                 }
             }
