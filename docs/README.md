@@ -303,3 +303,43 @@ dependencies {
 
 # NavGraph
 # Autenticação
+
+## Importações:
+
+```gradle
+    // EncryptedSharedPreferences
+    implementation("androidx.security:security-crypto:1.1.0-alpha03")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+```
+
+xml -> new file -> network-security-config.xml:
+```xml
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <trust-anchors>
+            <certificates src="@raw/my_cert"/>
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
+```
+
+adicionar ao manifests/AndroidManifests.xml:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Adicionar esta linha de permissão de acesso a Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <application
+        ...
+        android:networkSecurityConfig="@xml/network_security_config"
+        ...
+    </application>
+</manifest>
+```
