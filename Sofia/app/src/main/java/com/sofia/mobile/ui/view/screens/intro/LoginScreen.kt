@@ -21,13 +21,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.aasjunior.mediapickersuite.domain.model.login.LoginState
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
@@ -64,7 +60,8 @@ fun LoginScreen(
         FormLogin(
             onClick = loginViewModel::login,
             navController = navController,
-            relativeDimensions = relativeDimensions
+            relativeDimensions = relativeDimensions,
+            loginViewModel = loginViewModel
         )
         when(val state = loginState){
             is LoginState.Loading -> { Text(text = "Validando") }
@@ -79,7 +76,8 @@ fun LoginScreen(
 private fun FormLogin(
     onClick: (String, String) -> Unit,
     navController: NavController,
-    relativeDimensions: RelativeDimensions
+    relativeDimensions: RelativeDimensions,
+    loginViewModel: LoginViewModel
 ){
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -102,8 +100,7 @@ private fun FormLogin(
         Button(
             modifier = Modifier.width(relativeDimensions.btnWidth),
             onClick = {
-                //onClick(email, password)
-                navController.navigate(NavRoutes.MainRoute.name)
+                loginViewModel.login(email, password)
             }
         ) {
             Text(text = "Login")
