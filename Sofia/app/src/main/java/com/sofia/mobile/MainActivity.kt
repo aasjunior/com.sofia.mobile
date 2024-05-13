@@ -19,9 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sofia.mobile.ui.view.MainCompose
 import com.sofia.mobile.ui.view.components.form.inputs.textfields.FormField
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
+import com.sofia.mobile.ui.viewmodel.LoginViewModel
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,8 +34,9 @@ class MainActivity : ComponentActivity() {
             val configuration = LocalConfiguration.current
             val screenWidth = configuration.screenWidthDp.dp
             val rd = RelativeDimensions(screenWidth)
+            val loginViewModel: LoginViewModel = viewModel()
 
-            MainCompose(rd)
+            MainCompose(rd = rd, loginViewModel = loginViewModel)
         }
     }
 }
