@@ -13,7 +13,7 @@ import com.sofia.mobile.ui.theme.SofiaTypography.title20
 import com.sofia.mobile.ui.theme.SofiaTypography.title24
 import com.sofia.mobile.ui.theme.SofiaTypography.title28
 
-object SofiaTextStyles {
+object  SofiaTextStyles {
     val h1 = title28.copy(BrillantPurple)
     val h2 = title24.copy(BrillantPurple)
     val h3 = title20.copy(BrillantPurple)
