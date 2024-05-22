@@ -17,10 +17,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
+import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
@@ -93,10 +95,10 @@ fun CustomTextField(
                         }
                     ) {
                         Icon(
-                            imageVector =
+                            painter =
                             if(passwordVisibility)
-                                Icons.Filled.FavoriteBorder
-                            else Icons.Filled.Favorite,
+                                painterResource(id = R.drawable.ic_eye_off)
+                            else painterResource(id = R.drawable.ic_eye),
                             contentDescription = "Toggle password visibility"
                         )
                     }
