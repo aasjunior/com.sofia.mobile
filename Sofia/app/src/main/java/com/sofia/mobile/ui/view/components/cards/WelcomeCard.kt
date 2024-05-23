@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.view.components.cards
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,17 +10,22 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h2
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
 @Composable
@@ -42,8 +48,8 @@ fun WelcomeCard(
                         .height(38.dp)
                 ){
                     Text(
-                        text = stringResource(id = R.string.main_welcome),
-                        style = text1.copy(Color.Black)
+                        text = stringResource(id = R.string.main_welcome, name),
+                        style = h2
                     )
                 }
                 Row(
@@ -55,11 +61,30 @@ fun WelcomeCard(
                         modifier = Modifier.width(160.dp),
                     ){
                         Text(
-                            text = stringResource(id = R.string.main_description)
+                            text = stringResource(id = R.string.main_description),
+                            style = text1.copy(Color.Black)
+                        )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        ClickableLinkText(
+                            text = stringResource(id = R.string.link_learnmore),
+                            onClick = {}
                         )
                     }
+                    Image(
+                        modifier = Modifier.size(100.dp),
+                        painter = painterResource(id = R.drawable.ic_illustration),
+                        contentDescription = "Welcome Card"
+                    )
                 }
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun WelcomeCardPreview(){
+    WelcomeCard(name = "Amanda", navController = rememberNavController())
 }
