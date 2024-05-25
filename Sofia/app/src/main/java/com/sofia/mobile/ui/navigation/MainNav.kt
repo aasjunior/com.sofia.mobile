@@ -15,6 +15,7 @@ import com.sofia.mobile.ui.view.contents.containers.BaseContent
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
 import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
 import com.sofia.mobile.ui.view.screens.main.PatientListScreen
+import com.sofia.mobile.ui.view.screens.main.PatientRegisterScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.mainGraph(
@@ -32,7 +33,12 @@ fun NavGraphBuilder.mainGraph(
             }
         }
         composable(MainNavOptions.PatientListScreen.name){
-            PatientListScreen(navController = navHostController)
+            PatientListScreen(navController = navHostController, drawerState = drawerState)
+        }
+        composable(MainNavOptions.PatientRegisterScreen.name){
+            BaseContent(navController = navHostController, drawerState = drawerState) {
+                PatientRegisterScreen(navController = navHostController)
+            }
         }
         composable(
             route = "${MainNavOptions.PatientEditScreen.name}/{patientId}",

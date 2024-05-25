@@ -13,14 +13,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -53,10 +51,10 @@ import com.sofia.mobile.ui.viewmodel.PatientListViewModel
 @Composable
 fun PatientListScreen(
     navController: NavController,
-    drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)
+    drawerState: DrawerState
 ){
     val plvm: PatientListViewModel = viewModel()
-    val patients = plvm.patients.value.sortedBy { it.firstName.lowercase() }
+    val patients = plvm.patients.sortedBy { it.firstName.lowercase() }
     val showDialog = remember { mutableStateOf(false) }
     val isCardOpen = remember { mutableStateOf(false) }
     val isDeleteMode = remember { mutableStateOf(false) }

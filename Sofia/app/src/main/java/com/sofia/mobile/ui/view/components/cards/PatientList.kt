@@ -105,7 +105,7 @@ fun PatientList(
 fun PatientCheckList(
     plvm: PatientListViewModel
 ) {
-    val patients = plvm.patients.value.sortedBy { it.firstName }
+    val patients = plvm.patients.sortedBy { it.firstName }
     val grouped = patients.groupBy { it.firstName[0].uppercase()[0] }
     val listState = rememberLazyListState()
     val allChecked = remember { mutableStateOf(false) }
