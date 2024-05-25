@@ -25,6 +25,7 @@ import com.sofia.mobile.ui.view.MainCompose
 import com.sofia.mobile.ui.view.components.form.inputs.textfields.FormField
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
+import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 
@@ -38,8 +39,9 @@ class MainActivity : ComponentActivity() {
             val rd = RelativeDimensions(screenWidth)
             val loginViewModel: LoginViewModel = viewModel()
 
-            //MainCompose(rd = rd, loginViewModel = loginViewModel)
-            HomeScreen(navController = rememberNavController())
+            MainCompose(rd = rd, loginViewModel = loginViewModel)
+            //HomeScreen(navController = rememberNavController())
+            //PatientListScreen(navController = rememberNavController())
         }
     }
 }

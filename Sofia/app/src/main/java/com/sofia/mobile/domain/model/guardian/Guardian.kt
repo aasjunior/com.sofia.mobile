@@ -1,8 +1,8 @@
 package com.sofia.mobile.domain.model.guardian
 
-import com.sofia.mobile.domain.model.patientguardian.PatientGuardianDTO
+import com.sofia.mobile.domain.model.patientguardian.PatientGuardian
 
-data class GuardianDTO(
+data class Guardian(
     val id: String?,
     val firstName: String,
     val lastName: String,
@@ -10,9 +10,9 @@ data class GuardianDTO(
     val email: String,
 
     // Usar o patientId como chave
-    val patients: HashMap<String, PatientGuardianDTO>
+    val patients: HashMap<String, PatientGuardian>
 ){
-    fun addPatient(patientGuardian: PatientGuardianDTO){
+    fun addPatient(patientGuardian: PatientGuardian){
         this.patients[patientGuardian.patientId!!] = patientGuardian
     }
 }

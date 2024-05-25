@@ -4,13 +4,17 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
+import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
+import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.mainGraph(
@@ -26,6 +30,18 @@ fun NavGraphBuilder.mainGraph(
             BaseContent(navController = navHostController, drawerState = drawerState) {
                 HomeScreen(navController = navHostController)
             }
+        }
+        composable(MainNavOptions.PatientListScreen.name){
+            PatientListScreen(navController = navHostController)
+        }
+        composable(
+            route = "${MainNavOptions.PatientEditScreen.name}/{patientId}",
+            arguments = listOf(navArgument("patientId") {
+                type = NavType.StringType
+            })
+        ){ backStackEntry ->
+            val patientId = backStackEntry.arguments?.getString("patientId")
+            PatientEditScreen(navController = navHostController, patientId = patientId ?: "")
         }
     }
 }

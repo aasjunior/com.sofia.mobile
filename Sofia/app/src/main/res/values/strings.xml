@@ -29,6 +29,9 @@
     <string name="btn_register_patient">Register Patient</string>
     <string name="btn_new">New</string>
     <string name="btn_delete">Delete</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_new_patient">Register new patient</string>
+    <string name="btn_cancel">Cancel</string>
 
     <!-- Links -->
     <string name="link_learnmore">Learn more</string>
@@ -43,12 +46,13 @@
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alert</string>
-    <string name="alert_confirm_description">Are you sure you want to </string>
+    <string name="alert_confirm_description">Are you sure you want to %s</string>
+    <string name="alert_confirm_delete">Deletion Confirmation!</string>
     <string name="alert_confirm_delete_patient">delete this patient?</string>
     <string name="alert_not_be_undone">This action cannot be undone in the future.</string>
     <string name="alert_create_patient">Patient successfully registered!</string>
     <string name="alert_update_patient">Patient successfully updated!</string>
-    <string name="alert_delete_patient">Patient successfully deleted!</string>
+    <string name="alert_delete_patient">Selected patients successfully deleted!</string>
     <string name="alert_create_user">User successfully registered!</string>
     <string name="alert_update_user">User successfully updated!</string>
     <string name="alert_delete_user">User successfully deleted!</string>
@@ -92,6 +96,7 @@
     <!-- Patient List Screen -->
     <string name="list_title">Patient List</string>
     <string name="list_subtitle">%s registered patients</string>
+    <string name="list_selected">%s selected</string>
 
     <!-- Patient View Screen -->
     <string name="patient_title">Patient View</string>

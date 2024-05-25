@@ -18,8 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftLilas
 import com.sofia.mobile.ui.view.components.buttons.StarButton
@@ -52,12 +54,12 @@ fun HomeScreen(
             )
             StarButton(
                 text = stringResource(id = R.string.btn_list_patient),
-                onClick = { navController.navigate("patientList") },
+                onClick = { navController.navigate(MainNavOptions.PatientListScreen.name) },
                 iconId = R.drawable.ic_star_doubt
             )
             StarButton(
                 text = stringResource(id = R.string.btn_register_patient),
-                onClick = { navController.navigate("patientRegistration") },
+                onClick = { navController.navigate(MainNavOptions.PatientRegisterScreen.name) },
                 iconId = R.drawable.ic_star_laugh
             )
         }

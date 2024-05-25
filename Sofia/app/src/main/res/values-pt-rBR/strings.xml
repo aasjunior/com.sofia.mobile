@@ -22,6 +22,9 @@
     <string name="btn_register_patient">Cadastrar Paciente</string>
     <string name="btn_new">Novo</string>
     <string name="btn_delete">Deletar</string>
+    <string name="btn_close">Fechar</string>
+    <string name="btn_new_patient">Cadastrar novo paciente</string>
+    <string name="btn_cancel">Cancelar</string>
 
     <!-- Links -->
     <string name="link_learnmore">Saíba mais</string>
@@ -32,12 +35,13 @@
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alerta</string>
-    <string name="alert_confirm_description">Tem certeza que quer </string>
+    <string name="alert_confirm_description">Tem certeza que quer %s</string>
+    <string name="alert_confirm_delete">Confirmação de exclusão!</string>
     <string name="alert_confirm_delete_patient">excluir este paciente?</string>
     <string name="alert_not_be_undone">Essa ação não poderá ser desfeita futuramente.</string>
     <string name="alert_create_patient">Paciente cadastrado com sucesso!</string>
     <string name="alert_update_patient">Paciente atualizado com sucesso!</string>
-    <string name="alert_delete_patient">Paciente deletado com sucesso!</string>
+    <string name="alert_delete_patient">Pacientes selecionados deletados com sucesso!</string>
     <string name="alert_create_user">Usuário cadastrado com sucesso!</string>
     <string name="alert_update_user">Usuário atualizado com sucesso!</string>
     <string name="alert_delete_user">Usuário deletado com sucesso!</string>
@@ -81,6 +85,7 @@
     <!-- Patient List Screen -->
     <string name="list_title">Listagem de Pacientes</string>
     <string name="list_subtitle">%s pacientes cadastrados</string>
+    <string name="list_selected">%s selecionado(s)</string>
 
     <!-- Patient View Screen -->
     <string name="patient_title">Visualização do Paciente</string>

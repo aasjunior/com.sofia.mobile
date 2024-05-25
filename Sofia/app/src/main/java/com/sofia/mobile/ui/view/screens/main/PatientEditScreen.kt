@@ -6,7 +6,8 @@ import androidx.navigation.NavController
 
 @Composable
 fun PatientEditScreen(
-    navController: NavController
+    navController: NavController,
+    patientId: String
 ){
     Text(text = "PatientEdit")
 }
