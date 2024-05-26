@@ -3,12 +3,8 @@ package com.sofia.mobile.ui.view.components.buttons
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text2
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StarButton(
     text: String,
@@ -31,7 +26,7 @@ fun StarButton(
     iconId: Int
 ){
     Surface(
-        onClick = onClick,
+        onClick = {onClick()},
         //shape = MaterialTheme.shapes.medium,
         color = Color.Transparent,
         modifier = Modifier.width(IntrinsicSize.Min)

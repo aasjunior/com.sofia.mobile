@@ -49,7 +49,7 @@ fun HomeScreen(
         ){
             StarButton(
                 text = stringResource(id = R.string.btn_new_consultation),
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(MainNavOptions.CheckListScreen.name) },
                 iconId = R.drawable.ic_star_laugh
             )
             StarButton(

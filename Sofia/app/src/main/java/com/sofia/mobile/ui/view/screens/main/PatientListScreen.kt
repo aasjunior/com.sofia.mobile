@@ -47,7 +47,6 @@ import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
 import com.sofia.mobile.ui.viewmodel.PatientListViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientListScreen(
     navController: NavController,

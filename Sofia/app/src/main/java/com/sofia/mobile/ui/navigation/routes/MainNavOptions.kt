@@ -5,5 +5,7 @@ enum class MainNavOptions{
     PatientEditScreen,
     PatientListScreen,
     PatientProfileScreen,
-    PatientRegisterScreen
+    PatientRegisterScreen,
+    CheckListScreen,
+    QChatScreen
 }

@@ -11,10 +11,12 @@ import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
+import com.sofia.mobile.ui.view.screens.main.CheckListScreen
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
 import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
 import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 import com.sofia.mobile.ui.view.screens.main.PatientRegisterScreen
+import com.sofia.mobile.ui.view.screens.main.QChatScreen
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 
 fun NavGraphBuilder.mainGraph(
@@ -53,6 +55,18 @@ fun NavGraphBuilder.mainGraph(
         ){ backStackEntry ->
             val patientId = backStackEntry.arguments?.getString("patientId")
             PatientEditScreen(navController = navHostController, patientId = patientId ?: "")
+        }
+        composable(MainNavOptions.CheckListScreen.name){
+            CheckListScreen(navController = navHostController)
+        }
+        composable(
+            route = "${MainNavOptions.QChatScreen.name}/{patientId}",
+            arguments = listOf(navArgument("patientId") {
+                type = NavType.StringType
+            })
+        ){ backStackEntry ->
+            val patientId = backStackEntry.arguments?.getString("patientId")
+            QChatScreen(navController = navHostController, patientId = patientId ?: "")
         }
     }
 }
