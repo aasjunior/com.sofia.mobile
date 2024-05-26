@@ -24,6 +24,7 @@ import com.sofia.mobile.ui.view.contents.appdrawer.AppDrawerContent
 import com.sofia.mobile.ui.view.contents.appdrawer.DrawerParams
 import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
 import com.sofia.mobile.ui.view.screens.intro.SplashScreen
+import com.sofia.mobile.ui.view.screens.main.ButtonLogout
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
 
@@ -54,8 +55,9 @@ fun MainCompose(
                             menuItems = DrawerParams.drawerButtons,
                             defaultPick = MainNavOptions.HomeScreen
                         ){ onUserPickedOption ->
-                            navigateToScreen(navHostController, onUserPickedOption)
+                            navHostController.navigate(onUserPickedOption)
                         }
+                        ButtonLogout(navController = navHostController)
                     }
                 ) {
                     val startDestination: MutableState<String> = mutableStateOf(NavRoutes.IntroRoute.name)

@@ -57,7 +57,9 @@ fun NavGraphBuilder.mainGraph(
             PatientEditScreen(navController = navHostController, patientId = patientId ?: "")
         }
         composable(MainNavOptions.CheckListScreen.name){
-            CheckListScreen(navController = navHostController)
+            BaseContent(navController = navHostController, drawerState = drawerState) {
+                CheckListScreen(navController = navHostController)
+            }
         }
         composable(
             route = "${MainNavOptions.QChatScreen.name}/{patientId}",
@@ -66,7 +68,9 @@ fun NavGraphBuilder.mainGraph(
             })
         ){ backStackEntry ->
             val patientId = backStackEntry.arguments?.getString("patientId")
-            QChatScreen(navController = navHostController, patientId = patientId ?: "")
+            BaseContent(navController = navHostController, drawerState = drawerState) {
+                QChatScreen(navController = navHostController, patientId = patientId ?: "")
+            }
         }
     }
 }

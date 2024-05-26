@@ -22,7 +22,6 @@ import com.sofia.mobile.ui.view.components.forms.inputs.pickers.CustomDatePicker
 import com.sofia.mobile.ui.view.components.forms.inputs.pickers.ImagePicker
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.CustomTextField
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.EmailTextField
-import com.sofia.mobile.ui.view.components.forms.inputs.textfields.FormField
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.PhoneTextField
 import com.sofia.mobile.ui.view.components.forms.inputs.toIndex
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
@@ -87,8 +86,8 @@ fun FormPerfil(
     val pregnancyComplications = pvm.patientState.value.pregnancyComplications.collectAsState()
     val premature = pvm.patientState.value.premature.collectAsState()
     val options = listOf(
-        stringResource(id = R.string.form_yes),
-        stringResource(id = R.string.form_no)
+         R.string.form_yes,
+        R.string.form_no
     )
 
     FloatCard {
@@ -174,7 +173,7 @@ fun FormGuardian(
             phone = phone,
             onValueChange = {
                 pvm.guardianState.value
-                    .updatePhone(it!!)
+                    .updatePhone(it)
             }
         )
 

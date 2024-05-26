@@ -32,6 +32,7 @@
 
     <!-- Drawer -->
     <string name="drawer_perfil">Meu perfil</string>
+    <string name="drawer_logout">Sair</string>
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alerta</string>
@@ -113,4 +114,20 @@
     <string name="patient_edit_patient">Atualização do Paciente</string>
     <string name="patient_edit_guardian">Atualização do Responsável</string>
     <string name="patient_edit_success">Dados atualizados com sucesso!</string>
+
+    <!-- CheckList Screen -->
+    <string name="checklist_title">Selecione o Paciente</string>
+
+    <!-- QChat Screen -->
+    <string name="qchat_A1">Seu filho olha para você quando você chama o nome dele/dela?</string>
+    <string name="qchat_A2">Quão fácil é para você obter contato visual com seu filho?</string>
+    <string name="qchat_A3">Seu filho aponta para indicar que quer algo? (ex.: um brinquedo que está fora de alcance)</string>
+    <string name="qchat_A4">Seu filho aponta para compartilhar interesse com você? (ex.: apontando para algo interessante)</string>
+    <string name="qchat_A5">Seu filho faz de conta? (ex.: cuidar de bonecas, falar em um telefone de brinquedo) </string>
+    <string name="qchat_A6">Seu filho segue onde você está olhando?</string>
+    <string name="qchat_A7">Se você ou outra pessoa da família estiver visivelmente chateada, seu filho mostra sinais de querer confortá-los? (ex.: acariciando o cabelo, abraçando) </string>
+    <string name="qchat_A8">Como você descreveria as primeiras palavras do seu filho? </string>
+    <string name="qchat_A9">Seu filho usa gestos simples? (ex.: acenar adeus)</string>
+    <string name="qchat_A10">Seu filho olha para o nada sem um propósito aparente? </string>
+
 </resources>

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Surface
@@ -20,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T: Enum<T>> AppDrawerContent(
     drawerState: DrawerState,
     menuItems: List<AppDrawerItemInfo<T>>,
     defaultPick: T,
-    onClick: (T) -> Unit
+    onClick: (String) -> Unit
 ){
     var currentPick by remember { mutableStateOf(defaultPick) }
     val coroutineScope= rememberCoroutineScope()
@@ -56,7 +54,7 @@ fun <T: Enum<T>> AppDrawerContent(
                             coroutineScope.launch {
                                 drawerState.close()
                             }
-                            onClick(navOption)
+                            onClick(navOption.name)
                         }
                     }
                 }

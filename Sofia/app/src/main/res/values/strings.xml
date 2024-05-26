@@ -39,6 +39,7 @@
 
     <!-- Drawer -->
     <string name="drawer_perfil">My profile</string>
+    <string name="drawer_logout">Logout</string>
     <string name="drawer_home" translatable="false">Home</string>
     <string name="drawer_register" translatable="false">Register</string>
     <string name="drawer_menu_description" translatable="false">Menu navigation button</string>
@@ -124,4 +125,21 @@
     <string name="patient_edit_patient">Patient Update</string>
     <string name="patient_edit_guardian">Guardian Update</string>
     <string name="patient_edit_success">Data updated successfully!</string>
+
+    <!-- CheckList Screen -->
+    <string name="checklist_title">Select Patient</string>
+
+    <!-- QChat Screen -->
+    <string name="qchat_title" translatable="false">Q-Chat 10</string>
+    <string name="qchat_A1">Does your child look at you when you call his/her name?</string>
+    <string name="qchat_A2">How easy is it for you to get eye contact with your child?  </string>
+    <string name="qchat_A3">Does your child point to indicate that she/he wants something? (e.g. a toy that is out of reach)</string>
+    <string name="qchat_A4">Does your child point to share interest with you? (e.g. pointing at an interesting sight)</string>
+    <string name="qchat_A5">Does your child pretend? (e.g. care for dolls, talk on a toy phone)</string>
+    <string name="qchat_A6">Does your child follow where you\’re looking?</string>
+    <string name="qchat_A7">If you or someone else in the family is visibly upset, does your child show signs of wan9ng to comfort them? (e.g. stroking hair, hugging them) </string>
+    <string name="qchat_A8">Would you describe your child\’s first words as:  </string>
+    <string name="qchat_A9">Does your child use simple gestures? (e.g. wave goodbye)</string>
+    <string name="qchat_A10">Does your child stare at nothing with no apparent purpose?</string>
+
 </resources>

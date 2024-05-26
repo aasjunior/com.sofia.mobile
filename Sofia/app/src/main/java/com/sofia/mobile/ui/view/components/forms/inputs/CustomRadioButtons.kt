@@ -16,15 +16,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
 @Composable
 fun OutlinedRadioButton(
-    modifier: Modifier = Modifier,
     label: String,
-    options: List<String>,
+    options: List<Int>,
     state: State<Int?>,
     onOptionSelected: (Int) -> Unit
 ) {
@@ -60,7 +60,7 @@ fun OutlinedRadioButton(
                         onClick = null // null because we're handling onClick above
                     )
                     Text(
-                        text = option,
+                        text = stringResource(id = option),
                         style = text1.copy(color = BrillantPurple),
                         modifier = Modifier.padding(start = 4.dp)
                     )
