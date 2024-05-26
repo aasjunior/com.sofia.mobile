@@ -22,6 +22,7 @@ import com.sofia.mobile.ui.view.components.forms.inputs.pickers.CustomDatePicker
 import com.sofia.mobile.ui.view.components.forms.inputs.pickers.ImagePicker
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.CustomTextField
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.EmailTextField
+import com.sofia.mobile.ui.view.components.forms.inputs.textfields.FormField
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.PhoneTextField
 import com.sofia.mobile.ui.view.components.forms.inputs.toIndex
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
@@ -173,7 +174,7 @@ fun FormGuardian(
             phone = phone,
             onValueChange = {
                 pvm.guardianState.value
-                    .updatePhone(it)
+                    .updatePhone(it!!)
             }
         )
 

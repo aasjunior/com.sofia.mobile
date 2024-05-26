@@ -16,9 +16,9 @@ interface PatientService {
     @GET("/patients/{id}")
     suspend fun getPatient(@Path("id") id: String): Patient?
 
-    @POST("/patient-with-guardian")
+    @POST("/patients/patient-with-guardian")
     suspend fun savePatientWithGuardian(@Body request: PatientGuardianRequest): Patient
 
-    @DELETE("/{id}")
+    @DELETE("/patients/{id}")
     suspend fun deletePatient(@Path("id") id: String): Response<Unit>
 }

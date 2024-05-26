@@ -23,5 +23,6 @@ fun PhoneTextField(
 }
 
 private fun validPhone(phone: String): Boolean{
-    return phone.all { it.isDigit() } && phone.length <= 11
+    val digitsOnly = phone.filter { it.isDigit() }
+    return digitsOnly.length <= 11
 }
