@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.form.inputs.textfields
+package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 fun FormField(
     label: String,
     stateFlow: StateFlow<String>,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String?) -> Unit,
     isEmail: Boolean = false,
     isPhone: Boolean = false
 ){

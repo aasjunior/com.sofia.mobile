@@ -29,8 +29,8 @@ import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaTheme
-import com.sofia.mobile.ui.view.components.form.inputs.textfields.EmailTextField
-import com.sofia.mobile.ui.view.components.form.inputs.textfields.PasswordTextField
+import com.sofia.mobile.ui.view.components.forms.inputs.textfields.EmailTextField
+import com.sofia.mobile.ui.view.components.forms.inputs.textfields.PasswordTextField
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.contents.Dimensions
@@ -91,7 +91,7 @@ private fun FormLogin(
         )
         PasswordTextField(
             password = password,
-            onValueChange = { newPassword -> password = newPassword },
+            onValueChange = { newPassword -> password = newPassword!! },
             width = relativeDimensions.formFieldIntro
         )
         Redirect {

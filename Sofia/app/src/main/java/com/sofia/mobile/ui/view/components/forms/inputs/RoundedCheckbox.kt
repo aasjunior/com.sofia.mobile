@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.form.inputs
+package com.sofia.mobile.ui.view.components.forms.inputs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

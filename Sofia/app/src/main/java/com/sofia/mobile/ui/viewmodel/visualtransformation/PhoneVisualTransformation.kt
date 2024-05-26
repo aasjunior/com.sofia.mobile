@@ -6,41 +6,39 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 
 class PhoneVisualTransformation : VisualTransformation {
-    // (XX) XXXXX-XXXX
     override fun filter(text: AnnotatedString): TransformedText {
-        val phoneMask = text.text.mapIndexed { index, c ->
-            when(index){
-                0 -> "($c"
-                1 -> "$c) "
-                6 -> "$c-"
-                else -> c
-            }
-        }.joinToString(separator = "")
-
-        return TransformedText(
-            AnnotatedString(phoneMask),
-            PhoneOffsetMapping
-        )
-    }
-
-    object PhoneOffsetMapping : OffsetMapping {
-        override fun originalToTransformed(offset: Int): Int {
-            return when{
-                offset > 6 -> offset + 4
-                offset > 1 -> offset + 3
-                offset > 0 -> offset + 1
-                else -> offset
+        val transformedText = buildString {
+            text.text.forEachIndexed { index, char ->
+                when (index) {
+                    0 -> append("($char")
+                    1 -> append("$char) ")
+                    6 -> append("$char-")
+                    else -> append(char)
+                }
             }
         }
 
-        override fun transformedToOriginal(offset: Int): Int {
-            return when{
-                offset > 6 -> offset - 4
-                offset > 1 -> offset - 3
-                offset > 0 -> offset - 1
-                else -> offset
+        val offsetTranslator = object : OffsetMapping {
+            override fun originalToTransformed(offset: Int): Int {
+                return when {
+                    offset <= 0 -> offset
+                    offset <= 1 -> offset + 1
+                    offset <= 6 -> offset + 3
+                    else -> offset + 4
+                }
+            }
+
+            override fun transformedToOriginal(offset: Int): Int {
+                return when {
+                    offset <= 1 -> offset
+                    offset <= 4 -> offset - 1
+                    offset <= 9 -> offset - 3
+                    else -> offset - 4
+                }
             }
         }
 
+        return TransformedText(AnnotatedString(transformedText), offsetTranslator)
     }
 }
+

@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.form.inputs.textfields
+package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -14,7 +14,7 @@ fun PhoneTextField(
         label = stringResource(id = form_phone),
         value = phone,
         onValueChange = {
-            if(validPhone(it)){
+            if(validPhone(it!!)){
                 onValueChange(it)
             }
         },

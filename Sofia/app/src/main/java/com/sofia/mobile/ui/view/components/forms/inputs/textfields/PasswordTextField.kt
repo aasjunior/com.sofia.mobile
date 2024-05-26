@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.form.inputs.textfields
+package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -17,7 +17,7 @@ import com.sofia.mobile.ui.view.contents.Dimensions
 @Composable
 fun PasswordTextField(
     password: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String?) -> Unit,
     roundedCornerShape: Boolean = true,
     isConfirmedPassword: Boolean = false,
     width: Dp = Dimensions.formFild264
@@ -39,7 +39,7 @@ fun PasswordTextField(
 @Composable
 fun ConfirmPassword(
     password: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String?) -> Unit,
     width: Dp = Dimensions.formFild264
 ){
     val confirmPassword by rememberSaveable {

@@ -1,43 +1,39 @@
-package com.sofia.mobile.ui.view.components.form.inputs.textfields
+package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import com.sofia.mobile.R
-import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 import com.sofia.mobile.ui.view.contents.Dimensions
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomTextField(
+    modifier: Modifier = Modifier,
     label: String,
     placeholder: String? = null,
     value: String,
     width: Dp = Dimensions.formFild264,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String?) -> Unit = {},
     singleLine: Boolean = true,
     enabled: Boolean = true,
     readOnly: Boolean = false,
@@ -46,7 +42,9 @@ fun CustomTextField(
     isPassword: Boolean = false,
     isError: Boolean = false,
     errorText: String? = null,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    isDropDownMenu: Boolean = false,
+    trailingIcon: @Composable () -> Unit = {}
 ){
     var passwordVisibility by remember {
         mutableStateOf(false)
@@ -54,8 +52,7 @@ fun CustomTextField(
 
     Column {
         OutlinedTextField(
-            modifier = androidx.compose.ui.Modifier
-                .width(width),
+            modifier = modifier.width(width),
             value = value,
             onValueChange = onValueChange,
             label = {
@@ -81,10 +78,10 @@ fun CustomTextField(
                 if(isPassword && !passwordVisibility)
                     PasswordVisualTransformation()
                 else visualTransformation,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = SoftPurple,
                 unfocusedBorderColor = SoftPurple,
-                textColor = SoftPurple,
+                unfocusedTextColor = SoftPurple,
                 focusedLabelColor = SoftPurple
             ),
             trailingIcon = {
@@ -102,6 +99,9 @@ fun CustomTextField(
                             contentDescription = "Toggle password visibility"
                         )
                     }
+                }
+                if(isDropDownMenu){
+                    trailingIcon()
                 }
             }
         )

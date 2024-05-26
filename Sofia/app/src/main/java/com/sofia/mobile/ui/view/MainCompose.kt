@@ -3,7 +3,6 @@ package com.sofia.mobile.ui.view
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
@@ -25,9 +24,9 @@ import com.sofia.mobile.ui.view.contents.appdrawer.AppDrawerContent
 import com.sofia.mobile.ui.view.contents.appdrawer.DrawerParams
 import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
 import com.sofia.mobile.ui.view.screens.intro.SplashScreen
+import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainCompose(
     rd: RelativeDimensions,
@@ -35,9 +34,11 @@ fun MainCompose(
     drawerState: DrawerState = rememberDrawerState(
         initialValue = DrawerValue.Closed
     ),
-    loginViewModel: LoginViewModel
+    loginViewModel: LoginViewModel,
+    imagePickerViewModel: ImagePickerViewModel,
+    onPickImageClick: () -> Unit
 ){
-    var isLoggedIn = loginViewModel.isLoggedIn()
+    val isLoggedIn = loginViewModel.isLoggedIn()
         .collectAsState(initial = null)
 
     SofiaTheme(darkTheme = false){
@@ -72,7 +73,13 @@ fun MainCompose(
                         startDestination = startDestination.value
                     ){
                         introGraph(navHostController, rd)
-                        mainGraph(navHostController, drawerState, rd)
+                        mainGraph(
+                            navHostController,
+                            drawerState,
+                            rd,
+                            imagePickerViewModel,
+                            onPickImageClick
+                        )
                     }
                 }
             }

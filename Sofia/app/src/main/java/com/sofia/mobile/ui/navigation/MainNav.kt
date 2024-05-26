@@ -1,7 +1,6 @@
 package com.sofia.mobile.ui.navigation
 
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,12 +15,14 @@ import com.sofia.mobile.ui.view.screens.main.HomeScreen
 import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
 import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 import com.sofia.mobile.ui.view.screens.main.PatientRegisterScreen
+import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.mainGraph(
     navHostController: NavHostController,
     drawerState: DrawerState,
-    rd: RelativeDimensions
+    rd: RelativeDimensions,
+    imagePickerViewModel: ImagePickerViewModel,
+    onPickImageClick: () -> Unit
 ){
     navigation(
         startDestination = MainNavOptions.HomeScreen.name,
@@ -37,7 +38,11 @@ fun NavGraphBuilder.mainGraph(
         }
         composable(MainNavOptions.PatientRegisterScreen.name){
             BaseContent(navController = navHostController, drawerState = drawerState) {
-                PatientRegisterScreen(navController = navHostController)
+                PatientRegisterScreen(
+                    navController = navHostController,
+                    imagePickerViewModel = imagePickerViewModel,
+                    onPickImageClick
+                )
             }
         }
         composable(

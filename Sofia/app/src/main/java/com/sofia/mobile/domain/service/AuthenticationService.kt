@@ -5,6 +5,7 @@ import com.aasjunior.mediapickersuite.domain.model.login.LoginRequest
 import com.aasjunior.mediapickersuite.domain.model.login.LoginState
 import com.sofia.mobile.config.retrofit.ApiClient
 import com.sofia.mobile.config.security.SecurePreferences
+import com.sofia.mobile.domain.model.login.RefreshRequest
 
 class AuthenticationService(
     private val securePreferences: SecurePreferences
@@ -25,6 +26,33 @@ class AuthenticationService(
                     }else{
                         Log.e("AuthenticationService", "Token is null")
                         LoginState.Error("Token is null")
+                    }
+                }
+            }else{
+                val errorBody = response.errorBody()?.string()
+                Log.e("AuthenticationService", errorBody ?: "Unknown error")
+                LoginState.Error(errorBody ?: "Unknown error")
+            }
+        }catch(e: Exception){
+            Log.e("AuthenticationService", e.message ?: "Unknown error")
+            LoginState.Error(e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun refresh(token: String): LoginState{
+        return try{
+            val response = apiClient.refresh(
+                RefreshRequest(token)
+            )
+
+            if(response.isSuccessful){
+                response.body()?.token.let { newToken ->
+                    if(newToken != null){
+                        securePreferences.saveToken(newToken)
+                        LoginState.Success(newToken)
+                    }else{
+                        Log.e("AuthenticationService", "New token is null")
+                        LoginState.Error("New token is null")
                     }
                 }
             }else{

@@ -22,6 +22,6 @@ abstract class PersonState(
     }
 
     fun updateLastName(newLastName: String){
-        this._firstName.value = newLastName
+        this._lastName.value = newLastName
     }
 }

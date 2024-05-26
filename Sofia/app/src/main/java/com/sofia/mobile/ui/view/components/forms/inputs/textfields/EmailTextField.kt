@@ -1,4 +1,4 @@
-package com.sofia.mobile.ui.view.components.form.inputs.textfields
+package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -20,7 +20,7 @@ fun EmailTextField(
         label = "Email",
         value = emailState.email,
         onValueChange = { newEmail ->
-            emailState.setEmail(newEmail)
+            emailState.setEmail(newEmail!!)
             onValueChange(newEmail)
         },
         width = width,

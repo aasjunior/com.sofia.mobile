@@ -3,7 +3,7 @@ package com.sofia.mobile.domain.model.patient
 import com.sofia.mobile.domain.common.enums.Ethnicity
 import com.sofia.mobile.domain.common.enums.Gender
 import com.sofia.mobile.domain.model.guardian.Guardian
-import java.time.LocalDateTime
+import com.sofia.mobile.domain.model.guardian.GuardianRequest
 
 data class PatientRequest(
     val firstName: String,
@@ -13,7 +13,5 @@ data class PatientRequest(
     val ethnicity: Ethnicity,
     val familyCases: Boolean,
     val pregnancyComplications: Boolean,
-    val premature: Boolean,
-    val guardians: HashMap<String, Guardian>,
-    val registerDate: LocalDateTime
+    val premature: Boolean
 )

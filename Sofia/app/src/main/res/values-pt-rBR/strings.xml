@@ -55,6 +55,7 @@
 
     <!-- Exceptions -->
     <string name="error_no_localizedcontext">Nenhum LocalizedContext fornecido!</string>
+    <string name="error_send_data">Ocorreu um erro ao enviar os dados:</string>
 
     <!-- LoginScreen -->
     <string name="login_welcome">Bem-vindo</string>
@@ -107,4 +108,9 @@
     <string name="patient_form_step_03">Responsável</string>
     <string name="patient_form_title_02">Cadastro de Responsável</string>
     <string name="patient_form_kinship">Parentesco</string>
+
+    <!-- Patient Edit Screen -->
+    <string name="patient_edit_patient">Atualização do Paciente</string>
+    <string name="patient_edit_guardian">Atualização do Responsável</string>
+    <string name="patient_edit_success">Dados atualizados com sucesso!</string>
 </resources>

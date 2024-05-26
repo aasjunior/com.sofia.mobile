@@ -66,6 +66,7 @@
 
     <!-- Exceptions -->
     <string name="error_no_localizedcontext">No LocalizedContext provided!</string>
+    <string name="error_send_data">An error occurred while sending the data:</string>
 
     <!-- LoginScreen -->
     <string name="login_welcome">Welcome</string>
@@ -118,4 +119,9 @@
     <string name="patient_form_step_03">Guardian</string>
     <string name="patient_form_title_02">Guardian Registration</string>
     <string name="patient_form_kinship">Relationship</string>
+
+    <!-- Patient Edit Screen -->
+    <string name="patient_edit_patient">Patient Update</string>
+    <string name="patient_edit_guardian">Guardian Update</string>
+    <string name="patient_edit_success">Data updated successfully!</string>
 </resources>

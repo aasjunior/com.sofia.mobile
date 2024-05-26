@@ -57,3 +57,16 @@ data class PatientState(
         this._guardians.value = currentGuardians + newGuardian
     }
 }
+
+fun PatientState.toRequest(): PatientRequest{
+    return PatientRequest(
+        firstName = this.firstName.value,
+        lastName = this.lastName.value,
+        birthDate = this.birthDate.value,
+        gender = this.gender.value!!,
+        ethnicity = this.ethnicity.value!!,
+        familyCases = this.familyCases.value!!,
+        pregnancyComplications = this.pregnancyComplications.value!!,
+        premature = this.premature.value!!
+    )
+}

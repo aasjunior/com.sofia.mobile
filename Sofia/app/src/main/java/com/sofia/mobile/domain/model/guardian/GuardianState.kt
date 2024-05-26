@@ -31,3 +31,13 @@ data class GuardianState(
         this._patients.value = currentPatients + newPatient
     }
 }
+
+fun GuardianState.toRequest(): GuardianRequest {
+    return GuardianRequest(
+        firstName = this.firstName.value,
+        lastName = this.lastName.value,
+        phone = this.phone.value,
+        email = this.email.value
+    )
+}
+

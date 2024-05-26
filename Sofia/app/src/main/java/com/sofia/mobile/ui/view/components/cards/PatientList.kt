@@ -31,7 +31,7 @@ import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Gray3
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
-import com.sofia.mobile.ui.view.components.form.inputs.RoundedCheckbox
+import com.sofia.mobile.ui.view.components.forms.inputs.RoundedCheckbox
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 import com.sofia.mobile.ui.viewmodel.PatientListViewModel
 

@@ -1,9 +1,7 @@
 package com.sofia.mobile.ui.view.screens.intro
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
@@ -19,16 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.aasjunior.mediapickersuite.domain.model.login.LoginState
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaTheme
-import com.sofia.mobile.ui.view.components.form.inputs.textfields.ConfirmPassword
-import com.sofia.mobile.ui.view.components.form.inputs.textfields.EmailTextField
-import com.sofia.mobile.ui.view.contents.Dimensions
+import com.sofia.mobile.ui.view.components.forms.inputs.textfields.ConfirmPassword
+import com.sofia.mobile.ui.view.components.forms.inputs.textfields.EmailTextField
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.containers.IntroContent
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
@@ -79,7 +74,7 @@ private fun FormRegister(
         )
         ConfirmPassword(
             password = password,
-            onValueChange = { newPassword -> password = newPassword },
+            onValueChange = { newPassword -> password = newPassword!! },
             width = relativeDimensions.formFieldIntro
         )
         Button(
