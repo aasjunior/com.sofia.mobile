@@ -22,22 +22,36 @@ class SecurePreferences(context: Context): TokenRepository {
             .PrefValueEncryptionScheme.AES256_GCM
     )
 
-    override suspend fun saveToken(token: String) {
+    override suspend fun saveAccessToken(token: String) {
         sharedPreferences.edit()
-            .putString("token", token)
+            .putString("access_token", token)
             .apply()
     }
 
-    override val token: Flow<String?>
+    override val accessToken: Flow<String?>
         get() = flow {
             emit(
-                sharedPreferences.getString("token", null)
+                sharedPreferences.getString("access_token", null)
             )
         }
 
-    override suspend fun clearToken() {
+    override suspend fun saveRefreshToken(token: String) {
         sharedPreferences.edit()
-            .remove("token")
+            .putString("refresh_token", token)
+            .apply()
+    }
+
+    override val refreshToken: Flow<String?>
+        get() = flow {
+            emit(
+                sharedPreferences.getString("refresh_token", null)
+            )
+        }
+
+    override suspend fun clearTokens() {
+        sharedPreferences.edit()
+            .remove("access_token")
+            .remove("refresh_token")
             .apply()
     }
 }

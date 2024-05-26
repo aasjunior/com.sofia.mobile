@@ -26,7 +26,7 @@ class LoginViewModel: ViewModel() {
     }
 
     fun isLoggedIn(): Flow<Boolean>{
-        return securePreferences.token.map { it != null }
+        return securePreferences.accessToken.map { it != null }
     }
 
     fun logout(){
