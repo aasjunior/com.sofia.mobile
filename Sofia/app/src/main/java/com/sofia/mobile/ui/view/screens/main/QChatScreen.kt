@@ -2,30 +2,30 @@ package com.sofia.mobile.ui.view.screens.main
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
-import com.sofia.mobile.ui.view.components.cards.FloatCard
+import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.cards.FloatLazyCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun QChatScreen(
     navController: NavController,
     patientId: String
 ){
-    val qChatViewModel = remember { QChatViewModel(patientId) }
-    val qChatState = qChatViewModel.qChatState.collectAsState()
+    val courotineScope = rememberCoroutineScope()
+    val qchatViewModel = remember { QChatViewModel(patientId) }
+    val qchatState = qchatViewModel.qChatState.collectAsState()
 
     val options = listOf(
         R.string.form_yes,
@@ -36,7 +36,7 @@ fun QChatScreen(
 
     FloatLazyCard {
         for ((id, question) in questions) {
-            val answer = qChatState.value.questions.value[id]
+            val answer = qchatState.value.questions.value[id]
             val answerIndex = if (answer == true) 0 else if (answer == false) 1 else null
 
             OutlinedRadioButton(
@@ -44,10 +44,16 @@ fun QChatScreen(
                 options = options,
                 state =  mutableStateOf(answerIndex),
                 onOptionSelected = { selected ->
-                    qChatViewModel.update(id, selected == 0)
+                    qchatViewModel.update(id, selected == 0)
                 }
             )
             Spacer(modifier = Modifier.height(16.dp))
+        }
+        
+        CustomButton(text = "Enviar") {
+            courotineScope.launch {
+                qchatViewModel.submit()
+            }
         }
     }
 }
