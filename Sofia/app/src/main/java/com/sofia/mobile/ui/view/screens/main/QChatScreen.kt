@@ -2,6 +2,7 @@ package com.sofia.mobile.ui.view.screens.main
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -12,9 +13,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.cards.FloatLazyCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
 import kotlinx.coroutines.launch
 
@@ -34,6 +37,10 @@ fun QChatScreen(
 
     val questions = mappedQuestions()
 
+    Text(
+        text = stringResource(id = R.string.qchat_title),
+        style = SofiaTextStyles.h3.copy(color = SofiaColorScheme.BrillantPurple)
+    )
     FloatLazyCard {
         for ((id, question) in questions) {
             val answer = qchatState.value.questions.value[id]

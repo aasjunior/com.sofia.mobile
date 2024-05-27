@@ -38,7 +38,7 @@ fun CustomButton(
     ) {
         Text(
             text = text,
-            style = text2
+            style = text2.copy(Color.White)
         )
     }
 }

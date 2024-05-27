@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -17,6 +16,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
+import com.sofia.mobile.ui.view.screens.main.ButtonLogout
 import kotlinx.coroutines.launch
 
 @Composable
@@ -24,14 +26,15 @@ fun <T: Enum<T>> AppDrawerContent(
     drawerState: DrawerState,
     menuItems: List<AppDrawerItemInfo<T>>,
     defaultPick: T,
+    navHostController: NavHostController,
     onClick: (String) -> Unit
 ){
     var currentPick by remember { mutableStateOf(defaultPick) }
     val coroutineScope= rememberCoroutineScope()
 
-    ModalDrawerSheet {
+    ModalDrawerSheet(drawerContainerColor = Lilas){
         Surface(
-            color = MaterialTheme.colorScheme.background
+            color = Lilas
         ){
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -56,6 +59,12 @@ fun <T: Enum<T>> AppDrawerContent(
                             }
                             onClick(navOption.name)
                         }
+                    }
+                    item {
+                        ButtonLogout(
+                            navController = navHostController,
+                            drawerState = drawerState
+                        )
                     }
                 }
             }
