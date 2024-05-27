@@ -11,6 +11,7 @@ import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
+import com.sofia.mobile.ui.view.screens.main.CheckListResultScreen
 import com.sofia.mobile.ui.view.screens.main.CheckListScreen
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
 import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
@@ -31,20 +32,16 @@ fun NavGraphBuilder.mainGraph(
         route = NavRoutes.MainRoute.name
     ){
         composable(MainNavOptions.HomeScreen.name){
-            BaseContent(navController = navHostController, drawerState = drawerState) {
-                HomeScreen(navController = navHostController)
+            BaseContent(navHostController,drawerState) {
+                HomeScreen(navHostController)
             }
         }
         composable(MainNavOptions.PatientListScreen.name){
-            PatientListScreen(navController = navHostController, drawerState = drawerState)
+            PatientListScreen(navHostController, drawerState)
         }
         composable(MainNavOptions.PatientRegisterScreen.name){
-            BaseContent(navController = navHostController, drawerState = drawerState) {
-                PatientRegisterScreen(
-                    navController = navHostController,
-                    imagePickerViewModel = imagePickerViewModel,
-                    onPickImageClick
-                )
+            BaseContent(navHostController, drawerState) {
+                PatientRegisterScreen(navHostController, imagePickerViewModel, onPickImageClick)
             }
         }
         composable(
@@ -54,11 +51,11 @@ fun NavGraphBuilder.mainGraph(
             })
         ){ backStackEntry ->
             val patientId = backStackEntry.arguments?.getString("patientId")
-            PatientEditScreen(navController = navHostController, patientId = patientId ?: "")
+            PatientEditScreen(navHostController, patientId ?: "")
         }
         composable(MainNavOptions.CheckListScreen.name){
-            BaseContent(navController = navHostController, drawerState = drawerState) {
-                CheckListScreen(navController = navHostController)
+            BaseContent(navHostController, drawerState) {
+                CheckListScreen(navHostController)
             }
         }
         composable(
@@ -68,8 +65,22 @@ fun NavGraphBuilder.mainGraph(
             })
         ){ backStackEntry ->
             val patientId = backStackEntry.arguments?.getString("patientId")
-            BaseContent(navController = navHostController, drawerState = drawerState) {
-                QChatScreen(navController = navHostController, patientId = patientId ?: "")
+            BaseContent(navHostController, drawerState) {
+                QChatScreen(navHostController, patientId ?: "")
+            }
+        }
+        composable(
+            route = "${MainNavOptions.CheckListResultScreen.name}/{accuracy}/{result}",
+            arguments = listOf(
+                navArgument("accuracy") { type = NavType.StringType },
+                navArgument("result") { type = NavType.StringType}
+            )
+        ){ backStackEntry ->
+            val accuracy = backStackEntry.arguments?.getString("accuracy")
+            val result = backStackEntry.arguments?.getString("result")
+
+            BaseContent(navHostController, drawerState) {
+                CheckListResultScreen(navHostController, accuracy!!, result!!)
             }
         }
     }

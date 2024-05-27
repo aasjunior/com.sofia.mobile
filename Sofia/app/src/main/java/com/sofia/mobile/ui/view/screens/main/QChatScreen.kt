@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.cards.FloatLazyCard
@@ -27,8 +28,9 @@ fun QChatScreen(
     patientId: String
 ){
     val courotineScope = rememberCoroutineScope()
-    val qchatViewModel = remember { QChatViewModel(patientId) }
-    val qchatState = qchatViewModel.qChatState.collectAsState()
+    val vm = remember { QChatViewModel(patientId) }
+    val qchatState = vm.qChatState.collectAsState()
+
 
     val options = listOf(
         R.string.form_yes,
@@ -51,7 +53,7 @@ fun QChatScreen(
                 options = options,
                 state =  mutableStateOf(answerIndex),
                 onOptionSelected = { selected ->
-                    qchatViewModel.update(id, selected == 0)
+                    vm.update(id, selected == 0)
                 }
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -59,7 +61,12 @@ fun QChatScreen(
         
         CustomButton(text = "Enviar") {
             courotineScope.launch {
-                qchatViewModel.submit()
+                vm.submit()
+                if(vm.response.value != null){
+                    navController.navigate(
+                        "${MainNavOptions.CheckListResultScreen.name}/${vm.getAccuracy()}/${vm.getResult()}"
+                    )
+                }
             }
         }
     }
