@@ -14,6 +14,7 @@
     <string name="form_phone">Phone</string>
     <string name="form_yes">Yes</string>
     <string name="form_no">No</string>
+    <string name="form_search">Search for something</string>
 
     <!-- Buttons -->
     <string name="btn_login" translatable="false">Login</string>

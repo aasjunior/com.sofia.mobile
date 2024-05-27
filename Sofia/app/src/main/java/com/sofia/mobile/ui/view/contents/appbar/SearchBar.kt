@@ -3,6 +3,7 @@ package com.sofia.mobile.ui.view.contents.appbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,14 +23,17 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.ContentAlpha
+import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
+import com.sofia.mobile.ui.theme.SofiaTypography.text12
 
 @Composable
 fun SearchableTopBar(
@@ -65,8 +69,8 @@ fun SearchTopBar(
 ){
     BasicTextField(
         modifier = Modifier
-            .width(234.dp)
-            .height(31.dp)
+            .fillMaxWidth()
+            .height(40.dp)
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(20.dp)
@@ -85,15 +89,15 @@ fun SearchTopBar(
         decorationBox = { innerTextField ->
             Row(
                 Modifier
-                    .height(31.dp),
+                    .height(30.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SearchLeadingIcon()
                 Box(Modifier.weight(1f)) {
                     if (currentSearchText.isEmpty()) {
                         Text(
-                            text = "Pesquise por algo",
-                            style = TextStyle(color = Lilas)
+                            text = stringResource(id = R.string.form_search),
+                            style = text12.copy(color = Color.Gray)
                         )
                     }
                     innerTextField()
@@ -109,10 +113,8 @@ fun SearchTopBar(
     )
 }
 
-
-// Criação dos icones de busca partindo do icone padrão
 @Composable
-fun SearchIcon(action: () -> Unit = {}){
+private fun SearchIcon(action: () -> Unit = {}){
     DefaultIcon(
         searchIcon = Icons.Filled.Search,
         contentDescription = "Search Icon",
@@ -121,7 +123,7 @@ fun SearchIcon(action: () -> Unit = {}){
 }
 
 @Composable
-fun SearchLeadingIcon(action: () -> Unit = {}){
+private fun SearchLeadingIcon(action: () -> Unit = {}){
     DefaultIcon(
         modifier = Modifier
             .alpha(ContentAlpha.medium)
@@ -131,7 +133,7 @@ fun SearchLeadingIcon(action: () -> Unit = {}){
 }
 
 @Composable
-fun SearchTrailingIcon(action: () -> Unit = {}){
+private fun SearchTrailingIcon(action: () -> Unit = {}){
     DefaultIcon(
         modifier = Modifier.height(16.dp),
         searchIcon = Icons.Default.Close,
@@ -141,7 +143,7 @@ fun SearchTrailingIcon(action: () -> Unit = {}){
 }
 
 @Composable
-fun DefaultIcon(
+private fun DefaultIcon(
     modifier: Modifier = Modifier,
     searchIcon: ImageVector = Icons.Default.Search,
     iconColor: Color = BrillantPurple,
@@ -161,7 +163,7 @@ fun DefaultIcon(
 
 @Composable
 @Preview
-fun SearchTopBarPreview() {
+private fun SearchTopBarPreview() {
     SearchTopBar(
         currentSearchText = "",
         onSearchTextChanged = {},

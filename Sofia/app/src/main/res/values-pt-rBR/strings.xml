@@ -10,6 +10,8 @@
     <string name="form_phone">Celular</string>
     <string name="form_yes">Sim</string>
     <string name="form_no">Não</string>
+    <string name="form_search">Pesquise por algo</string>
+
 
     <!-- Buttons -->
     <string name="btn_begin">Começar</string>
