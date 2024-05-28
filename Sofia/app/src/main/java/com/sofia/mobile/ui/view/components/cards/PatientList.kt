@@ -144,22 +144,28 @@ fun PatientCheckList(
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     patientsForInitial.forEach { patient ->
-                        Column(modifier = Modifier.fillMaxWidth().background(White)){
+                        val oncheckedChange = { checked: Boolean ->
+                            plvm.selectPatient(patient, checked)
+                            if(!checked){
+                                allChecked.value = false
+                            }else{
+                                allChecked.value = patients.all { it.isSelected }
+                            }
+                        }
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .background(White)
+                            .clickable { oncheckedChange(!patient.isSelected) }
+                        ){
                             Row(
-                                modifier = Modifier.padding(horizontal = 18.dp, vertical = 11.dp),
+                                modifier = Modifier
+                                    .padding(horizontal = 18.dp, vertical = 11.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(20.dp)
                             ) {
                                 RoundedCheckbox(
                                     checked = patient.isSelected,
-                                    onCheckedChange = { checked ->
-                                        plvm.selectPatient(patient, checked)
-                                        if(!checked){
-                                            allChecked.value = false
-                                        }else{
-                                            allChecked.value = patients.all { it.isSelected }
-                                        }
-                                    },
+                                    onCheckedChange = oncheckedChange,
                                 )
                                 Text(
                                     text = "${patient.firstName} ${patient.lastName}",

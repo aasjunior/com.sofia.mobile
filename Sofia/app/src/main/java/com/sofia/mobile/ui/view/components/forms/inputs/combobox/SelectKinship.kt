@@ -24,7 +24,10 @@ fun SelectKinship(
 ){
     val options = Kinship.values().toList()
     var expanded by remember { mutableStateOf(false) }
-    var selectedOptionText by remember { mutableStateOf(options[0]) }
+    var selectedOption by remember { mutableStateOf(options[0]) }
+
+    // Cria um mapa de Kinship para String
+    val kinshipToString = options.associateWith { stringResource(id = it.resId) }
 
     ExposedDropdownMenuBox(
         modifier = Modifier,
@@ -47,11 +50,11 @@ fun SelectKinship(
             options.forEach { selectionOption ->
                 DropdownMenuItem(
                     modifier = Modifier,
-                    text = { Text(stringResource(id = selectionOption.resId)) },
+                    text = { Text(kinshipToString[selectionOption]!!) },
                     onClick = {
-                        selectedOptionText = selectionOption
+                        selectedOption = selectionOption
                         expanded = false
-                        updateKinship(Kinship.valueOf(selectionOption.name))
+                        updateKinship(selectedOption)
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                 )

@@ -24,7 +24,10 @@ fun SelectEthnicity(
 ){
     val options = Ethnicity.values().toList()
     var expanded by remember { mutableStateOf(false) }
-    var selectedOptionText by remember { mutableStateOf(options[0]) }
+    var selectedOption by remember { mutableStateOf(options[0]) }
+
+    // Cria um mapa de Ethnicity para String
+    val ethnicityToString = options.associateWith { stringResource(id = it.resId) }
 
     ExposedDropdownMenuBox(
         modifier = Modifier,
@@ -47,11 +50,11 @@ fun SelectEthnicity(
             options.forEach { selectionOption ->
                 DropdownMenuItem(
                     modifier = Modifier,
-                    text = { Text(stringResource(id = selectionOption.resId)) },
+                    text = { Text(ethnicityToString[selectionOption]!!) },
                     onClick = {
-                        selectedOptionText = selectionOption
+                        selectedOption = selectionOption
                         expanded = false
-                        updateEthnicity(Ethnicity.valueOf(selectionOption.name))
+                        updateEthnicity(selectionOption)
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                 )
