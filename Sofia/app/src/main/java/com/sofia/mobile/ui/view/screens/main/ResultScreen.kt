@@ -7,9 +7,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 
 @Composable
-fun CheckListResultScreen(navController: NavController, accuracy: Int, result: Int){
+fun CheckListResultScreen(navController: NavController, accuracy: String, result: Int){
     Column {
-        Text(text = "Acuracia: " + stringResource(id = accuracy))
+        Text(text = "Acuracia: $accuracy %")
         Text(text = "Resultado: " + stringResource(id = result))
     }
 }

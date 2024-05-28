@@ -19,19 +19,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
-import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
 @Composable
 fun OutlinedRadioButton(
+    modifier: Modifier = Modifier
+        .width(264.dp),
     label: String,
     options: List<Int>,
     state: State<Int?>,
     onOptionSelected: (Int) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .width(264.dp)
+        modifier = modifier
             .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.Center

@@ -11,17 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun FloatCard(
+    modifier: Modifier = Modifier
+        .padding(8.dp)
+        .fillMaxWidth(0.9f),
     content: @Composable () -> Unit
 ){
     ElevatedCard(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(0.9f),
-        shape = RoundedCornerShape(10.dp)
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp)
     ) {
         Column(
             modifier = Modifier

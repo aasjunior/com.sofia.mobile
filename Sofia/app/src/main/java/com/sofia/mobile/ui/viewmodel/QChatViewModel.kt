@@ -15,9 +15,11 @@ class QChatViewModel(private val patientId: String): ViewModel() {
 
     private val _response = MutableStateFlow<QChatResponse?>(null)
     private val _qchatState = MutableStateFlow(QChatState())
+    private val _errorMessage = MutableStateFlow<String?>(null)
 
     val response: StateFlow<QChatResponse?> by ::_response
     val qChatState: StateFlow<QChatState> by ::_qchatState
+    val errorMessage: StateFlow<String?> by ::_errorMessage
 
     fun update(question: String, answer: Boolean) {
         val currentQuestions = _qchatState.value.questions.value.toMutableMap()
@@ -25,15 +27,17 @@ class QChatViewModel(private val patientId: String): ViewModel() {
         _qchatState.value = QChatState(MutableStateFlow(currentQuestions))
     }
 
-    suspend fun submit(){
-        try{
+    suspend fun submit(): String{
+        return try{
             val request = _qchatState.value.toRequest(this.patientId)
 
             this._response.value = repository.submit(request)
             Log.i("QChat Response", "${_response.value}")
+            "success"
         }catch(e: Exception){
             e.printStackTrace()
             Log.i("Error submit()", "${e.message}")
+            "${e.message}"
         }
     }
 
