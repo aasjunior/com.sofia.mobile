@@ -147,6 +147,7 @@
     <string name="qchat_A9">Does your child use simple gestures?\n\n(ex. wave goodbye)</string>
     <string name="qchat_A10">Does your child stare at nothing with no apparent purpose?</string>
     <string name="qchat_empty">Select an answer!</string>
+    <string name="qchat_numerate">Question %s</string>
 
     <!-- Mapped Enums -->
     <string name="gender_female">Girl</string>

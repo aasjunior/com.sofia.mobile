@@ -136,6 +136,7 @@
     <string name="qchat_A9">Seu filho usa gestos simples?\n\n(ex.: acenar adeus)</string>
     <string name="qchat_A10">Seu filho olha para o nada sem um propósito aparente? </string>
     <string name="qchat_empty">Selecione uma resposta!</string>
+    <string name="qchat_numerate">Questão %s</string>
 
     <!-- Mapped Enums -->
     <string name="gender_female">Menina</string>

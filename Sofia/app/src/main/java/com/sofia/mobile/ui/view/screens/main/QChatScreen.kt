@@ -23,13 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
-import com.sofia.mobile.ui.theme.SofiaColorScheme
+import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
 import kotlinx.coroutines.launch
 
@@ -71,15 +72,27 @@ fun QChatScreen(
     ){
         Text(
             text = stringResource(id = R.string.qchat_title),
-            style = SofiaTextStyles.h1.copy(color = SofiaColorScheme.BrillantPurple)
+            style = SofiaTextStyles.h1.copy(color = BrillantPurple)
         )
 
         FloatCard(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 12.dp)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 12.dp),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Text(
+                    text = stringResource(id = R.string.qchat_numerate, currentQuestionIndex + 1),
+                    style = h3.copy(BrillantPurple)
+                )
+            }
             OutlinedRadioButton(
                 label = stringResource(id = currentQuestionLabel),
                 options = options,
@@ -102,7 +115,7 @@ fun QChatScreen(
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(0.9f)
                 .padding(12.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
