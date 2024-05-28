@@ -47,10 +47,7 @@ fun QChatScreen(
     val btnSubmitText = stringResource(id = R.string.btn_submit)
 
     val questions = mappedQuestions()
-
-    // Mantenha um estado para a pergunta atual
     var currentQuestionIndex by remember { mutableStateOf(0) }
-
     val currentQuestion = questions.keys.elementAt(currentQuestionIndex)
     val currentQuestionLabel = questions[currentQuestion]!!
     val answer = qchatState.value.questions.value[currentQuestion]

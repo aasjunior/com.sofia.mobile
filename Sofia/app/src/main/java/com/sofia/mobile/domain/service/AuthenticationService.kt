@@ -21,9 +21,11 @@ class AuthenticationService(
             )
 
             if(response.isSuccessful){
+                Log.i("Response.isSuccessful", "$response")
                 response.body()?.let { loginResponse ->
                     securePreferences.saveAccessToken(loginResponse.accessToken)
                     securePreferences.saveRefreshToken(loginResponse.refreshToken)
+                    Log.i("Refresh Token", loginResponse.refreshToken)
                     LoginState.Success(loginResponse.accessToken)
                 } ?: run {
                     Log.e("AuthenticationService", "Tokens are null")
@@ -43,13 +45,14 @@ class AuthenticationService(
     suspend fun refresh(): LoginState{
         val refreshToken = runBlocking { securePreferences.refreshToken.first() }
         Log.e("AuthenticationService", "Refresh called with refreshToken $refreshToken")
-        if (refreshToken != null) {
+        if(refreshToken != null) {
             return try{
                 val response = apiClient.refresh(
                     RefreshRequest(refreshToken)
                 )
                 Log.e("AuthenticationService", "Called apiClient.refresh, response is $response")
                 if(response.isSuccessful){
+                    Log.i("Response.isSuccessful", "$response")
                     Log.e("AuthenticationService", "Refresh result: ${response.body()?.accessToken}")
                     response.body()?.accessToken.let { newAccessToken ->
                         if(newAccessToken != null){
@@ -66,9 +69,11 @@ class AuthenticationService(
                     LoginState.Error(errorBody ?: "Unknown error")
                 }
             }catch(e: Exception){
+                Log.e("AuthenticationService", "Exception during refresh: $e")
                 Log.e("AuthenticationService", e.message ?: "Unknown error")
                 LoginState.Error(e.message ?: "Unknown error")
             }
+
         } else {
             Log.e("AuthenticationService", "Refresh token is null")
             return LoginState.Error("Refresh token is null")

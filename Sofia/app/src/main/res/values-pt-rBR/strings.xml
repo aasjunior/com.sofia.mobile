@@ -155,4 +155,8 @@
     <string name="kinship_uncle">Tio</string>
     <string name="kinship_grandmother">Avó</string>
     <string name="kinship_grandfather">Avô</string>
+
+    <!-- Resultado -->
+    <string name="result_positive">Positivo</string>
+    <string name="result_negative">Negativo</string>
 </resources>

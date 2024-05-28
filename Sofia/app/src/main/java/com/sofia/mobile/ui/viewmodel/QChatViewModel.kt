@@ -2,6 +2,7 @@ package com.sofia.mobile.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.sofia.mobile.R
 import com.sofia.mobile.config.retrofit.ApiClient
 import com.sofia.mobile.domain.model.qchat.QChatResponse
 import com.sofia.mobile.domain.model.qchat.QChatState
@@ -40,7 +41,7 @@ class QChatViewModel(private val patientId: String): ViewModel() {
         return "${(_response.value!!.accuracy * 100).toInt()}"
     }
 
-    fun getResult(): String{
-        return if(_response.value!!.result) "Positivo" else "Negativo"
+    fun getResult(): Int{
+        return if(_response.value!!.result) R.string.result_positive else R.string.result_negative
     }
 }

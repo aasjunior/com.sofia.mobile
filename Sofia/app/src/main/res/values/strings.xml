@@ -166,4 +166,8 @@
     <string name="kinship_uncle">Uncle</string>
     <string name="kinship_grandmother">Grandmother</string>
     <string name="kinship_grandfather">Grandfather</string>
+
+    <!-- Result -->
+    <string name="result_positive">Positive</string>
+    <string name="result_negative">Negative</string>
 </resources>

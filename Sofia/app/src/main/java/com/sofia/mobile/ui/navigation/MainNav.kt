@@ -72,12 +72,12 @@ fun NavGraphBuilder.mainGraph(
         composable(
             route = "${MainNavOptions.CheckListResultScreen.name}/{accuracy}/{result}",
             arguments = listOf(
-                navArgument("accuracy") { type = NavType.StringType },
-                navArgument("result") { type = NavType.StringType}
+                navArgument("accuracy") { type = NavType.IntType },
+                navArgument("result") { type = NavType.IntType}
             )
         ){ backStackEntry ->
-            val accuracy = backStackEntry.arguments?.getString("accuracy")
-            val result = backStackEntry.arguments?.getString("result")
+            val accuracy = backStackEntry.arguments?.getInt("accuracy")
+            val result = backStackEntry.arguments?.getInt("result")
 
             BaseContent(navHostController, drawerState) {
                 CheckListResultScreen(navHostController, accuracy!!, result!!)

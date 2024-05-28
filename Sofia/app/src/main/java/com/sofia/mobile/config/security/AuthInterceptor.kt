@@ -24,6 +24,12 @@ class AuthInterceptor(
                 .build()
             val response = chain.proceed(newRequest)
             if(response.code == 401 || response.code == 403){
+                runBlocking {
+                    val refreshToken = securePreferences.refreshToken.first()
+                    val accessToken = securePreferences.accessToken.first()
+                    Log.e("SecurePreferences RefreshToken", "$refreshToken")
+                    Log.e("SecurePreferences AccessToken", "$accessToken")
+                }
                 Log.e("AuthInterceptor", "${response.code}")
                 val refreshResponse = runBlocking { authService.refresh() }
                 if(refreshResponse is LoginState.Success){
