@@ -131,6 +131,9 @@
     <string name="checklist_title">Select Patient</string>
 
     <!-- QChat Screen -->
+    <string name="qchat_stage1">Stage 1</string>
+    <string name="qchat_stage2">Stage 2</string>
+    <string name="qchat_stage3">Final</string>
     <string name="qchat_title" translatable="false">Q-Chat 10</string>
     <string name="qchat_A1">Does your child look at you when you call his/her name?</string>
     <string name="qchat_A2">How easy is it for you to get eye contact with your child?  </string>
@@ -143,4 +146,23 @@
     <string name="qchat_A9">Does your child use simple gestures? (e.g. wave goodbye)</string>
     <string name="qchat_A10">Does your child stare at nothing with no apparent purpose?</string>
 
+    <!-- Mapped Enums -->
+    <string name="gender_female">Girl</string>
+    <string name="gender_male">Boy</string>
+
+    <string name="ethnicity_white">White</string>
+    <string name="ethnicity_black">Black</string>
+    <string name="ethnicity_brown">Brown</string>
+    <string name="ethnicity_indigenous">Indigenous</string>
+    <string name="ethnicity_yellow">Yellow</string>
+    <string name="ethnicity_other">Other</string>
+
+    <string name="kinship_mother">Mother</string>
+    <string name="kinship_father">Father</string>
+    <string name="kinship_sister">Sister</string>
+    <string name="kinship_brother">Brother</string>
+    <string name="kinship_aunt">Aunt</string>
+    <string name="kinship_uncle">Uncle</string>
+    <string name="kinship_grandmother">Grandmother</string>
+    <string name="kinship_grandfather">Grandfather</string>
 </resources>

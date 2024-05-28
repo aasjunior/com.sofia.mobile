@@ -32,13 +32,10 @@ import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text2
 
 @Composable
-fun FormProgress(currentStep: Int) {
-
-    val labels = listOf(
-        stringResource(id = R.string.patient_form_step_01),
-        stringResource(id = R.string.patient_form_step_02),
-        stringResource(id = R.string.patient_form_step_03)
-    )
+fun FormProgress(
+    currentStep: Int,
+    labels: List<Int>
+) {
 
     ElevatedCard(
         modifier = Modifier
@@ -79,7 +76,7 @@ fun FormProgress(currentStep: Int) {
 @Composable
 private fun FormProgressStep(
     step: Int,
-    labels: List<String>,
+    labels: List<Int>,
     icons: List<Int>
 ) {
     Row(
@@ -107,7 +104,7 @@ private fun FormProgressStep(
                         )
                     }
                     Text(
-                        text = label,
+                        text = stringResource(id = label),
                         style = legend1.copy(Gray1)
                     )
                 }
@@ -128,5 +125,10 @@ private fun FormProgressStep(
 @Preview
 @Composable
 private fun FormProgressPreview(){
-    FormProgress(2)
+    val labels = listOf(
+        R.string.patient_form_step_01,
+        R.string.patient_form_step_02,
+        R.string.patient_form_step_03
+    )
+    FormProgress(2, labels)
 }

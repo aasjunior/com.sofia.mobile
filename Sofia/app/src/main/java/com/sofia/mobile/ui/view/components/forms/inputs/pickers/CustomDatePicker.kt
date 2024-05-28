@@ -1,7 +1,11 @@
 package com.sofia.mobile.ui.view.components.forms.inputs.pickers
 
+import androidx.compose.foundation.background
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
@@ -18,6 +22,8 @@ import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
+import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.CustomTextField
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 import java.text.SimpleDateFormat
@@ -70,7 +76,9 @@ fun CustomDatePicker(pvm: PatientViewModel) {
                                     )
                             }
                         showDatePickerDialog = false
-                    }) {
+                    },
+                    colors = ButtonDefaults.buttonColors(BrillantPurple)
+                ) {
                     Text(text = "Selecionar data")
                 }
             }) {

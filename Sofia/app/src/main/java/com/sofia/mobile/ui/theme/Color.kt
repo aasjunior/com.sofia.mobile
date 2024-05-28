@@ -11,7 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 object SofiaColorScheme{
-    val BrillantPurple = Color(0xFF5E17EB)
+    val BrillantPurple = Color(0xFF4D16BA) //0xFF5E17EB
     val SoftPurple = Color(0xFF9668F2)
     val PinkOfStar = Color(0xFFFF6CC6)
     val SoftPinkOfStar = Color(0xFFFFC0E3)

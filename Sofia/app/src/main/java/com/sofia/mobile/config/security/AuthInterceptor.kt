@@ -29,7 +29,10 @@ class AuthInterceptor(
                 if(refreshResponse is LoginState.Success){
                     val refreshedToken = refreshResponse.token
                     Log.e("RefreshToken", refreshedToken)
-                    runBlocking { securePreferences.saveAccessToken(refreshedToken) }
+                    runBlocking {
+                        securePreferences.clearTokens()
+                        securePreferences.saveAccessToken(refreshedToken)
+                    }
                     val newRequestWithRefreshedToken = originalRequest
                         .newBuilder()
                         .header("Authorization", "Bearer $refreshedToken")

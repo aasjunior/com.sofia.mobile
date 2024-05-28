@@ -20,7 +20,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import com.sofia.mobile.R
-import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
+import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
@@ -79,10 +79,10 @@ fun CustomTextField(
                     PasswordVisualTransformation()
                 else visualTransformation,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = SoftPurple,
-                unfocusedBorderColor = SoftPurple,
-                unfocusedTextColor = SoftPurple,
-                focusedLabelColor = SoftPurple
+                focusedBorderColor = BrillantPurple,
+                unfocusedBorderColor = BrillantPurple,
+                unfocusedTextColor = BrillantPurple,
+                focusedLabelColor = BrillantPurple
             ),
             trailingIcon = {
                 if(isPassword){
@@ -94,9 +94,10 @@ fun CustomTextField(
                         Icon(
                             painter =
                             if(passwordVisibility)
-                                painterResource(id = R.drawable.ic_eye_off)
-                            else painterResource(id = R.drawable.ic_eye),
-                            contentDescription = "Toggle password visibility"
+                                painterResource(id = R.drawable.ic_eye)
+                            else painterResource(id = R.drawable.ic_eye_off),
+                            contentDescription = "Toggle password visibility",
+                            tint = BrillantPurple
                         )
                     }
                 }

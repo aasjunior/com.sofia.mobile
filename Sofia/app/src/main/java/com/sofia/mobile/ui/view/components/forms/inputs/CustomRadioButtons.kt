@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
+import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
 @Composable
@@ -57,7 +58,8 @@ fun OutlinedRadioButton(
                 ) {
                     RadioButton(
                         selected = state.value == index,
-                        onClick = null // null because we're handling onClick above
+                        onClick = null, // null because we're handling onClick above
+                       // colors = RadioButtonDefaults.colors(BrillantPurple)
                     )
                     Text(
                         text = stringResource(id = option),

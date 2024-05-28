@@ -19,10 +19,10 @@ import com.sofia.mobile.ui.view.components.forms.inputs.textfields.CustomTextFie
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectEthnicity(
-    ethnicity: Ethnicity,
+    ethnicity: Ethnicity?,
     updateEthnicity: (Ethnicity) -> Unit
 ){
-    val options = Ethnicity.values().map { it.name }
+    val options = Ethnicity.values().toList()
     var expanded by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf(options[0]) }
 
@@ -36,7 +36,7 @@ fun SelectEthnicity(
             modifier = Modifier.menuAnchor(),
             readOnly = true,
             label = stringResource(id = R.string.patient_form_ethnicity),
-            value = ethnicity.toString(),
+            value = if(ethnicity != null) stringResource(id = ethnicity.resId) else "",
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
         )
         ExposedDropdownMenu(
@@ -47,11 +47,11 @@ fun SelectEthnicity(
             options.forEach { selectionOption ->
                 DropdownMenuItem(
                     modifier = Modifier,
-                    text = { Text(selectionOption) },
+                    text = { Text(stringResource(id = selectionOption.resId)) },
                     onClick = {
                         selectedOptionText = selectionOption
                         expanded = false
-                        updateEthnicity(Ethnicity.valueOf(selectionOption))
+                        updateEthnicity(Ethnicity.valueOf(selectionOption.name))
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                 )

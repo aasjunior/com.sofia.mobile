@@ -17,6 +17,7 @@ import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.cards.FloatLazyCard
+import com.sofia.mobile.ui.view.components.forms.FormProgress
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
@@ -37,12 +38,19 @@ fun QChatScreen(
         R.string.form_no
     )
 
+    val labels = listOf(
+        R.string.qchat_stage1,
+        R.string.qchat_stage2,
+        R.string.qchat_stage3,
+    )
+
     val questions = mappedQuestions()
 
     Text(
         text = stringResource(id = R.string.qchat_title),
         style = SofiaTextStyles.h3.copy(color = SofiaColorScheme.BrillantPurple)
     )
+    FormProgress(currentStep = 1, labels = labels)
     FloatLazyCard {
         for ((id, question) in questions) {
             val answer = qchatState.value.questions.value[id]

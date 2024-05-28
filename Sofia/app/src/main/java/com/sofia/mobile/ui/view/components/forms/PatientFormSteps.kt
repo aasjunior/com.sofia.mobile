@@ -9,13 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.R
-import com.sofia.mobile.domain.common.enums.Ethnicity
 import com.sofia.mobile.domain.common.enums.Kinship
 import com.sofia.mobile.domain.model.guardian.GuardianState
 import com.sofia.mobile.domain.model.patient.PatientState
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
-import com.sofia.mobile.ui.view.components.forms.inputs.combobox.SelectBox
+import com.sofia.mobile.ui.view.components.forms.inputs.combobox.SelectEthnicity
 import com.sofia.mobile.ui.view.components.forms.inputs.combobox.SelectGender
 import com.sofia.mobile.ui.view.components.forms.inputs.combobox.SelectKinship
 import com.sofia.mobile.ui.view.components.forms.inputs.pickers.CustomDatePicker
@@ -66,12 +65,10 @@ fun FormInfo(
 
        CustomDatePicker(pvm = pvm)
 
-        SelectBox(
-            selectedValue = ethnicity,
-            updateValue = pvm.patientState.value::updateEthnicity,
-            labelId = R.string.patient_form_ethnicity,
-            enumClass = Ethnicity::class
-        )
+       SelectEthnicity(
+           ethnicity = ethnicity,
+           updateEthnicity = pvm.patientState.value::updateEthnicity
+       )
 
        Spacer(modifier = Modifier.height(10.dp))
     }

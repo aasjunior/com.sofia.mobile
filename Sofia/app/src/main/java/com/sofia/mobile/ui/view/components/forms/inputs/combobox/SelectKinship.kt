@@ -22,7 +22,7 @@ fun SelectKinship(
     kinship: Kinship?,
     updateKinship: (Kinship) -> Unit
 ){
-    val options = Kinship.values().map { it.name }
+    val options = Kinship.values().toList()
     var expanded by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf(options[0]) }
 
@@ -36,7 +36,7 @@ fun SelectKinship(
             modifier = Modifier.menuAnchor(),
             readOnly = true,
             label = stringResource(id = R.string.patient_form_kinship),
-            value = kinship.toString(),
+            value = if(kinship != null) stringResource(id = kinship.resId) else "",
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
         )
         ExposedDropdownMenu(
@@ -47,11 +47,11 @@ fun SelectKinship(
             options.forEach { selectionOption ->
                 DropdownMenuItem(
                     modifier = Modifier,
-                    text = { Text(selectionOption) },
+                    text = { Text(stringResource(id = selectionOption.resId)) },
                     onClick = {
                         selectedOptionText = selectionOption
                         expanded = false
-                        updateKinship(Kinship.valueOf(selectionOption))
+                        updateKinship(Kinship.valueOf(selectionOption.name))
                     },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
                 )

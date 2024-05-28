@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,13 +16,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
+import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
-import com.sofia.mobile.ui.theme.SofiaColorScheme.Gray3
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
+import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
@@ -43,6 +43,12 @@ fun PatientForm(
     val btnNextText = stringResource(id = R.string.btn_next)
     val btnBackText = stringResource(id = R.string.btn_back)
     val btnSaveText = stringResource(id = R.string.btn_save)
+
+    val labels = listOf(
+        R.string.patient_form_step_01,
+        R.string.patient_form_step_02,
+        R.string.patient_form_step_03
+    )
 
     val alertMessageText = stringResource(id = R.string.alert_empty_field)
 
@@ -81,7 +87,7 @@ fun PatientForm(
             text = stringResource(id = textHeader),
             style = h3.copy(color = BrillantPurple)
         )
-        FormProgress(currentStep)
+        FormProgress(currentStep, labels)
 
         when(currentStep){
             0 -> FormInfo(
@@ -98,7 +104,9 @@ fun PatientForm(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             when(currentStep) {
@@ -156,68 +164,26 @@ fun PatientForm(
             }
         }
         if(showDialog) {
-            AlertDialog(
+            CustomAlertDialog(
                 onDismissRequest = { !showDialog },
-                title = { Text(stringResource(id = R.string.alert_title)) },
-                text = { Text(alertMessage) },
-                confirmButton = {
-                    Button(
-                        onClick = { showDialog = false },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = BrillantPurple,
-                            contentColor = Gray3
-                        )
-                    ) {
-                        Text("Ok")
-                    }
-                }
-            )
+                text = alertMessage
+            ) {
+                showDialog = false
+            }
         }
 
         if(showDialogSuccess){
-            AlertDialog(
+            CustomAlertDialog(
                 onDismissRequest = { !showDialog },
-                title = { Text(stringResource(id = R.string.alert_title)) },
-                text = { Text(stringResource(id = successMessage)) },
-                confirmButton = {
-                    Button(onClick = {
-                        navController.navigate(MainNavOptions.PatientListScreen.name)
-                        showDialog = false
-
-                    }) {
-                        Text("Ok")
+                text = stringResource(id = successMessage)
+            ) {
+                navController.navigate(MainNavOptions.PatientListScreen.name){
+                    popUpTo(MainNavOptions.PatientRegisterScreen.name){
+                        inclusive = true
                     }
                 }
-            )
-        }
-    }
-}
-
-@Composable
-private fun rememberScreenState() = remember {
-    mutableStateOf(ScreenState())
-}
-
-private data class ScreenState(
-    var currentStep: Int = 0,
-    var showDialog: Boolean = false,
-    var showDialogSuccess: Boolean = false,
-    var alertMessage: String = "",
-    var textHeader: Int = R.string.patient_form_title,
-    var successMessage: Int = R.string.alert_create_patient
-){
-    fun init(isEditMode: Boolean){
-        if (isEditMode) {
-            this.textHeader = if(this.currentStep == 2)
-                R.string.patient_edit_guardian
-            else
-                R.string.patient_edit_patient
-            this.successMessage = R.string.patient_edit_success
-        } else {
-            this.textHeader = if (this.currentStep == 2)
-                R.string.patient_form_title
-            else
-                R.string.patient_form_title_02
+                showDialog = false
+            }
         }
     }
 }

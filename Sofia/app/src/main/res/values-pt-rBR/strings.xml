@@ -121,6 +121,9 @@
     <string name="checklist_title">Selecione o Paciente</string>
 
     <!-- QChat Screen -->
+    <string name="qchat_stage1">Etapa 1</string>
+    <string name="qchat_stage2">Etapa 2</string>
+    <string name="qchat_stage3">Final</string>
     <string name="qchat_A1">Seu filho olha para você quando você chama o nome dele/dela?</string>
     <string name="qchat_A2">Quão fácil é para você obter contato visual com seu filho?</string>
     <string name="qchat_A3">Seu filho aponta para indicar que quer algo? (ex.: um brinquedo que está fora de alcance)</string>
@@ -132,4 +135,23 @@
     <string name="qchat_A9">Seu filho usa gestos simples? (ex.: acenar adeus)</string>
     <string name="qchat_A10">Seu filho olha para o nada sem um propósito aparente? </string>
 
+    <!-- Mapped Enums -->
+    <string name="gender_female">Menina</string>
+    <string name="gender_male">Menino</string>
+
+    <string name="ethnicity_white">Branca</string>
+    <string name="ethnicity_black">Preta</string>
+    <string name="ethnicity_brown">Parda</string>
+    <string name="ethnicity_indigenous">Indigena</string>
+    <string name="ethnicity_yellow">Amarela</string>
+    <string name="ethnicity_other">Outra</string>
+
+    <string name="kinship_mother">Mãe</string>
+    <string name="kinship_father">Pai</string>
+    <string name="kinship_sister">Irmã</string>
+    <string name="kinship_brother">Irmão</string>
+    <string name="kinship_aunt">Tia</string>
+    <string name="kinship_uncle">Tio</string>
+    <string name="kinship_grandmother">Avó</string>
+    <string name="kinship_grandfather">Avô</string>
 </resources>

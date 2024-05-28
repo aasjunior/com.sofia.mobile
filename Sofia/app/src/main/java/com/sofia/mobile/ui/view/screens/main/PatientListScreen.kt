@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHost
@@ -209,11 +208,10 @@ fun PatientListScreen(
                     onConfirm = {
                         plvm.deleteSelectedPatients(successMessageText)
                         showDialog.value = false
-                    },
-                    onDismiss = {
-                        showDialog.value = false
                     }
-                )
+                ) {
+                    showDialog.value = false
+                }
             }
 
         }

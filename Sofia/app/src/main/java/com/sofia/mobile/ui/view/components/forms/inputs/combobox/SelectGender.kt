@@ -9,15 +9,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sofia.mobile.domain.common.enums.Gender
-import com.sofia.mobile.ui.theme.SofiaColorScheme
+import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.viewmodel.PatientViewModel
 
@@ -32,17 +34,19 @@ fun SelectGender(
     Column(
         modifier = Modifier
             .width(264.dp)
-            .border(1.dp, SofiaColorScheme.BrillantPurple, RoundedCornerShape(12.dp))
+            .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = label,
-            style = SofiaTextStyles.text2.copy(color = SofiaColorScheme.BrillantPurple),
+            style = SofiaTextStyles.text2.copy(color = BrillantPurple),
         )
 
         Row(
-            modifier = Modifier.width(264.dp),
+            modifier = Modifier
+                .width(264.dp)
+                .padding(top = 5.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             options.forEach { option ->
@@ -61,11 +65,12 @@ fun SelectGender(
                 ) {
                     RadioButton(
                         selected = gender == option,
-                        onClick = null // null because we're handling onClick above
+                        onClick = null, // null because we're handling onClick above
+                        colors = RadioButtonDefaults.colors(BrillantPurple)
                     )
                     Text(
-                        text = option.name,
-                        style = SofiaTextStyles.legend1.copy(color = SofiaColorScheme.BrillantPurple),
+                        text = stringResource(id = option.resId),
+                        style = SofiaTextStyles.legend1.copy(color = BrillantPurple),
                         modifier = Modifier.padding(start = 4.dp)
                     )
                 }
