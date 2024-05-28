@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.view.contents.appdrawer
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
 import com.sofia.mobile.ui.view.screens.main.ButtonLogout
 import kotlinx.coroutines.launch
@@ -27,6 +29,7 @@ fun <T: Enum<T>> AppDrawerContent(
     menuItems: List<AppDrawerItemInfo<T>>,
     defaultPick: T,
     navHostController: NavHostController,
+    routeMain: MainNavOptions? = null,
     onClick: (String) -> Unit
 ){
     var currentPick by remember { mutableStateOf(defaultPick) }
@@ -45,7 +48,11 @@ fun <T: Enum<T>> AppDrawerContent(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     items(menuItems) { item ->
-                        AppDrawerItem(item = item){ navOption ->
+                        AppDrawerItem(
+                            item = item,
+                            navController = navHostController,
+                            routeMain = routeMain
+                        ){ navOption ->
                             if(currentPick == navOption){
                                 coroutineScope.launch {
                                     drawerState.close()

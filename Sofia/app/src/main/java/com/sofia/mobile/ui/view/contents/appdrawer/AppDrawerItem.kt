@@ -17,10 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 
 @Composable
 fun <T> AppDrawerItem(
     item: AppDrawerItemInfo<T>,
+    navController: NavController? = null,
+    routeMain: MainNavOptions? = null,
     onClick: (options: T) -> Unit
 ){
     Surface(
@@ -28,7 +32,13 @@ fun <T> AppDrawerItem(
         modifier = Modifier
             .width(200.dp)
             .padding(16.dp),
-        onClick = { onClick(item.drawerOption) },
+        onClick = {
+            if(routeMain != null){
+                navController!!.navigate(routeMain.name)
+            }
+            onClick(item.drawerOption)
+
+        },
         shape = RoundedCornerShape(50),
     ){
         Row(

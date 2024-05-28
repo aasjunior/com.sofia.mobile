@@ -53,7 +53,8 @@ fun MainCompose(
                             drawerState = drawerState,
                             menuItems = DrawerParams.drawerButtons,
                             defaultPick = MainNavOptions.HomeScreen,
-                            navHostController = navHostController
+                            navHostController = navHostController,
+                            routeMain = MainNavOptions.HomeScreen
                         ){ onUserPickedOption ->
                             navHostController.navigate(onUserPickedOption)
                         }
