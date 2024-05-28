@@ -18,6 +18,7 @@
     <string name="btn_next">Próximo</string>
     <string name="btn_back">Voltar</string>
     <string name="btn_save">Salvar</string>
+    <string name="btn_submit">Enviar</string>
     <string name="btn_register">Register</string>
     <string name="btn_new_consultation">Nova Consulta</string>
     <string name="btn_list_patient">Listar Pacientes</string>

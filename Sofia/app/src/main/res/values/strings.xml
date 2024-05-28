@@ -24,6 +24,7 @@
     <string name="btn_next">Next</string>
     <string name="btn_back">Back</string>
     <string name="btn_save">Save</string>
+    <string name="btn_submit">Submit</string>
     <string name="btn_register">Register</string>
     <string name="btn_new_consultation">New Consultation</string>
     <string name="btn_list_patient">List Patients</string>
