@@ -161,4 +161,6 @@
     <!-- Resultado -->
     <string name="result_positive">Positivo</string>
     <string name="result_negative">Negativo</string>
+    <string name="result_title">Processamento Concluído</string>
+    <string name="result_probability">de probabilidade</string>
 </resources>

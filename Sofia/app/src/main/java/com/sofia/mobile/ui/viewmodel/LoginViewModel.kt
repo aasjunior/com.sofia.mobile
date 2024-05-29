@@ -17,6 +17,12 @@ class LoginViewModel: ViewModel() {
     private val _loginState = MutableStateFlow<LoginState?>(null)
     val loginState: StateFlow<LoginState?> by ::_loginState
 
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> by ::_errorMessage
+
+    fun updateErrrorMessage(e: String){
+        this._errorMessage.value = e
+    }
     fun login(email: String, password: String){
         viewModelScope.launch {
             _loginState.value = LoginState.Loading

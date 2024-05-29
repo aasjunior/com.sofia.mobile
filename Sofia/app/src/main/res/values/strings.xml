@@ -172,4 +172,6 @@
     <!-- Result -->
     <string name="result_positive">Positive</string>
     <string name="result_negative">Negative</string>
+    <string name="result_title">Processing Completed</string>
+    <string name="result_probability">probability</string>
 </resources>

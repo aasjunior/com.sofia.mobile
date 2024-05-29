@@ -13,4 +13,7 @@ interface LoginService {
 
     @POST("/auth/refresh")
     suspend fun refresh(@Body request: RefreshRequest): Response<LoginResponse>
+
+    @POST("/auth/checkTokenValidity")
+    suspend fun checkTokenValidity(@Body request: RefreshRequest): Response<Boolean>
 }

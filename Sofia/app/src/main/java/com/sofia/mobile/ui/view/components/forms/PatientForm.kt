@@ -105,8 +105,8 @@ fun PatientForm(
 
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .fillMaxWidth(0.9f)
+                .padding(bottom = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             when(currentStep) {
