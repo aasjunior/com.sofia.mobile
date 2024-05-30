@@ -62,7 +62,7 @@ fun HomeScreen(
             StarButton(
                 text = stringResource(id = R.string.btn_register_patient),
                 onClick = { navController.navigate(MainNavOptions.PatientRegisterScreen.name) },
-                iconId = R.drawable.ic_star_laugh
+                iconId = R.drawable.ic_star_cute_btn
             )
         }
     }

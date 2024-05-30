@@ -3,6 +3,7 @@ package com.sofia.mobile.ui.view.components.buttons
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
@@ -28,15 +29,15 @@ fun StarButton(
     Surface(
         onClick = {onClick()},
         //shape = MaterialTheme.shapes.medium,
-        color = Color.Transparent,
-        modifier = Modifier.width(IntrinsicSize.Min)
+        color = Color.Transparent
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
                 modifier = Modifier
-                    .size(90.dp),
+                    .size(90.dp)
+                    .padding(5.dp),
                 painter = painterResource(id = iconId),
                 contentDescription = "Star Button Icon"
             )
