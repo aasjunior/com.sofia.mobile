@@ -20,7 +20,7 @@ object  SofiaTextStyles {
     val text1 = textRegular.copy(Gray1)
     val text2 = textSemibold.copy(Gray1)
     val text3 = text16.copy(Gray1)
-    val p = textRegular.copy(Black)
+    val phrase = text12.copy(Gray1)
     val link1 = link.copy(Gray1)
     val link2 = link.copy(SoftPurple)
     val copyright = text2.copy(color = BrillantPurple)

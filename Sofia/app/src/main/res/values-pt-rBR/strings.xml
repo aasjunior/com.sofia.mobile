@@ -159,8 +159,13 @@
     <string name="kinship_grandfather">Avô</string>
 
     <!-- Resultado -->
-    <string name="result_positive">Positivo</string>
-    <string name="result_negative">Negativo</string>
+    <string name="result_positive">Sinais de TEA detectados</string>
+    <string name="result_negative">Não há sinais de TEA</string>
+    <string name="result_positive_description">Após a análise, foi identificado que a pontuação no questionário %s a média que indica a possibilidade de apresentar TEA. Para mais informações, clique em ‘Ver todos os dados’.</string>
+    <string name="result_positive_description_em">ultrapassou</string>
+    <string name="result_negative_description">Após a análise, foi identificado que a pontuação no questionário %s ultrapassou a média que indica a possibilidade de apresentar TEA. Para mais informações, clique em ‘Ver todos os dados’.</string>
+    <string name="result_negative_description_em">não</string>
     <string name="result_title">Processamento Concluído</string>
     <string name="result_probability">de probabilidade</string>
+    <string name="result_view_all_data">Ver todos os dados</string>
 </resources>

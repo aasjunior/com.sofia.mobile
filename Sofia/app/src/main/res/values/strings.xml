@@ -170,8 +170,13 @@
     <string name="kinship_grandfather">Grandfather</string>
 
     <!-- Result -->
-    <string name="result_positive">Positive</string>
-    <string name="result_negative">Negative</string>
+    <string name="result_positive">Signs of ASD detected</string>
+    <string name="result_negative">No signs of \nASD</string>
+    <string name="result_positive_description">After analysis, it was identified that the score on the questionnaire %s the average that indicates the possibility of presenting ASD. For more information, click on \'View all data\'.</string>
+    <string name="result_positive_description_em">exceeded</string>
+    <string name="result_negative_description">After analysis, it was identified that the score on the questionnaire %s exceeded the average that indicates the possibility of presenting ASD. For more information, click on \'View all data\'.</string>
+    <string name="result_negative_description_em">did not</string>
     <string name="result_title">Processing Completed</string>
     <string name="result_probability">probability</string>
+    <string name="result_view_all_data">View all data</string>
 </resources>

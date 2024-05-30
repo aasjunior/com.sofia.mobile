@@ -70,17 +70,15 @@ fun NavGraphBuilder.mainGraph(
             }
         }
         composable(
-            route = "${MainNavOptions.CheckListResultScreen.name}/{accuracy}/{result}",
+            route = "${MainNavOptions.CheckListResultScreen.name}/{result}",
             arguments = listOf(
-                navArgument("accuracy") { type = NavType.StringType },
-                navArgument("result") { type = NavType.IntType}
+                navArgument("result") { type = NavType.BoolType}
             )
         ){ backStackEntry ->
-            val accuracy = backStackEntry.arguments?.getString("accuracy")
-            val result = backStackEntry.arguments?.getInt("result")
+            val result = backStackEntry.arguments?.getBoolean("result")
 
             BaseContent(navHostController, drawerState) {
-                CheckListResultScreen(navHostController, accuracy!!, result!!)
+                CheckListResultScreen(navHostController, result!!)
             }
         }
     }
