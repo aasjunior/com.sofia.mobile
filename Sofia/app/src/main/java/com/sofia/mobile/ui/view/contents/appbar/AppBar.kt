@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -78,7 +76,7 @@ fun AppBar(
             ){
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        imageVector = Icons.Filled.Email,
+                        painter = painterResource(id = R.drawable.ic_notification),
                         contentDescription = "SMS Navigation",
                         tint = BrillantPurple
                     )
@@ -105,6 +103,7 @@ private fun AppBarAction(appBarAction: AppBarAction){
 @Composable
 private fun DrawerIcon(drawerState: DrawerState){
     val coroutineScope = rememberCoroutineScope()
+    val menuIcon: Painter = painterResource(id = R.drawable.ic_menu)
     Column(
         modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center
@@ -115,7 +114,7 @@ private fun DrawerIcon(drawerState: DrawerState){
             }
         }) {
             Icon(
-                Icons.Rounded.Menu,
+                painter = menuIcon,
                 tint = BrillantPurple,
                 contentDescription = stringResource(id = R.string.drawer_menu_description)
             )

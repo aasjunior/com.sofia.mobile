@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.view.screens.intro
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,18 +16,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.sofia.mobile.R
+import com.sofia.mobile.config.Injector
+import com.sofia.mobile.config.retrofit.ApiClient
+import com.sofia.mobile.config.security.SecurePreferences
+import com.sofia.mobile.domain.model.login.RefreshRequest
+import com.sofia.mobile.domain.service.LoginService
 import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
-import com.sofia.mobile.ui.navigation.routes.MainNavOptions
+import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaColorScheme.Lilas
 import com.sofia.mobile.ui.view.components.Copyright
 import com.sofia.mobile.ui.view.components.Logo
+import com.sofia.mobile.ui.viewmodel.LoginViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navController: NavHostController,
+    loginViewModel: LoginViewModel
 ){
     val showSecondBox = remember {
         mutableStateOf(false)
@@ -44,9 +54,31 @@ fun SplashScreen(
     ){
         if(showSecondBox.value){
             SecondStage()
-            LaunchedEffect(Unit){
-                delay(2000)
-                navController.navigate(IntroNavOptions.LoginScreen.name)
+            LaunchedEffect(key1 = Unit) {
+                val securePreferences: SecurePreferences = Injector.provideSecurePreferences()
+                val loginService: LoginService = ApiClient.loginService
+                val accessToken = securePreferences.accessToken.first()
+                try {
+                    if(accessToken != null) {
+                        val response = loginService.checkTokenValidity(RefreshRequest(accessToken))
+                        if (response.isSuccessful && response.body() == false) {
+                            val refreshResponse = loginService.refresh(RefreshRequest(accessToken))
+                            if (refreshResponse.isSuccessful) {
+                                val refreshedToken = refreshResponse.body()?.accessToken
+                                securePreferences.clearTokens()
+                                securePreferences.saveAccessToken(refreshedToken!!)
+                            } else {
+
+                                navigateToLoginScreen(navController, securePreferences)
+                            }
+                        }
+                    } else {
+                        navigateToLoginScreen(navController, securePreferences)
+                    }
+                }catch(e: Exception){
+                    Log.i("Initialize", "$e")
+                    loginViewModel.updateErrrorMessage(e.message!!)
+                }
             }
         }else{
             FirstStage(
@@ -94,4 +126,13 @@ private object Style{
     val sizeSecondLogo = 256.dp
     val sizeSorridentStar = 180.dp
     val paddingBottom = 28.dp
+}
+
+private fun navigateToLoginScreen(navHostController: NavHostController, securePreferences: SecurePreferences){
+    runBlocking {
+        securePreferences.clearTokens()
+        navHostController.navigate(IntroNavOptions.LoginScreen.name){
+            popUpTo(NavRoutes.MainRoute.name)
+        }
+    }
 }

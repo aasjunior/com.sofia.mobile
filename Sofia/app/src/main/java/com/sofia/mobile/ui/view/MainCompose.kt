@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -8,7 +7,6 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,14 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.sofia.mobile.config.Injector
-import com.sofia.mobile.config.retrofit.ApiClient
-import com.sofia.mobile.config.security.SecurePreferences
-import com.sofia.mobile.domain.model.login.RefreshRequest
-import com.sofia.mobile.domain.service.LoginService
 import com.sofia.mobile.ui.navigation.introGraph
 import com.sofia.mobile.ui.navigation.mainGraph
-import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaTheme
@@ -38,8 +30,6 @@ import com.sofia.mobile.ui.view.contents.containers.LocalizedContent
 import com.sofia.mobile.ui.view.screens.intro.SplashScreen
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 @Composable
 fun MainCompose(
@@ -57,33 +47,6 @@ fun MainCompose(
 
     val errorMessage by loginViewModel.errorMessage.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
-
-    LaunchedEffect(key1 = Unit) {
-        val securePreferences: SecurePreferences = Injector.provideSecurePreferences()
-        val loginService: LoginService = ApiClient.loginService
-        val accessToken = securePreferences.accessToken.first()
-        try {
-            if(accessToken != null) {
-                val response = loginService.checkTokenValidity(RefreshRequest(accessToken))
-                if (response.isSuccessful && response.body() == false) {
-                    val refreshResponse = loginService.refresh(RefreshRequest(accessToken))
-                    if (refreshResponse.isSuccessful) {
-                        val refreshedToken = refreshResponse.body()?.accessToken
-                        securePreferences.clearTokens()
-                        securePreferences.saveAccessToken(refreshedToken!!)
-                    } else {
-
-                        navigateToLoginScreen(navHostController, securePreferences)
-                    }
-                }
-            } else {
-                navigateToLoginScreen(navHostController, securePreferences)
-            }
-        }catch(e: Exception){
-            Log.i("Initialize", "$e")
-            loginViewModel.updateErrrorMessage(e.message!!)
-        }
-    }
 
     SofiaTheme(darkTheme = false){
         Surface(
@@ -107,7 +70,7 @@ fun MainCompose(
                     val startDestination: MutableState<String> = mutableStateOf(NavRoutes.IntroRoute.name)
 
                     when(isLoggedIn.value){
-                        null -> SplashScreen(navHostController)
+                        null -> SplashScreen(navHostController, loginViewModel)
 
                         true -> startDestination.value = NavRoutes.MainRoute.name
 
@@ -145,14 +108,5 @@ fun MainCompose(
 private fun navigateToScreen(navHostController: NavHostController, screen: MainNavOptions){
     navHostController.navigate(screen.name){
         popUpTo(NavRoutes.MainRoute.name)
-    }
-}
-
-private fun navigateToLoginScreen(navHostController: NavHostController, securePreferences: SecurePreferences){
-    runBlocking {
-        securePreferences.clearTokens()
-        navHostController.navigate(IntroNavOptions.LoginScreen.name){
-            popUpTo(NavRoutes.MainRoute.name)
-        }
     }
 }

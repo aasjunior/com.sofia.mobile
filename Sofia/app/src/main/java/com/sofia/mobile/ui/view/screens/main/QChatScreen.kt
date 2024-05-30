@@ -29,8 +29,8 @@ import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
-import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text3
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
 import kotlinx.coroutines.launch
 
@@ -66,52 +66,55 @@ fun QChatScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 18.dp, bottom = 12.dp),
+            .padding(top = 25.dp, bottom = 15.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ){
-        Text(
-            text = stringResource(id = R.string.qchat_title),
-            style = SofiaTextStyles.h1.copy(color = BrillantPurple)
-        )
-
-        FloatCard(
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(horizontal = 12.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 12.dp),
-                horizontalArrangement = Arrangement.Start
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(15.dp)
             ){
                 Text(
-                    text = stringResource(id = R.string.qchat_numerate, currentQuestionIndex + 1),
-                    style = h3.copy(BrillantPurple)
+                    text = stringResource(id = R.string.qchat_title),
+                    style = h3.copy(color = BrillantPurple)
                 )
-            }
-            OutlinedRadioButton(
-                label = stringResource(id = currentQuestionLabel),
-                options = options,
-                state =  mutableStateOf(answerIndex),
-                onOptionSelected = { selected ->
-                    vm.update(currentQuestion, selected == 0)
+
+                FloatCard(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(horizontal = 12.dp)
+                ) {
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    OutlinedRadioButton(
+                        label = stringResource(id = currentQuestionLabel),
+                        options = options,
+                        state = mutableStateOf(answerIndex),
+                        onOptionSelected = { selected ->
+                            vm.update(currentQuestion, selected == 0)
+                        }
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "${currentQuestionIndex + 1}/${questions.size}",
+                            style = text3
+                        )
+                    }
+
                 }
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(text = "${currentQuestionIndex + 1}/${questions.size}")
             }
-
         }
         Row(
             modifier = Modifier
@@ -121,14 +124,16 @@ fun QChatScreen(
         ) {
             when {
                 currentQuestionIndex == 0 -> {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        CustomButton(text = btnNextText) {
-                            if(answer != null) currentQuestionIndex++
-                            else showDialog = true
+                    CustomOutlinedButton(text = btnBackText) {
+                        navController.navigate(MainNavOptions.CheckListScreen.name){
+                            popUpTo(MainNavOptions.QChatScreen.name){
+                                inclusive = true
+                            }
                         }
+                    }
+                    CustomButton(text = btnNextText) {
+                        if(answer != null) currentQuestionIndex++
+                        else showDialog = true
                     }
                 }
                 currentQuestionIndex > 0 -> {

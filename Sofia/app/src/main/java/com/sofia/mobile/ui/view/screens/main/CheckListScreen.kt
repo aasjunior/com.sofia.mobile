@@ -1,10 +1,10 @@
 package com.sofia.mobile.ui.view.screens.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -24,6 +24,11 @@ import com.sofia.mobile.ui.viewmodel.PatientListViewModel
 
 @Composable
 fun CheckListScreen(navController: NavController){
+
+    BackHandler {
+        navController.navigate(MainNavOptions.HomeScreen.name)
+    }
+
     Spacer(modifier = Modifier.height(12.dp))
 
     Column(

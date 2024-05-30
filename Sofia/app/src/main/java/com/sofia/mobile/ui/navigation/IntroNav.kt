@@ -21,7 +21,9 @@ fun NavGraphBuilder.introGraph(navHostController: NavHostController, rd: Relativ
         route = NavRoutes.IntroRoute.name
     ){
         composable(IntroNavOptions.SplashScreen.name){
-            SplashScreen(navController = navHostController)
+            val loginViewModel: LoginViewModel = viewModel()
+
+            SplashScreen(navController = navHostController, loginViewModel)
         }
         composable(IntroNavOptions.LoginScreen.name){
             val loginViewModel: LoginViewModel = viewModel()

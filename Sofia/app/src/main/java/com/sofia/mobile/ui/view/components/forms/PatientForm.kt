@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
-import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
