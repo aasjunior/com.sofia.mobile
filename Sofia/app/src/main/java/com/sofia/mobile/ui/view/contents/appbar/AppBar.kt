@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -38,25 +40,10 @@ fun AppBar(
     @StringRes title: Int? = null,
     appBarActions: List<AppBarAction>? = null
 ){
-    var text by remember { mutableStateOf("") }
-
     CenterAlignedTopAppBar(
-        modifier = Modifier.height(59.dp),
+        modifier = Modifier.height(60.dp),
         title = {
-            Row(
-                modifier = Modifier.fillMaxHeight(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                SearchableTopBar(
-                    isShowSearchField = true,
-                    currentSearchText = text,
-                    onSearchTextChanged = { text = it },
-                    onSearchDeactivated = { text = "" },
-                    onSearchDispatched = {}
-                ) {
-                    
-                }
-            }
+            AppSearchBar()
         },
         navigationIcon = {
             if(drawerState != null && navigationIcon == null)
@@ -90,10 +77,13 @@ fun AppBar(
 }
 @Composable
 private fun AppBarAction(appBarAction: AppBarAction){
-    IconButton(onClick = appBarAction.onClick) {
+    IconButton(
+        modifier = Modifier.size(24.dp),
+        onClick = appBarAction.onClick
+    ) {
         Icon(
             painter = painterResource(id = appBarAction.icon),
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.fillMaxSize(),
             tint = BrillantPurple,
             contentDescription = stringResource(id = appBarAction.description)
         )
@@ -114,10 +104,54 @@ private fun DrawerIcon(drawerState: DrawerState){
             }
         }) {
             Icon(
+                modifier = Modifier.size(24.dp),
                 painter = menuIcon,
                 tint = BrillantPurple,
                 contentDescription = stringResource(id = R.string.drawer_menu_description)
             )
+        }
+    }
+}
+
+@Composable
+private fun AppSearchBar(){
+    var text by remember { mutableStateOf("") }
+    var expand by remember { mutableStateOf(false) }
+
+    when(expand){
+        false -> {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ){
+                IconButton(onClick = { expand = true }) {
+                    Icon(
+                        modifier = Modifier.size(24.dp),
+                        painter = painterResource(id = R.drawable.ic_searchbar),
+                        tint = BrillantPurple,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+        true -> {
+            Row(
+                modifier = Modifier.fillMaxHeight(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                SearchTopBar(
+                    currentSearchText = text,
+                    onSearchTextChanged = { text = it },
+                    onSearchDeactivated = {
+                        if(text.isNotEmpty()) text = ""
+                        else expand = false
+                    },
+                    onSearchDispatched = {}
+                )
+            }
         }
     }
 }
