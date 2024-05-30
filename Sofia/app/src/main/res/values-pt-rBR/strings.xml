@@ -94,7 +94,12 @@
 
     <!-- Patient View Screen -->
     <string name="patient_title">Visualização do Paciente</string>
-    <string name="patient_info">Alguma informação</string>
+    <string name="patient_age">%d meses de idade</string>
+    <string name="patient_history">Histórico de Testes</string>
+    <string name="patient_empty_history">Nenhum teste registrado ainda</string>
+    <string name="patient_test_apply">Aplicar Novo Teste</string>
+    <string name="patient_test_apply_btn">Aplicar Teste</string>
+    <string name="patient_qchat_description">Esta é uma adaptação do protocolo original. Recomendado para crianças entre 18 e 24 meses de idade.</string>
 
     <!-- Patient Registration Screen -->
     <string name="patient_form_title">Cadastro de Paciente</string>
@@ -125,16 +130,16 @@
     <string name="qchat_stage1">Etapa 1</string>
     <string name="qchat_stage2">Etapa 2</string>
     <string name="qchat_stage3">Final</string>
-    <string name="qchat_A1">Seu filho olha para você quando você chama o nome dele/dela?</string>
-    <string name="qchat_A2">Quão fácil é para você obter contato visual com seu filho?</string>
-    <string name="qchat_A3">Seu filho aponta para indicar que quer algo?\n\n(ex.: um brinquedo que está fora de alcance)</string>
-    <string name="qchat_A4">Seu filho aponta para compartilhar interesse com você?\n\n(ex.: apontando para algo interessante)</string>
-    <string name="qchat_A5">Seu filho faz de conta?\n\n(ex.: cuidar de bonecas, falar em um telefone de brinquedo) </string>
-    <string name="qchat_A6">Seu filho segue onde você está olhando?</string>
-    <string name="qchat_A7">Se você ou outra pessoa da família estiver visivelmente chateada, seu filho mostra sinais de querer confortá-los?\n\n(ex.: acariciando o cabelo, abraçando) </string>
-    <string name="qchat_A8">Como você descreveria as primeiras palavras do seu filho? </string>
-    <string name="qchat_A9">Seu filho usa gestos simples?\n\n(ex.: acenar adeus)</string>
-    <string name="qchat_A10">Seu filho olha para o nada sem um propósito aparente? </string>
+    <string name="qchat_A1">A criança olha para você quando você chama pelo nome dela?</string>
+    <string name="qchat_A2">Você consegue obter contato visual com a criança?</string>
+    <string name="qchat_A3">A criança aponta para indicar que quer alguma coisa?\n\n(ex.: um brinquedo que está fora de alcance)</string>
+    <string name="qchat_A4">A criança aponta para compartilhar algo que chama a atenção dela?\n\n(ex.: apontar para um cenário interessante)</string>
+    <string name="qchat_A5">A criança “faz de conta”?\n\n(ex.: cuidar de bonecas, falar em um telefone de brinquedo) </string>
+    <string name="qchat_A6">A criança segue o seu olhar?</string>
+    <string name="qchat_A7">Se você ou alguém da sua família estiver visivelmente aborrecido, a criança mostra sinais de querer confortá-lo?\n\n(ex.: acariciando o cabelo, abraçando) </string>
+    <string name="qchat_A8">A criança já começou a falar?</string>
+    <string name="qchat_A9">A criança usa gestos simples?\n\n(ex.: acenar adeus)</string>
+    <string name="qchat_A10">A criança olha fixamente o para nada sem razão aparente? </string>
     <string name="qchat_empty">Selecione uma resposta!</string>
     <string name="qchat_numerate">Questão %s</string>
 
@@ -157,6 +162,9 @@
     <string name="kinship_uncle">Tio</string>
     <string name="kinship_grandmother">Avó</string>
     <string name="kinship_grandfather">Avô</string>
+
+    <string name="checklist_type_intervention">Q. de Interveção</string>
+    <string name="checklist_type_screening">Q. de Triagem</string>
 
     <!-- Resultado -->
     <string name="result_positive">Sinais de TEA detectados</string>

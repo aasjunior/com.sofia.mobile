@@ -36,18 +36,14 @@ class MainActivity : ComponentActivity(){
             val rd = RelativeDimensions(screenWidth)
             val loginViewModel: LoginViewModel = viewModel()
 
-            /*MainCompose(
+            MainCompose(
                 rd = rd,
                 loginViewModel = loginViewModel,
                 imagePickerViewModel = imgvm,
                 onPickImageClick = { launcher.launch("image/*") }
-            )*/
+            )
             //HomeScreen(navController = rememberNavController())
             //PatientListScreen(navController = rememberNavController())*/
-
-            BaseContent(navController = rememberNavController(), drawerState = rememberDrawerState(DrawerValue.Closed)) {
-                CheckListResultScreen(navController = rememberNavController(), result = true)
-            }
         }
     }
 }

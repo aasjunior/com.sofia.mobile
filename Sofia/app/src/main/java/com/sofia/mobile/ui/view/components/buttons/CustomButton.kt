@@ -20,7 +20,9 @@ import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text2
 @Composable
 fun CustomButton(
     text: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .width(154.dp)
+        .padding(16.dp),
     backgroundColor: Color = BrillantPurple,
     contentColor: Color = Gray3,
     onClick: () -> Unit
@@ -32,9 +34,7 @@ fun CustomButton(
             containerColor = backgroundColor,
             contentColor = contentColor
         ),
-        modifier = Modifier
-            .width(154.dp)
-            .padding(16.dp)
+        modifier = modifier
     ) {
         Text(
             text = text,

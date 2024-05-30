@@ -1,4 +1,4 @@
-package com.sofia.mobile.domain.model.qchat
+package com.sofia.mobile.domain.checklist.qchat
 
 data class QChatRequest(
     val patientId: String,

@@ -1,4 +1,4 @@
-package com.sofia.mobile.domain.model.qchat
+package com.sofia.mobile.domain.checklist.qchat
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

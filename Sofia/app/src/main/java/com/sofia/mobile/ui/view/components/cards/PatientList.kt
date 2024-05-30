@@ -40,7 +40,7 @@ import com.sofia.mobile.ui.viewmodel.PatientListViewModel
 fun PatientList(
     navController: NavController,
     patients: List<Patient>,
-    navRoute: MainNavOptions = MainNavOptions.PatientEditScreen
+    navRoute: MainNavOptions = MainNavOptions.PatientProfileScreen
 ){
     val grouped = patients.groupBy { it.firstName[0].uppercase()[0] }
     val listState = rememberLazyListState()

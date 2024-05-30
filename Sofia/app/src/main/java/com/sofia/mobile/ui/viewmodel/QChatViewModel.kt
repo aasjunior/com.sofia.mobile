@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.sofia.mobile.R
 import com.sofia.mobile.config.retrofit.ApiClient
-import com.sofia.mobile.domain.model.qchat.QChatResponse
-import com.sofia.mobile.domain.model.qchat.QChatState
-import com.sofia.mobile.domain.model.qchat.toRequest
+import com.sofia.mobile.domain.checklist.qchat.QChatResponse
+import com.sofia.mobile.domain.checklist.qchat.QChatState
+import com.sofia.mobile.domain.checklist.qchat.toRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

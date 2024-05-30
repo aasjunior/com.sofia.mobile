@@ -104,7 +104,12 @@
 
     <!-- Patient View Screen -->
     <string name="patient_title">Patient View</string>
-    <string name="patient_info">Some information</string>
+    <string name="patient_age">%d months old</string>
+    <string name="patient_history">Test History</string>
+    <string name="patient_empty_history">No test registered yet</string>
+    <string name="patient_test_apply">Apply New Test</string>
+    <string name="patient_test_apply_btn">Apply Test</string>
+    <string name="patient_qchat_description">This is an adaptation of the original protocol. Recommended for children between 18 and 24 months of age.</string>
 
     <!-- Patient Registration Screen -->
     <string name="patient_form_title">Patient Registration</string>
@@ -136,16 +141,16 @@
     <string name="qchat_stage2">Stage 2</string>
     <string name="qchat_stage3">Final</string>
     <string name="qchat_title" translatable="false">Q-Chat 10</string>
-    <string name="qchat_A1">Does your child look at you when you call his/her name?</string>
-    <string name="qchat_A2">How easy is it for you to get eye contact with your child?</string>
-    <string name="qchat_A3">Does your child point to indicate that she/he wants something?\n\n(ex. a toy that is out of reach)</string>
-    <string name="qchat_A4">Does your child point to share interest with you?\n\n(ex. pointing at an interesting sight)</string>
-    <string name="qchat_A5">Does your child pretend?\n\n(ex. care for dolls, talk on a toy phone)</string>
-    <string name="qchat_A6">Does your child follow where you\’re looking?</string>
-    <string name="qchat_A7">If you or someone else in the family is visibly upset, does your child show signs of wan9ng to comfort them?\n\n(ex. stroking hair, hugging them) </string>
-    <string name="qchat_A8">Would you describe your child\’s first words as: </string>
-    <string name="qchat_A9">Does your child use simple gestures?\n\n(ex. wave goodbye)</string>
-    <string name="qchat_A10">Does your child stare at nothing with no apparent purpose?</string>
+    <string name="qchat_A1">Does the child look at you when you call their name?</string>
+    <string name="qchat_A2">Can you make eye contact with the child?</string>
+    <string name="qchat_A3">Does the child point to indicate that they want something?\n\n(e.g.: a toy that is out of reach)</string>
+    <string name="qchat_A4">Does the child point to share something that catches their attention?\n\n(e.g.: pointing at an interesting scenery)</string>
+    <string name="qchat_A5">Does the child "pretend"?\n\n(e.g.: taking care of dolls, talking on a toy phone)</string>
+    <string name="qchat_A6">Does the child follow your gaze?</string>
+    <string name="qchat_A7">If you or someone in your family is visibly upset, does the child show signs of wanting to comfort them?\n\n(e.g.: stroking hair, hugging)</string>
+    <string name="qchat_A8">Has the child started speaking?</string>
+    <string name="qchat_A9">Does the child use simple gestures?\n\n(e.g.: waving goodbye)</string>
+    <string name="qchat_A10">Does the child stare at nothing for no apparent reason?</string>
     <string name="qchat_empty">Select an answer!</string>
     <string name="qchat_numerate">Question %s</string>
 
@@ -168,6 +173,9 @@
     <string name="kinship_uncle">Uncle</string>
     <string name="kinship_grandmother">Grandmother</string>
     <string name="kinship_grandfather">Grandfather</string>
+
+    <string name="checklist_type_intervention">Intervention Questionnaire</string>
+    <string name="checklist_type_screening">Screening Questionnaire</string>
 
     <!-- Result -->
     <string name="result_positive">Signs of ASD detected</string>
