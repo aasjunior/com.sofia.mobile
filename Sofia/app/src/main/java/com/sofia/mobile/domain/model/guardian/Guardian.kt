@@ -1,6 +1,7 @@
 package com.sofia.mobile.domain.model.guardian
 
 import com.sofia.mobile.domain.model.patientguardian.PatientGuardian
+import com.sofia.mobile.domain.model.patientguardian.toState
 
 data class Guardian(
     val id: String?,
@@ -15,4 +16,15 @@ data class Guardian(
     fun addPatient(patientGuardian: PatientGuardian){
         this.patients[patientGuardian.patientId!!] = patientGuardian
     }
+}
+
+fun Guardian.toState(): GuardianState {
+    val guardianState = GuardianState()
+    guardianState.updateId(this.id ?: "")
+    guardianState.updateFirstName(this.firstName)
+    guardianState.updateLastName(this.lastName)
+    guardianState.updatePhone(this.phone)
+    guardianState.updateEmail(this.email)
+    guardianState.updatePatientsList(this.patients.values.map { it.toState() })
+    return guardianState
 }

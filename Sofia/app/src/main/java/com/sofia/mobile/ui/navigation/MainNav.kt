@@ -70,7 +70,10 @@ fun NavGraphBuilder.mainGraph(
             val patientId = backStackEntry.arguments?.getString("patientId")
             BaseContent(navHostController, drawerState) {
                 PatientEditScreen(
-                    navHostController, patientId ?: ""
+                    navHostController,
+                    patientId ?: "",
+                    imagePickerViewModel,
+                    onPickImageClick
                 )
             }
         }

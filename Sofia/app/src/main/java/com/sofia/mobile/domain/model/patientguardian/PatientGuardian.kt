@@ -7,3 +7,12 @@ data class PatientGuardian(
     val guardianId: String?,
     val kinship: Kinship?
 )
+
+fun PatientGuardian.toState(): PatientGuardianState {
+    val patientGuardianState = PatientGuardianState()
+    patientGuardianState.updatePatientId(this.patientId ?: "")
+    patientGuardianState.updateGuardianId(this.guardianId ?: "")
+    patientGuardianState.updateKinship(this.kinship!!)
+    return patientGuardianState
+}
+
