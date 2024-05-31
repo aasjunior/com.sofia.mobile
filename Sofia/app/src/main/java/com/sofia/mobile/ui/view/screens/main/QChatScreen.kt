@@ -59,7 +59,6 @@ fun QChatScreen(
     val errorMessage by vm.errorMessage.collectAsState()
 
     val questions = mappedQuestions()
-    Log.i("Question", "${questions}")
     var currentQuestionIndex by remember { mutableStateOf(0) }
     val currentQuestion = questions.keys.elementAt(currentQuestionIndex)
     val currentQuestionLabel = currentQuestion.let { questions[it] } ?: return
