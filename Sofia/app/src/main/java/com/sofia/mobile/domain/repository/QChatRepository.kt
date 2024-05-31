@@ -8,7 +8,7 @@ import com.sofia.mobile.domain.service.QChatService
 import retrofit2.Response
 
 class QChatRepository(private val service: QChatService) {
-    suspend fun submit(request: QChatRequest): QChatResponse {
+    suspend fun submit(request: QChatRequest): TestResponse {
         return service.submitQChat(request)
     }
 

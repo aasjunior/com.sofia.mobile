@@ -1,8 +1,5 @@
 package com.sofia.mobile.ui.view.screens.main
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,29 +24,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.cards.ResultCard
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
-import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h2
-import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.phrase
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text3
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
 
 @Composable
-fun CheckListResultScreen(navController: NavController, result: Boolean){
+fun CheckListResultScreen(navController: NavController, testId: String, result: Boolean){
     Spacer(modifier = Modifier.height(16.dp))
 
     Box(modifier = Modifier.fillMaxSize()){
@@ -90,7 +81,7 @@ fun CheckListResultScreen(navController: NavController, result: Boolean){
             ResultCard(result)
             Spacer(modifier = Modifier.height(12.dp))
             ClickableLinkText(text = stringResource(id = R.string.result_view_all_data)){
-
+                navController.navigate("${MainNavOptions.ResultDetailsScreen.name}/$testId/$result")
             }
         }
 
@@ -101,7 +92,9 @@ fun CheckListResultScreen(navController: NavController, result: Boolean){
         ){
             CustomOutlinedButton(
                 text = stringResource(id = R.string.btn_back),
-                onClick = { /*TODO*/ }
+                onClick = {
+                    navController.navigate(MainNavOptions.CheckListScreen.name)
+                }
             )
         }
     }
@@ -113,6 +106,6 @@ fun PreviewCheckListResultScreen() {
     BaseContent(navController = rememberNavController(), drawerState = rememberDrawerState(
         DrawerValue.Closed)
     ) {
-        CheckListResultScreen(navController = rememberNavController(), result = false)
+        CheckListResultScreen(navController = rememberNavController(), testId = "", result = false)
     }
 }

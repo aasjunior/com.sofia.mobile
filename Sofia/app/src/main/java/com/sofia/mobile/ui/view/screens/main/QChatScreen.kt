@@ -1,6 +1,5 @@
 package com.sofia.mobile.ui.view.screens.main
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -157,7 +156,7 @@ fun QChatScreen(
                                         alertMessage = vm.submit()
                                         if(alertMessage == "success"){
                                             navController.navigate(
-                                                "${MainNavOptions.CheckListResultScreen.name}/${vm.response.value!!.result}"
+                                                "${MainNavOptions.CheckListResultScreen.name}/${vm.response.value!!.testId}/${vm.response.value!!.result}"
                                             )
                                         }else{
                                             showDialog = true

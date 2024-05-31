@@ -95,15 +95,17 @@ fun NavGraphBuilder.mainGraph(
             }
         }
         composable(
-            route = "${MainNavOptions.CheckListResultScreen.name}/{result}",
+            route = "${MainNavOptions.CheckListResultScreen.name}/{testId}/{result}",
             arguments = listOf(
+                navArgument("testId") { type = NavType.StringType},
                 navArgument("result") { type = NavType.BoolType}
             )
         ){ backStackEntry ->
+            val testId = backStackEntry.arguments?.getString("testId")
             val result = backStackEntry.arguments?.getBoolean("result")
 
             BaseContent(navHostController, drawerState) {
-                CheckListResultScreen(navHostController, result!!)
+                CheckListResultScreen(navHostController, testId ?: "", result!!)
             }
         }
         composable(

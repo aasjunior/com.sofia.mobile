@@ -2,9 +2,8 @@ package com.sofia.mobile.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.sofia.mobile.R
 import com.sofia.mobile.config.retrofit.ApiClient
-import com.sofia.mobile.domain.checklist.qchat.QChatResponse
+import com.sofia.mobile.domain.checklist.TestResponse
 import com.sofia.mobile.domain.checklist.qchat.QChatState
 import com.sofia.mobile.domain.checklist.qchat.toRequest
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,12 +12,12 @@ import kotlinx.coroutines.flow.StateFlow
 class QChatViewModel(private val patientId: String): ViewModel() {
     private val repository = ApiClient.qchatRepository
 
-    private val _response = MutableStateFlow<QChatResponse?>(null)
+    private val _response = MutableStateFlow<TestResponse?>(null)
     private val _qchatState = MutableStateFlow(QChatState())
     private val _qchatRequest = MutableStateFlow(QChatState())
     private val _errorMessage = MutableStateFlow<String?>(null)
 
-    val response: StateFlow<QChatResponse?> by ::_response
+    val response: StateFlow<TestResponse?> by ::_response
     val qChatState: StateFlow<QChatState> by ::_qchatState
     val errorMessage: StateFlow<String?> by ::_errorMessage
 
@@ -49,13 +48,5 @@ class QChatViewModel(private val patientId: String): ViewModel() {
             Log.i("Error submit()", "${e.message}")
             "${e.message}"
         }
-    }
-
-    fun getAccuracy(): String{
-        return "${(_response.value!!.accuracy * 100).toInt()}"
-    }
-
-    fun getResult(): Int{
-        return if(_response.value!!.result) R.string.result_positive else R.string.result_negative
     }
 }

@@ -1,8 +1,5 @@
 package com.sofia.mobile.ui.view.screens.main
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -35,8 +31,10 @@ import com.sofia.mobile.R
 import com.sofia.mobile.domain.checklist.qchat.QChat
 import com.sofia.mobile.domain.checklist.qchat.mappedQuestions
 import com.sofia.mobile.domain.model.patient.Patient
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
+import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.cards.ResultCard
 import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
@@ -90,6 +88,18 @@ fun ResultDetailsScreen(
                     item {
                         DetailsSection(patient, qchat)
                     }
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 25.dp),
+                            horizontalArrangement = Arrangement.Start
+                        ){
+                            CustomOutlinedButton(text = stringResource(id = R.string.btn_back)) {
+                                navController.navigate("${MainNavOptions.PatientProfileScreen.name}/${patient!!.id}")
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -101,7 +111,7 @@ private fun DetailsSection(
     patient: Patient?,
     qChat: QChat?
 ){
-    var cardView = remember { mutableStateOf(0) }
+    val cardView = remember { mutableStateOf(0) }
 
     Spacer(modifier = Modifier.height(20.dp))
     Row(
