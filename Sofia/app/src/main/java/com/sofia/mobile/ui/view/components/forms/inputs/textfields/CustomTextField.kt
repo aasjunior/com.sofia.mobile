@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
+import com.sofia.mobile.ui.theme.SofiaColorScheme.Gray1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
@@ -50,6 +52,8 @@ fun CustomTextField(
         mutableStateOf(false)
     }
 
+    val color = setColors(enabled)
+
     Column {
         OutlinedTextField(
             modifier = modifier.width(width),
@@ -58,7 +62,7 @@ fun CustomTextField(
             label = {
                 Text(
                     text = label,
-                    style = SofiaTextStyles.label
+                    style = SofiaTextStyles.label.copy(color)
                 )
             },
             enabled = enabled,
@@ -79,10 +83,11 @@ fun CustomTextField(
                     PasswordVisualTransformation()
                 else visualTransformation,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = BrillantPurple,
-                unfocusedBorderColor = BrillantPurple,
-                unfocusedTextColor = BrillantPurple,
-                focusedLabelColor = BrillantPurple
+                focusedBorderColor = color,
+                unfocusedBorderColor = color,
+                unfocusedTextColor = color,
+                focusedLabelColor = color,
+                disabledBorderColor = color
             ),
             trailingIcon = {
                 if(isPassword){
@@ -113,5 +118,12 @@ fun CustomTextField(
                 style = legend1
             )
         }
+    }
+}
+
+private fun setColors(enabled: Boolean): Color{
+    return when(enabled){
+        true -> BrillantPurple
+        false -> Gray1
     }
 }

@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.view.screens.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.domain.checklist.qchat.mappedQuestions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
@@ -57,9 +59,11 @@ fun QChatScreen(
     val errorMessage by vm.errorMessage.collectAsState()
 
     val questions = mappedQuestions()
+    Log.i("Question", "${questions}")
     var currentQuestionIndex by remember { mutableStateOf(0) }
     val currentQuestion = questions.keys.elementAt(currentQuestionIndex)
     val currentQuestionLabel = currentQuestion.let { questions[it] } ?: return
+
     val answer = qchatState.value.questions.value[currentQuestion]
     val answerIndex = if (answer == true) 0 else if (answer == false) 1 else null
 
@@ -90,9 +94,10 @@ fun QChatScreen(
                         .padding(horizontal = 12.dp)
                 ) {
                     Spacer(modifier = Modifier.height(15.dp))
+                    val labelText = stringResource(id = currentQuestionLabel)
 
                     OutlinedRadioButton(
-                        label = stringResource(id = currentQuestionLabel),
+                        label = labelText,
                         options = options,
                         state = mutableStateOf(answerIndex),
                         onOptionSelected = { selected ->
@@ -191,20 +196,4 @@ fun QChatScreen(
             showDialog = false
         }
     }
-}
-
-
-private fun mappedQuestions(): Map<String, Int>{
-    return mapOf(
-        "A1" to R.string.qchat_A1,
-        "A2" to R.string.qchat_A2,
-        "A3" to R.string.qchat_A3,
-        "A4" to R.string.qchat_A4,
-        "A5" to R.string.qchat_A5,
-        "A6" to R.string.qchat_A6,
-        "A7" to R.string.qchat_A7,
-        "A8" to R.string.qchat_A8,
-        "A9" to R.string.qchat_A9,
-        "A10" to R.string.qchat_A10,
-    )
 }

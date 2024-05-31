@@ -19,9 +19,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text3
@@ -36,15 +38,17 @@ fun OutlinedRadioButton(
     enabled: Boolean = true,
     onOptionSelected: (Int) -> Unit
 ) {
+    val color = setColors(enabled)
+
     Column(
         modifier = modifier
-            .border(1.dp, BrillantPurple, RoundedCornerShape(12.dp))
+            .border(1.dp, color, RoundedCornerShape(12.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = label,
-            style = text3.copy(color = BrillantPurple)
+            style = text3.copy(color = color)
         )
         Spacer(modifier = Modifier.height(15.dp))
         Row(
@@ -64,16 +68,16 @@ fun OutlinedRadioButton(
                 ) {
                     RadioButton(
                         selected = state.value == index,
-                        onClick = null, // null because we're handling onClick above
+                        onClick = null,
                         colors = RadioButtonDefaults.colors(
-                            selectedColor = BrillantPurple,
-                            unselectedColor = BrillantPurple
+                            selectedColor = color,
+                            unselectedColor = color
                         ),
                         enabled = enabled
                     )
                     Text(
                         text = stringResource(id = option),
-                        style = text1.copy(color = BrillantPurple),
+                        style = text1.copy(color = color),
                         modifier = Modifier.padding(start = 4.dp)
                     )
                 }
@@ -84,4 +88,11 @@ fun OutlinedRadioButton(
 
 fun State<Boolean?>.toIndex(): State<Int?> {
     return mutableStateOf(if (value == true) 0 else if (value == false) 1 else null)
+}
+
+private fun setColors(enabled: Boolean): Color {
+    return when(enabled){
+        true -> BrillantPurple
+        false -> SofiaColorScheme.Gray1
+    }
 }
