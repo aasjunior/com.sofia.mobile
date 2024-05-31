@@ -104,7 +104,7 @@ private fun Content(
                 )
             }
             item {
-                HistoryCard(test)
+                HistoryCard(navController, test)
             }
             item {
                 ApplyNewTestCard(navController, patient.id!!)
@@ -114,7 +114,10 @@ private fun Content(
 }
 
 @Composable
-private fun HistoryCard(test: TestResponse?){
+private fun HistoryCard(
+    navController: NavController,
+    test: TestResponse?
+){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -123,7 +126,6 @@ private fun HistoryCard(test: TestResponse?){
             text = stringResource(id = R.string.patient_history),
             style = h3.copy(color = BrillantPurple)
         )
-
 
         FloatCard {
             Column(
@@ -182,7 +184,7 @@ private fun HistoryCard(test: TestResponse?){
                     }
                     Spacer(modifier = Modifier.height(12.dp))
                     ClickableLinkText(text = stringResource(id = R.string.result_view_all_data)){
-
+                        navController.navigate("${MainNavOptions.ResultDetailsScreen.name}/${test.testId}/${test.result}")
                     }
                 }else{
                     Text(

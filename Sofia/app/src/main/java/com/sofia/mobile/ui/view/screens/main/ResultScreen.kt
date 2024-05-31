@@ -41,6 +41,7 @@ import com.sofia.mobile.R
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
+import com.sofia.mobile.ui.view.components.cards.ResultCard
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h2
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.phrase
@@ -49,22 +50,6 @@ import com.sofia.mobile.ui.view.contents.containers.BaseContent
 
 @Composable
 fun CheckListResultScreen(navController: NavController, result: Boolean){
-    val resources = if(result){
-        ResultResources(
-            R.string.result_positive,
-            R.string.result_negative_description,
-            R.string.result_negative_description_em,
-            R.drawable.ic_star_signs_asd
-        )
-    }else{
-        ResultResources(
-            R.string.result_negative,
-            R.string.result_negative_description,
-            R.string.result_negative_description_em,
-            R.drawable.ic_sorrident_star_elipse
-        )
-    }
-
     Spacer(modifier = Modifier.height(16.dp))
 
     Box(modifier = Modifier.fillMaxSize()){
@@ -102,40 +87,7 @@ fun CheckListResultScreen(navController: NavController, result: Boolean){
                 }
             }
             Spacer(modifier = Modifier.height(12.dp))
-            FloatCard {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(15.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ){
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        Image(
-                            modifier = Modifier.size(105.dp),
-                            painter = painterResource(id = resources.resultImageId),
-                            contentDescription = null
-                        )
-                        Column(
-                            horizontalAlignment = Alignment.Start,
-                            verticalArrangement = Arrangement.Center
-                        ){
-                            Text(
-                                text = stringResource(id = resources.resultTextId),
-                                style = h2
-                            )
-                        }
-                    }
-                    Row(modifier = Modifier.padding(top = 16.dp)){
-                        CustomTextDescription(resources)
-                    }
-                }
-            }
+            ResultCard(result)
             Spacer(modifier = Modifier.height(12.dp))
             ClickableLinkText(text = stringResource(id = R.string.result_view_all_data)){
 
@@ -154,34 +106,6 @@ fun CheckListResultScreen(navController: NavController, result: Boolean){
         }
     }
 }
-
-@Composable
-private fun CustomTextDescription(resources: ResultResources) {
-    val descriptionTemplate = stringResource(id = resources.resultDescriptionId)
-    val emText = stringResource(id = resources.resultDescriptionEmId)
-    val annotatedString = buildAnnotatedString {
-        val beforeEmText = descriptionTemplate.substringBefore("%s")
-        val afterEmText = descriptionTemplate.substringAfter("%s")
-
-        append(beforeEmText)
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append(emText)
-        }
-        append(afterEmText)
-    }
-
-    Text(
-        text = annotatedString,
-        style = phrase
-    )
-}
-
-private data class ResultResources(
-    @StringRes val resultTextId: Int,
-    @StringRes val resultDescriptionId: Int,
-    @StringRes val resultDescriptionEmId: Int,
-    @DrawableRes val resultImageId: Int,
-)
 
 @Preview
 @Composable

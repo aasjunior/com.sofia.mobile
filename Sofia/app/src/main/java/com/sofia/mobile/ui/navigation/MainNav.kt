@@ -19,6 +19,7 @@ import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 import com.sofia.mobile.ui.view.screens.main.PatientProfileScreen
 import com.sofia.mobile.ui.view.screens.main.PatientRegisterScreen
 import com.sofia.mobile.ui.view.screens.main.QChatScreen
+import com.sofia.mobile.ui.view.screens.main.ResultDetailsScreen
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 
 fun NavGraphBuilder.mainGraph(
@@ -103,6 +104,20 @@ fun NavGraphBuilder.mainGraph(
 
             BaseContent(navHostController, drawerState) {
                 CheckListResultScreen(navHostController, result!!)
+            }
+        }
+        composable(
+            route = "${MainNavOptions.ResultDetailsScreen.name}/{testId}/{result}",
+            arguments = listOf(
+                navArgument("testId"){ type = NavType.StringType },
+                navArgument("result"){ type = NavType.BoolType }
+            )
+        ){ backStackEntry ->
+            val testId = backStackEntry.arguments?.getString("testId")
+            val result = backStackEntry.arguments?.getBoolean("result")
+
+            BaseContent(navHostController, drawerState) {
+                ResultDetailsScreen(navHostController, testId!!, result!!)
             }
         }
     }

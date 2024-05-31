@@ -188,4 +188,8 @@
     <string name="result_title">Processing Completed</string>
     <string name="result_probability">probability</string>
     <string name="result_view_all_data">View all data</string>
+
+    <string name="result_details_title">Result</string>
+    <string name="result_details_profile">Profile</string>
+    <string name="result_details_responses">Responses</string>
 </resources>

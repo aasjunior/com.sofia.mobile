@@ -1,6 +1,7 @@
 package com.sofia.mobile.domain.service
 
 import com.sofia.mobile.domain.checklist.TestResponse
+import com.sofia.mobile.domain.checklist.qchat.QChat
 import com.sofia.mobile.domain.checklist.qchat.QChatRequest
 import com.sofia.mobile.domain.checklist.qchat.QChatResponse
 import retrofit2.Response
@@ -15,4 +16,7 @@ interface QChatService {
 
     @GET("/checklist/qchat/{patientId}")
     suspend fun getQChat(@Path("patientId") patientId: String): Response<TestResponse>
+
+    @GET("/checklist/qchat/responses/{testId}")
+    suspend fun getQChatResponses(@Path("testId") testId: String): Response<QChat>
 }

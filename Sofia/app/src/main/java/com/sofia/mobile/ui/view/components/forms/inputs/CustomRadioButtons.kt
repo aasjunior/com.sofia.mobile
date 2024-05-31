@@ -33,6 +33,7 @@ fun OutlinedRadioButton(
     label: String,
     options: List<Int>,
     state: State<Int?>,
+    enabled: Boolean = true,
     onOptionSelected: (Int) -> Unit
 ) {
     Column(
@@ -67,7 +68,8 @@ fun OutlinedRadioButton(
                         colors = RadioButtonDefaults.colors(
                             selectedColor = BrillantPurple,
                             unselectedColor = BrillantPurple
-                        )
+                        ),
+                        enabled = enabled
                     )
                     Text(
                         text = stringResource(id = option),

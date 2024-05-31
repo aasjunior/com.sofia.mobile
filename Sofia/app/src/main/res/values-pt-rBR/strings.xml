@@ -177,4 +177,8 @@
     <string name="result_title">Processamento Concluído</string>
     <string name="result_probability">de probabilidade</string>
     <string name="result_view_all_data">Ver todos os dados</string>
+
+    <string name="result_details_title">Resultado</string>
+    <string name="result_details_profile">Perfil</string>
+    <string name="result_details_responses">Respostas</string>
 </resources>
