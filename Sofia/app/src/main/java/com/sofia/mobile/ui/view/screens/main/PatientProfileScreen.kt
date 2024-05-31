@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -30,13 +28,13 @@ import com.sofia.mobile.domain.common.enums.ChecklistType
 import com.sofia.mobile.domain.common.utils.formatRegisterDate
 import com.sofia.mobile.domain.model.patient.Patient
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
-import com.sofia.mobile.ui.theme.SofiaColorScheme
+import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.cards.FloatCard
 import com.sofia.mobile.ui.view.components.cards.PatientProfileCard
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
-import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h2
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.phrase
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text3
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
@@ -89,7 +87,7 @@ private fun Content(
         ) {
             Text(
                 text = stringResource(id = R.string.patient_form_title),
-                style = SofiaTextStyles.h3.copy(color = SofiaColorScheme.BrillantPurple)
+                style = h3.copy(color = BrillantPurple)
             )
         }
         LazyColumn(
@@ -123,7 +121,7 @@ private fun HistoryCard(test: TestResponse?){
     ){
         Text(
             text = stringResource(id = R.string.patient_history),
-            style = SofiaTextStyles.h3.copy(color = SofiaColorScheme.BrillantPurple)
+            style = h3.copy(color = BrillantPurple)
         )
 
 
@@ -146,7 +144,11 @@ private fun HistoryCard(test: TestResponse?){
                                 style = text3
                             )
                             Text(
-                                text = formatRegisterDate(test.registerDateTime, Locale.getDefault()),
+                                text = formatRegisterDate(
+                                    test.registerDateTime, 
+                                    Locale.getDefault(),
+                                    stringResource(id = R.string.patient_qchat_at)
+                                ),
                                 style = phrase
                             )
                         }
@@ -204,7 +206,7 @@ private fun ApplyNewTestCard(
     ) {
         Text(
             text = stringResource(id = R.string.patient_test_apply),
-            style = SofiaTextStyles.h3.copy(color = SofiaColorScheme.BrillantPurple)
+            style = h3.copy(color = BrillantPurple)
         )
 
         FloatCard {

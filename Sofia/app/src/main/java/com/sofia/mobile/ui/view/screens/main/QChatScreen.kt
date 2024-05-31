@@ -153,7 +153,7 @@ fun QChatScreen(
                                         alertMessage = vm.submit()
                                         if(alertMessage == "success"){
                                             navController.navigate(
-                                                "${MainNavOptions.CheckListResultScreen.name}/${vm.getAccuracy()}/${vm.getResult()}"
+                                                "${MainNavOptions.CheckListResultScreen.name}/${vm.response.value!!.result}"
                                             )
                                         }else{
                                             showDialog = true

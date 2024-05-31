@@ -36,6 +36,7 @@ class PatientProfileViewModel: ViewModel(){
             val response = qChatRepository.getQChat(patientId)
             if(response.isSuccessful){
                 _testResponse.value = response.body()
+                Log.i("TestResponse", "${testResponse!!}")
             }else{
                 errorMessage.value = "Error fetching test: ${response.errorBody()?.string()}"
             }

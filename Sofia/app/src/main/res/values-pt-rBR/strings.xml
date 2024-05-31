@@ -100,6 +100,7 @@
     <string name="patient_test_apply">Aplicar Novo Teste</string>
     <string name="patient_test_apply_btn">Aplicar Teste</string>
     <string name="patient_qchat_description">Esta é uma adaptação do protocolo original. Recomendado para crianças entre 18 e 24 meses de idade.</string>
+    <string name="patient_qchat_at">às</string>
 
     <!-- Patient Registration Screen -->
     <string name="patient_form_title">Cadastro de Paciente</string>
