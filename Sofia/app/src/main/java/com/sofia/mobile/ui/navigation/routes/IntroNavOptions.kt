@@ -5,5 +5,6 @@ enum class IntroNavOptions {
     RegisterScreen,
     LoadingScreen,
     WelcomeScreen,
-    SplashScreen
+    SplashScreen,
+    GettingStartedScreen
 }

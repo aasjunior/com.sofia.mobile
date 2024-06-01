@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import com.sofia.mobile.domain.model.login.LoginState
 import com.sofia.mobile.R
 import com.sofia.mobile.domain.model.user.UserState
+import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.ConfirmPassword
 import com.sofia.mobile.ui.view.components.forms.inputs.textfields.CustomTextField
@@ -58,7 +59,7 @@ fun RegisterScreen(
     }
 
     IntroContent(navController = navController, isRegister = true) {
-        FormRegister(loginViewModel, relativeDimensions)
+        FormRegister(loginViewModel, navController, relativeDimensions)
         when(val state = loginState){
             is LoginState.Loading -> { Text(text = "Validando") }
             is LoginState.Success -> { Text(text = "Logado") }
@@ -71,6 +72,7 @@ fun RegisterScreen(
 @Composable
 private fun FormRegister(
     lvm: LoginViewModel,
+    navController: NavController,
     rd: RelativeDimensions
 ){
     val coroutineScope = rememberCoroutineScope()
@@ -174,17 +176,33 @@ private fun FormRegister(
 
     if(showDialogSuccess){
         CustomAlertDialog(
-            onDismissRequest = { !showDialog },
+            onDismissRequest = { showDialogSuccess = !showDialogSuccess },
             text = stringResource(id = R.string.alert_create_user)
         ) {
             coroutineScope.launch {
-                lvm.login(
-                    us.email.value,
-                    us.password.value
-                )
+                try {
+                    lvm.firstLogin(
+                        us.email.value,
+                        us.password.value
+                    )
+                    if(lvm.isFirstLogin.value){
+                        showDialogSuccess = !showDialogSuccess
+                    }
+                }catch(e: Exception){
+                    alertMessage = "Erro: ${e.message}"
+                    showDialogSuccess = !showDialogSuccess
+                    showDialog = true
+                }
+            }
+        }
+        if(lvm.isFirstLogin.value){
+            coroutineScope.launch {
+                navController.navigate(IntroNavOptions.GettingStartedScreen.name)
             }
         }
     }
+
+
 
 }
 
@@ -198,7 +216,7 @@ private fun FirstStep(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ){
         CustomTextField(
             label = stringResource(id = R.string.form_firstname),
@@ -231,7 +249,7 @@ private fun SecondStep(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         EmailTextField(
             email = email,

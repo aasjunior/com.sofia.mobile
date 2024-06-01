@@ -1,12 +1,14 @@
 package com.sofia.mobile.ui.viewmodel.validation
 
 import android.util.Patterns
+import androidx.annotation.StringRes
+import com.sofia.mobile.R
 
 class EmailState {
     var email: String = ""
         private set
 
-    var error: String? = null
+    @StringRes var error: Int? = null
     var hasTriedToEnterEmail = false
         private set
 
@@ -15,7 +17,7 @@ class EmailState {
             hasTriedToEnterEmail = true
         }
         email = newEmail
-        error = if(isValid()) null else "Invalid email"
+        error = if(isValid()) null else R.string.invalid_email
     }
     private fun isValid() : Boolean{
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()

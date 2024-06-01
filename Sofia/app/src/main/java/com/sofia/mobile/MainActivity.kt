@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.view.MainCompose
 import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.contents.containers.BaseContent
+import com.sofia.mobile.ui.view.screens.intro.GettingStartedScreen
 import com.sofia.mobile.ui.view.screens.main.CheckListResultScreen
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
@@ -42,8 +43,6 @@ class MainActivity : ComponentActivity(){
                 imagePickerViewModel = imgvm,
                 onPickImageClick = { launcher.launch("image/*") }
             )
-            //HomeScreen(navController = rememberNavController())
-            //PatientListScreen(navController = rememberNavController())*/
         }
     }
 }

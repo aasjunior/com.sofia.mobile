@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.ui.navigation.introGraph
 import com.sofia.mobile.ui.navigation.mainGraph
+import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaTheme
@@ -72,7 +73,8 @@ fun MainCompose(
                     when(isLoggedIn.value){
                         null -> SplashScreen(navHostController, loginViewModel)
 
-                        true -> startDestination.value = NavRoutes.MainRoute.name
+                        true -> if(loginViewModel.isFirstLogin.value)  navHostController.navigate(IntroNavOptions.GettingStartedScreen.name)
+                                else startDestination.value = NavRoutes.MainRoute.name
 
                         false -> startDestination.value = NavRoutes.IntroRoute.name
                     }

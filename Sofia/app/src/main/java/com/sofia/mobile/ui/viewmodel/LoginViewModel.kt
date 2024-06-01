@@ -1,5 +1,6 @@
 package com.sofia.mobile.ui.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sofia.mobile.domain.model.login.LoginState
@@ -15,6 +16,8 @@ class LoginViewModel: ViewModel() {
     private val securePreferences = Injector.provideSecurePreferences()
 
     private val _loginState = MutableStateFlow<LoginState?>(null)
+    val isFirstLogin = mutableStateOf(false)
+
     val loginState: StateFlow<LoginState?> by ::_loginState
 
     private val _errorMessage = MutableStateFlow<String?>(null)
@@ -28,6 +31,13 @@ class LoginViewModel: ViewModel() {
             _loginState.value = LoginState.Loading
             val result = authService.authenticate(email, password)
             _loginState.value = result
+        }
+    }
+
+    fun firstLogin(email: String, password: String){
+        viewModelScope.launch {
+            val result = authService.authenticate(email, password)
+            isFirstLogin.value = true
         }
     }
 
