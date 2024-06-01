@@ -25,6 +25,7 @@ class UserViewModel: ViewModel() {
 
     suspend fun sendData(): String{
         return try{
+            _userState.value.updateUsername()
             val request: UserRequest = _userState.value.toRequest()
 
             if(request.isNotEmptyFields()){

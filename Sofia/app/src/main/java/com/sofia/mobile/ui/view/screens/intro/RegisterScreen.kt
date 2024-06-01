@@ -136,13 +136,11 @@ private fun FormRegister(
                                     try{
                                         alertMessage = uvm.sendData()
                                         if(alertMessage == "success"){
-                                            lvm.login(
-                                                uvm.user!!.username,
-                                                us.password.value
-                                            )
+                                            showDialogSuccess = true
                                         }
                                     }catch(e: Exception){
-                                        uvm.errorMessage.value = e.message
+                                        alertMessage = e.message
+                                        showDialog = true
                                     }
                                 }
                             }
@@ -171,6 +169,20 @@ private fun FormRegister(
             text = alertMessage!!
         ) {
             showDialog = false
+        }
+    }
+
+    if(showDialogSuccess){
+        CustomAlertDialog(
+            onDismissRequest = { !showDialog },
+            text = stringResource(id = R.string.alert_create_user)
+        ) {
+            coroutineScope.launch {
+                lvm.login(
+                    us.email.value,
+                    us.password.value
+                )
+            }
         }
     }
 

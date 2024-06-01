@@ -10,14 +10,14 @@ data class UserResponse(
     val username: String,
     val email: String,
     val role: UserRole,
-    val registrationDate: LocalDateTime
+    val registrationDate: String
 )
 
 fun UserResponse.toState(): UserState{
     val userState = UserState()
     userState.updateFirstName(this.firstName)
     userState.updateLastName(this.lastName)
-    userState.updateUsername(this.username)
+    userState.updateUsername()
     userState.updateEmail(this.email)
     userState.updateUserRole(this.role)
 

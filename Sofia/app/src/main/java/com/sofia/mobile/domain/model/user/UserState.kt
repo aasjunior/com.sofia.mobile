@@ -16,8 +16,8 @@ data class UserState(
     val password: StateFlow<String> by ::_password
     val role: StateFlow<UserRole?> by ::_role
 
-    fun updateUsername(newUsername: String){
-        this._username.value = newUsername
+    fun updateUsername(){
+        this._username.value = "${this.firstName.value}.${this.lastName.value}"
     }
 
     fun updateEmail(newEmail: String){
