@@ -1,8 +1,11 @@
 package com.sofia.mobile.config.security
 
 import android.content.Context
+import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.google.gson.Gson
+import com.sofia.mobile.domain.model.user.UserResponse
 import com.sofia.mobile.domain.repository.TokenRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,6 +55,30 @@ class SecurePreferences(context: Context): TokenRepository {
         sharedPreferences.edit()
             .remove("access_token")
             .remove("refresh_token")
+            .remove("user")
             .apply()
+    }
+
+    fun saveUser(user: UserResponse){
+        val userJson = Gson().toJson(user)
+        Log.i("SaveUserJson", "$userJson")
+        sharedPreferences.edit()
+            .putString("user", userJson)
+            .apply()
+    }
+
+    val user: Flow<UserResponse?>
+        get() = flow {
+            val userJson = sharedPreferences.getString("user", null)
+            val user =
+                if(userJson != null) Gson().fromJson(userJson, UserResponse::class.java)
+                else null
+        }
+
+    fun getUser(): UserResponse?{
+        val userJson = sharedPreferences.getString("user", null)
+        val user = if(userJson != null) Gson().fromJson(userJson, UserResponse::class.java) else null
+        Log.i("GetUser", "$user")
+        return user
     }
 }

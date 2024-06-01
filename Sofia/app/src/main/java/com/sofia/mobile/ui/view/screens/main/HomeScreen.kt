@@ -12,6 +12,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,12 +31,19 @@ import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftLilas
 import com.sofia.mobile.ui.view.components.buttons.StarButton
 import com.sofia.mobile.ui.view.components.cards.WelcomeCard
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
+import com.sofia.mobile.ui.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
     navController: NavController
 ){
+    val uvm: UserViewModel = viewModel()
+    LaunchedEffect(uvm){
+        uvm.getUser()
+    }
+    val user by uvm.user.collectAsState(null)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +53,7 @@ fun HomeScreen(
     ){
         Spacer(modifier = Modifier.height(12.dp))
 
-        WelcomeCard(name = "Amanda", navController = rememberNavController())
+        WelcomeCard(name = user?.firstName ?: "None", navController = rememberNavController())
 
         Row(
             modifier = Modifier.  width(312.dp),
