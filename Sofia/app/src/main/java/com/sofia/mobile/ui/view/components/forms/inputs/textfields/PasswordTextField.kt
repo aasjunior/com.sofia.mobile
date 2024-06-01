@@ -1,14 +1,20 @@
 package com.sofia.mobile.ui.view.components.forms.inputs.textfields
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.sofia.mobile.R
 import com.sofia.mobile.R.string.invalid_confirm_password
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.legend1
@@ -42,32 +48,39 @@ fun ConfirmPassword(
     onValueChange: (String?) -> Unit,
     width: Dp = Dimensions.formFild264
 ){
-    val confirmPassword by rememberSaveable {
+    var confirmPassword by rememberSaveable {
         mutableStateOf("")
     }
 
-    val isPasswordConfirmed by remember {
-        mutableStateOf(true)
+    val isPasswordConfirmed by derivedStateOf {
+        password == confirmPassword
     }
 
-    Column {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)){
         PasswordTextField(
             password = password,
             onValueChange = onValueChange,
             width = width
         )
-
         PasswordTextField(
             password = confirmPassword,
-            onValueChange = onValueChange,
+            onValueChange = {
+                confirmPassword = it!!
+            },
             isConfirmedPassword = true,
             width = width
         )
 
-        if(!isPasswordConfirmed && confirmPassword.isNotEmpty())
-            Text(
-                stringResource(id = invalid_confirm_password),
-                style = legend1
-            )
+        if(!isPasswordConfirmed && confirmPassword.isNotEmpty()){
+            Row(
+                modifier = Modifier.padding(start = 30.dp),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Text(
+                    stringResource(id = invalid_confirm_password),
+                    style = legend1
+                )
+            }
+        }
     }
 }

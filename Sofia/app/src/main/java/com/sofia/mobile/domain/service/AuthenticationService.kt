@@ -1,8 +1,8 @@
 package com.sofia.mobile.domain.service
 
 import android.util.Log
-import com.aasjunior.mediapickersuite.domain.model.login.LoginRequest
-import com.aasjunior.mediapickersuite.domain.model.login.LoginState
+import com.sofia.mobile.domain.model.login.LoginRequest
+import com.sofia.mobile.domain.model.login.LoginState
 import com.sofia.mobile.config.retrofit.ApiClient
 import com.sofia.mobile.config.security.SecurePreferences
 import com.sofia.mobile.domain.model.login.RefreshRequest
@@ -14,7 +14,7 @@ class AuthenticationService(
 ) {
     private val apiClient = ApiClient.loginService
 
-    suspend fun authenticate(username: String, password: String): LoginState{
+    suspend fun authenticate(username: String, password: String): LoginState {
         return try{
             val response = apiClient.login(
                 LoginRequest(username, password)
@@ -42,7 +42,7 @@ class AuthenticationService(
         }
     }
 
-    suspend fun refresh(): LoginState{
+    suspend fun refresh(): LoginState {
         val refreshToken = runBlocking { securePreferences.refreshToken.first() }
         Log.e("AuthenticationService", "Refresh called with refreshToken $refreshToken")
         if(refreshToken != null) {
@@ -54,15 +54,16 @@ class AuthenticationService(
                 if(response.isSuccessful){
                     Log.i("Response.isSuccessful", "$response")
                     Log.e("AuthenticationService", "Refresh result: ${response.body()?.accessToken}")
-                    response.body()?.accessToken.let { newAccessToken ->
-                        if(newAccessToken != null){
-                            securePreferences.saveAccessToken(newAccessToken)
-                            LoginState.Success(newAccessToken)
+                    response.body()?.let { newTokens ->
+                        if(newTokens.accessToken != null && newTokens.refreshToken != null){
+                            securePreferences.saveAccessToken(newTokens.accessToken)
+                            securePreferences.saveRefreshToken(newTokens.refreshToken) // Save the new refresh token
+                            LoginState.Success(newTokens.accessToken)
                         }else{
-                            Log.e("AuthenticationService", "New accessToken is null")
-                            LoginState.Error("New accessToken is null")
+                            Log.e("AuthenticationService", "New tokens are null")
+                            LoginState.Error("New tokens are null")
                         }
-                    }
+                    } ?: LoginState.Error("Response body is null")
                 }else{
                     val errorBody = response.errorBody()?.string()
                     Log.e("AuthenticationService", errorBody ?: "Unknown error")
@@ -79,6 +80,7 @@ class AuthenticationService(
             return LoginState.Error("Refresh token is null")
         }
     }
+
 
 
     suspend fun logout(){

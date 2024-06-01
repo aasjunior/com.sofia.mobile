@@ -46,7 +46,9 @@ fun CustomButton(
 @Composable
 fun CustomOutlinedButton(
     text: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .width(154.dp)
+        .padding(16.dp),
     onClick: () -> Unit
 ){
     OutlinedButton(
@@ -57,9 +59,7 @@ fun CustomOutlinedButton(
             disabledContentColor = MaterialTheme.colorScheme.onTertiaryContainer
         ),
         border = BorderStroke(1.dp, BrillantPurple),
-        modifier = Modifier
-            .width(154.dp)
-            .padding(16.dp)
+        modifier = modifier
     ) {
         Text(
             text = text,

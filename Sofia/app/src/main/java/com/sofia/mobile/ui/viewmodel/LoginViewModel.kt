@@ -2,7 +2,7 @@ package com.sofia.mobile.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aasjunior.mediapickersuite.domain.model.login.LoginState
+import com.sofia.mobile.domain.model.login.LoginState
 import com.sofia.mobile.config.Injector
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

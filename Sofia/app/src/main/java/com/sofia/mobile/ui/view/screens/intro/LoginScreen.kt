@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.aasjunior.mediapickersuite.domain.model.login.LoginState
+import com.sofia.mobile.domain.model.login.LoginState
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.NavRoutes

@@ -1,7 +1,7 @@
 package com.sofia.mobile.config.security
 
 import android.util.Log
-import com.aasjunior.mediapickersuite.domain.model.login.LoginState
+import com.sofia.mobile.domain.model.login.LoginState
 import com.sofia.mobile.config.Injector
 import com.sofia.mobile.domain.service.AuthenticationService
 import kotlinx.coroutines.flow.first

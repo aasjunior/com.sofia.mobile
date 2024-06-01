@@ -1,4 +1,4 @@
-package com.aasjunior.mediapickersuite.domain.model.login
+package com.sofia.mobile.domain.model.login
 
 sealed class LoginState{
     object Loading: LoginState()
