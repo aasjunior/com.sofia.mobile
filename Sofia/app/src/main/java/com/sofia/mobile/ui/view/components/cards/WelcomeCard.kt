@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.view.components.textstyles.ClickableLinkText
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h2
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
@@ -69,7 +70,9 @@ fun WelcomeCard(
                         
                         ClickableLinkText(
                             text = stringResource(id = R.string.link_learnmore),
-                            onClick = {}
+                            onClick = {
+                                navController.navigate(MainNavOptions.LearnMoreScreen.name)
+                            }
                         )
                     }
                     Image(

@@ -14,6 +14,7 @@ import com.sofia.mobile.ui.view.contents.containers.BaseContent
 import com.sofia.mobile.ui.view.screens.main.CheckListResultScreen
 import com.sofia.mobile.ui.view.screens.main.CheckListScreen
 import com.sofia.mobile.ui.view.screens.main.HomeScreen
+import com.sofia.mobile.ui.view.screens.main.LearnMoreScreen
 import com.sofia.mobile.ui.view.screens.main.PatientEditScreen
 import com.sofia.mobile.ui.view.screens.main.PatientListScreen
 import com.sofia.mobile.ui.view.screens.main.PatientProfileScreen
@@ -126,6 +127,11 @@ fun NavGraphBuilder.mainGraph(
         composable(MainNavOptions.SettingsScreen.name){
             BaseContent(navHostController, drawerState) {
                 SettingScreen(navHostController)
+            }
+        }
+        composable(MainNavOptions.LearnMoreScreen.name){
+            BaseContent(navHostController, drawerState) {
+                LearnMoreScreen(navHostController)
             }
         }
     }

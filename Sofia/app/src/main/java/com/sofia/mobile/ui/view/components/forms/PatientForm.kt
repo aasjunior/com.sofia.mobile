@@ -65,7 +65,7 @@ fun PatientForm(
             R.string.patient_edit_patient
         successMessage = R.string.patient_edit_success
     } else {
-        textHeader = if(currentStep == 2)
+        textHeader = if(currentStep != 2)
             R.string.patient_form_title
         else
             R.string.patient_form_title_02

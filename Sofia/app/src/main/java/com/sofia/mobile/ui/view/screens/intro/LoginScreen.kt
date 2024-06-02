@@ -118,7 +118,7 @@ private fun FormLogin(
             width = relativeDimensions.formFieldIntro
         )
         Redirect {
-            navController.navigate(IntroNavOptions.RegisterScreen.name)
+            navController.navigate(IntroNavOptions.RecoverPasswordScreen.name)
         }
         Button(
             modifier = Modifier.width(relativeDimensions.btnWidth),

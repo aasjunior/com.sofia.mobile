@@ -18,11 +18,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles
 
 @Composable
-fun ComingSoon(navController: NavController){
+fun ComingSoon(
+    navController: NavController,
+    isRecoverPassword: Boolean = false
+){
+    val route = if(isRecoverPassword) IntroNavOptions.LoginScreen.name
+                else MainNavOptions.HomeScreen.name
     FloatCard {
         Column(
             modifier = Modifier
@@ -64,7 +70,9 @@ fun ComingSoon(navController: NavController){
                     .padding(10.dp),
                 horizontalArrangement = Arrangement.Center
             ){
-                Button(onClick = { navController.navigate(MainNavOptions.HomeScreen.name) }) {
+                Button(onClick = {
+                    navController.navigate(route)
+                }) {
                     Text(text = stringResource(id = R.string.btn_back))
                 }
             }

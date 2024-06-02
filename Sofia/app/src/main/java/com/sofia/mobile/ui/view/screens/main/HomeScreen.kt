@@ -46,7 +46,7 @@ fun HomeScreen(
     ){
         Spacer(modifier = Modifier.height(12.dp))
 
-        WelcomeCard(name = user?.firstName ?: "None", navController = rememberNavController())
+        WelcomeCard(name = user?.firstName ?: "None", navController)
 
         Row(
             modifier = Modifier.width(312.dp),

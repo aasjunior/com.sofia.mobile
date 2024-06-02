@@ -11,6 +11,7 @@ import com.sofia.mobile.ui.view.contents.RelativeDimensions
 import com.sofia.mobile.ui.view.screens.intro.GettingStartedScreen
 import com.sofia.mobile.ui.view.screens.intro.LoadingScreen
 import com.sofia.mobile.ui.view.screens.intro.LoginScreen
+import com.sofia.mobile.ui.view.screens.intro.RecoverPasswordScreen
 import com.sofia.mobile.ui.view.screens.intro.RegisterScreen
 import com.sofia.mobile.ui.view.screens.intro.SplashScreen
 import com.sofia.mobile.ui.viewmodel.LoginViewModel
@@ -42,6 +43,9 @@ fun NavGraphBuilder.introGraph(navHostController: NavHostController, rd: Relativ
                 loginViewModel = loginViewModel,
                 relativeDimensions = rd
             )
+        }
+        composable(IntroNavOptions.RecoverPasswordScreen.name){
+            RecoverPasswordScreen(navHostController)
         }
         composable(IntroNavOptions.LoadingScreen.name){
             LoadingScreen(navController = navHostController)
