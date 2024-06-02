@@ -19,33 +19,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.wear.compose.material.Text
 import com.sofia.mobile.R
 import com.sofia.mobile.config.Injector
 import com.sofia.mobile.config.preferences.language.Language
+import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
 import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
-import com.sofia.mobile.ui.viewmodel.LoginViewModel
 
 @Composable
-fun LanguageSelector(){
-    val context = LocalContext.current
+fun LanguageSelector(navController: NavController){
     val languageManager = remember { Injector.provideLanguageManager() }
     val currentLanguage = languageManager.currentLanguage.collectAsState()
     val selectedLanguage = rememberSaveable { mutableStateOf(currentLanguage.value) }
     val showDialog = remember { mutableStateOf(false) }
-
-    val lvm: LoginViewModel = viewModel()
-    var isLoggedIn = lvm.isLoggedIn().collectAsState(initial = false)
 
     Text(
         text= stringResource(id = R.string.change_language),
@@ -90,8 +84,8 @@ fun LanguageSelector(){
                 .padding(end = 25.dp),
             horizontalArrangement = Arrangement.End
         ){
-            CustomButton(text = stringResource(id = R.string.btn_save)) {
-                restartActivity(context, isLoggedIn.value)
+            CustomButton(text = stringResource(id = R.string.btn_back)) {
+                navController.navigate(MainNavOptions.HomeScreen.name)
             }
         }
 

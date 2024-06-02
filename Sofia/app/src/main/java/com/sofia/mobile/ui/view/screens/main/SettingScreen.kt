@@ -26,6 +26,6 @@ fun SettingScreen(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(12.dp))
 
-        LanguageSelector()
+        LanguageSelector(navController)
     }
 }
