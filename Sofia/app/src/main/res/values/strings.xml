@@ -90,6 +90,9 @@
     <string name="loading_title">Loading</string>
     <string name="loading_message">We\'re preparing everything for you</string>
 
+    <string name="processing">Processing</string>
+    <string name="processing_msg">We\'re calculating everything! Hold on...</string>
+
     <!-- Start Screen -->
     <string name="begin_title">Let\'s get started!</string>
     <string name="begin_message_01">All set, let\'s begin!</string>

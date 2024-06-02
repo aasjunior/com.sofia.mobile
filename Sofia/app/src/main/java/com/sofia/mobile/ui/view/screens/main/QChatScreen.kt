@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
 import com.sofia.mobile.domain.checklist.qchat.mappedQuestions
+import com.sofia.mobile.ui.navigation.routes.IntroNavOptions
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
@@ -32,6 +33,7 @@ import com.sofia.mobile.ui.view.components.forms.inputs.OutlinedRadioButton
 import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text3
+import com.sofia.mobile.ui.view.screens.intro.LoadingScreen
 import com.sofia.mobile.ui.viewmodel.QChatViewModel
 import kotlinx.coroutines.launch
 
@@ -64,6 +66,8 @@ fun QChatScreen(
 
     val answer = qchatState.value.questions.value[currentQuestion]
     val answerIndex = if (answer == true) 0 else if (answer == false) 1 else null
+
+    var showLoading by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -153,8 +157,11 @@ fun QChatScreen(
                             if(answer != null){
                                 coroutineScope.launch {
                                     try{
+                                        showLoading = true
+
                                         alertMessage = vm.submit()
                                         if(alertMessage == "success"){
+                                            showLoading = false
                                             navController.navigate(
                                                 "${MainNavOptions.CheckListResultScreen.name}/${vm.response.value!!.testId}/${vm.response.value!!.result}"
                                             )
@@ -163,6 +170,7 @@ fun QChatScreen(
                                         }
                                     }catch(e: Exception){
                                         alertMessage = e.message!!
+                                        showLoading = false
                                         showDialog = true
                                     }
                                 }
@@ -193,5 +201,9 @@ fun QChatScreen(
         ) {
             showDialog = false
         }
+    }
+
+    if(showLoading) {
+        LoadingScreen(navController)
     }
 }

@@ -79,6 +79,9 @@
     <string name="loading_title">Carregando</string>
     <string name="loading_message">Estamos preparando tudo para você</string>
 
+    <string name="processing">Processando</string>
+    <string name="processing_msg">Estamos calculando tudo! Aguarde...</string>
+
     <!-- Start Screen -->
     <string name="begin_title">Vamos começar!</string>
     <string name="begin_message_01">Tudo pronto, vamos começar!</string>
