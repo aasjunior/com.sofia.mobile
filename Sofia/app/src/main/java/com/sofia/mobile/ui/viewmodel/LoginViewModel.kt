@@ -20,19 +20,32 @@ class LoginViewModel: ViewModel() {
 
     val loginState: StateFlow<LoginState?> by ::_loginState
 
-    private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage: StateFlow<String?> by ::_errorMessage
+    val errorMessage = MutableStateFlow<String?>(null)
 
     fun updateErrrorMessage(e: String){
-        this._errorMessage.value = e
+        this.errorMessage.value = e
     }
     fun login(email: String, password: String){
         viewModelScope.launch {
-            _loginState.value = LoginState.Loading
-            val result = authService.authenticate(email, password)
-            _loginState.value = result
+            try{
+                _loginState.value = LoginState.Loading
+                val result: LoginState = authService.authenticate(email, password)
+                when(result){
+                    is LoginState.Success -> {
+                        _loginState.value = result
+                    }
+                    is LoginState.Error -> {
+                        _loginState.value = result
+                        errorMessage.value = result.error
+                    }
+                    else -> throw Exception("Erro login")
+                }
+            }catch(e: Exception){
+                errorMessage.value = e.message
+            }
         }
     }
+
 
     fun firstLogin(email: String, password: String){
         viewModelScope.launch {

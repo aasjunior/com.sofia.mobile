@@ -30,7 +30,7 @@ fun NavGraphBuilder.introGraph(navHostController: NavHostController, rd: Relativ
 
             LoginScreen(
                 navController = navHostController,
-                loginViewModel = loginViewModel,
+                lvm = loginViewModel,
                 relativeDimensions = rd
             )
         }
