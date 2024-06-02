@@ -30,7 +30,7 @@ import com.sofia.mobile.config.preferences.language.Language
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
 import com.sofia.mobile.ui.view.components.buttons.CustomButton
-import com.sofia.mobile.ui.view.components.popup.CustomAlertDialog
+import com.sofia.mobile.ui.view.components.popup.ConfirmAlertDialog
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
 import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
@@ -58,7 +58,7 @@ fun LanguageSelector(navController: NavController){
                     .selectable(
                         selected = (language == currentLanguage.value),
                         onClick = {
-                            if(language == currentLanguage.value)
+                            if (language == currentLanguage.value)
                                 return@selectable
                             selectedLanguage.value = language
                             showDialog.value = true
@@ -90,16 +90,18 @@ fun LanguageSelector(navController: NavController){
         }
 
         if(showDialog.value){
-            CustomAlertDialog(
-                onDismissRequest = { !showDialog.value },
+            ConfirmAlertDialog(
+                title = stringResource(id = R.string.alert_title),
                 text = stringResource(
                     id = R.string.alert_confirm_description,
                     stringResource(id = R.string.alert_change_settings)
-                )
-            ) {
-                languageManager.updateLanguage(selectedLanguage.value)
-                showDialog.value = false
-            }
+                ),
+                onConfirm = {
+                    languageManager.updateLanguage(selectedLanguage.value)
+                    showDialog.value = false
+                },
+                onDismiss = { showDialog.value = false}
+            )
         }
     }
 }

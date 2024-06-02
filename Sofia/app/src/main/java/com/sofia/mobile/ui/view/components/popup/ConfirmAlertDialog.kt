@@ -1,16 +1,29 @@
 package com.sofia.mobile.ui.view.components.popup
 
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.sofia.mobile.R
-import com.sofia.mobile.ui.theme.SofiaColorScheme.BrillantPurple
-import com.sofia.mobile.ui.theme.SofiaColorScheme.Gray3
+import com.sofia.mobile.ui.view.components.buttons.CustomButton
+import com.sofia.mobile.ui.view.components.buttons.CustomOutlinedButton
+import com.sofia.mobile.ui.view.components.cards.FloatCard
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.h3
+import com.sofia.mobile.ui.view.components.textstyles.SofiaTextStyles.text1
 
 @Composable
 fun ConfirmAlertDialog(
@@ -21,42 +34,55 @@ fun ConfirmAlertDialog(
 ) {
     val openDialog = remember { mutableStateOf(true) }
 
+    val yes = stringResource(id = R.string.form_yes)
+    val no = stringResource(id = R.string.form_no)
+
     if(openDialog.value){
-        AlertDialog(
-            onDismissRequest = {
-                openDialog.value = false
-                onDismiss()
-            },
-            title = { Text(title) },
-            text = { Text(text) },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        onConfirm()
-                        openDialog.value = false
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = BrillantPurple,
-                        contentColor = Gray3
+        Dialog(onDismissRequest = {
+            openDialog.value = false
+            onDismiss()
+        }) {
+            FloatCard(modifier = Modifier.fillMaxWidth()){
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ){
+                    Text(
+                        text = title,
+                        style = h3.copy(Color.Black)
                     )
-                ) {
-                    Text(stringResource(id = R.string.form_yes))
-                }
-            },
-            dismissButton = {
-                Button(
-                    onClick = {
-                        openDialog.value = false
-                        onDismiss()
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = BrillantPurple,
-                        contentColor = Gray3
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = text,
+                        style = text1.copy(Color.Black)
                     )
-                ) {
-                    Text(stringResource(id = R.string.form_no))
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        CustomOutlinedButton(
+                            modifier = Modifier.width(100.dp),
+                            text = no
+                        ) {
+                            openDialog.value = false
+                            onDismiss()
+                        }
+                        CustomButton(
+                            modifier = Modifier.width(100.dp),
+                            text = yes
+                        ) {
+                            onConfirm()
+                            openDialog.value = false
+                        }
+                    }
                 }
             }
-        )
+        }
     }
 }
