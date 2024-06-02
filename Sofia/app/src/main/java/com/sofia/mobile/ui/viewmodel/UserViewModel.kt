@@ -47,7 +47,7 @@ class UserViewModel: ViewModel() {
         }
     }
 
-    suspend fun getUser(){
+    fun getUser(){
         try {
             _userResponse.value = securePreferences.getUser()
         }catch(e: Exception){

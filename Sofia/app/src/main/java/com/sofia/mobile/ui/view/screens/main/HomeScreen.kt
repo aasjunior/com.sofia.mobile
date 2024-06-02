@@ -8,14 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,13 +22,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sofia.mobile.R
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
-import com.sofia.mobile.ui.navigation.routes.NavRoutes
 import com.sofia.mobile.ui.theme.SofiaColorScheme.SoftLilas
 import com.sofia.mobile.ui.view.components.buttons.StarButton
 import com.sofia.mobile.ui.view.components.cards.WelcomeCard
-import com.sofia.mobile.ui.viewmodel.LoginViewModel
 import com.sofia.mobile.ui.viewmodel.UserViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
@@ -75,28 +68,6 @@ fun HomeScreen(
                 iconId = R.drawable.ic_star_cute_btn
             )
         }
-    }
-}
-
-@Composable
-fun ButtonLogout(navController: NavController, drawerState: DrawerState){
-    val lvm: LoginViewModel = viewModel()
-    val coroutineScope = rememberCoroutineScope()
-
-    Button(
-        onClick = {
-            lvm.logout()
-            coroutineScope.launch{
-                drawerState.close()
-            }
-            navController.navigate(NavRoutes.IntroRoute.name){
-                popUpTo(NavRoutes.IntroRoute.name){
-                    inclusive = true
-                }
-            }
-        }
-    ) {
-        Text(text = "logout")
     }
 }
 

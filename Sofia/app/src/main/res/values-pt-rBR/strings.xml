@@ -34,7 +34,7 @@
     <string name="link_seemore">Veja mais</string>
 
     <!-- Drawer -->
-    <string name="drawer_perfil">Meu perfil</string>
+    <string name="drawer_perfil">Meu perfil ></string>
     <string name="drawer_logout">Sair</string>
 
     <!-- Alert Dialog -->

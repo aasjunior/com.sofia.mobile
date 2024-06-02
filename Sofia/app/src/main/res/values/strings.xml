@@ -40,7 +40,7 @@
     <string name="link_seemore">See more</string>
 
     <!-- Drawer -->
-    <string name="drawer_perfil">My profile</string>
+    <string name="drawer_perfil">My profile ></string>
     <string name="drawer_logout">Logout</string>
     <string name="drawer_home" translatable="false">Home</string>
     <string name="drawer_register" translatable="false">Register</string>
