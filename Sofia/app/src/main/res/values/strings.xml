@@ -52,6 +52,7 @@
     <!-- Alert Dialog -->
     <string name="alert_title">Alert</string>
     <string name="alert_confirm_description">Are you sure you want to %s</string>
+    <string name="alert_change_settings">Make this change?</string>
     <string name="alert_confirm_delete">Deletion Confirmation!</string>
     <string name="alert_confirm_delete_patient">delete this patient?</string>
     <string name="alert_not_be_undone">This action cannot be undone in the future.</string>
@@ -199,4 +200,9 @@
     <string name="coming_soon">Ops! We\'re still working on it.</string>
     <string name="coming_soon_msg">It looks like you\'ve tried to access a part of the system that\'s still under development. We apologize for the inconvenience.</string>
     <string name="coming_soon_back">Return to the beginning</string>
+
+    <!-- Settings -->
+    <string name="change_language">Select Language</string>
+    <string name="pt_br">Portuguese, Brazil</string>
+    <string name="en_usa">English, USA</string>
 </resources>

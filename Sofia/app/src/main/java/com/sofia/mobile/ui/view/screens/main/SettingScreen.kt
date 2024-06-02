@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.ui.theme.SofiaColorScheme
 import com.sofia.mobile.ui.view.components.cards.ComingSoon
+import com.sofia.mobile.ui.view.components.settings.LanguageSelector
 
 @Composable
 fun SettingScreen(navController: NavController) {
@@ -25,6 +26,6 @@ fun SettingScreen(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(12.dp))
 
-        ComingSoon(navController)
+        LanguageSelector()
     }
 }

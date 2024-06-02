@@ -3,6 +3,7 @@ package com.sofia.mobile.ui.view.contents.containers
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,13 +26,8 @@ fun LocalizedContent(
     val languageManager = remember {
         Injector.provideLanguageManager()
     }
-    val currentLanguage = remember {
-        mutableStateOf(languageManager.currentLanguage)
-    }
+    val currentLanguage = languageManager.currentLanguage.collectAsState()
 
-    LaunchedEffect(Unit){
-        currentLanguage.value = languageManager.currentLanguage
-    }
     CompositionLocalProvider(
         LocalContext provides languageManager
             .updateResources(currentLanguage.value.locale)

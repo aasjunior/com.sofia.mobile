@@ -41,6 +41,7 @@
     <!-- Alert Dialog -->
     <string name="alert_title">Alerta</string>
     <string name="alert_confirm_description">Tem certeza que quer %s</string>
+    <string name="alert_change_settings">Fazer esta alteração?</string>
     <string name="alert_confirm_delete">Confirmação de exclusão!</string>
     <string name="alert_confirm_delete_patient">excluir este paciente?</string>
     <string name="alert_not_be_undone">Essa ação não poderá ser desfeita futuramente.</string>
@@ -187,4 +188,9 @@
     <string name="coming_soon">Ops! Ainda estamos trabalhando nisso.</string>
     <string name="coming_soon_msg">Parece que você tentou acessar uma parte do sistema que ainda está em desenvolvimento. Pedimos desculpa pelo incoveniente.</string>
     <string name="coming_soon_back">Voltar ao início</string>
+
+    <!-- Settings -->
+    <string name="change_language">Selecione o idioma</string>
+    <string name="pt_br">Português, Brasil</string>
+    <string name="en_usa">Inglês, EUA</string>
 </resources>
