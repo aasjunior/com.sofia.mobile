@@ -43,9 +43,11 @@
     <string name="drawer_perfil">My profile ></string>
     <string name="drawer_logout">Logout</string>
     <string name="drawer_home" translatable="false">Home</string>
+    <string name="drawer_settings">Settings</string>
     <string name="drawer_register" translatable="false">Register</string>
     <string name="drawer_menu_description" translatable="false">Menu navigation button</string>
     <string name="drawer_home_description" translatable="false">Home navigation button</string>
+    <string name="drawer_settings_description" translatable="false">Settings navigation button</string>
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alert</string>
@@ -192,4 +194,9 @@
     <string name="result_details_title">Result</string>
     <string name="result_details_profile">Profile</string>
     <string name="result_details_responses">Responses</string>
+
+    <!-- 404 -->
+    <string name="coming_soon">Ops! We\'re still working on it.</string>
+    <string name="coming_soon_msg">It looks like you\'ve tried to access a part of the system that\'s still under development. We apologize for the inconvenience.</string>
+    <string name="coming_soon_back">Return to the beginning</string>
 </resources>

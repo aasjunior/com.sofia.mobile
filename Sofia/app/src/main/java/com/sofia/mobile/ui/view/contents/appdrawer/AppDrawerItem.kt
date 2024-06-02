@@ -56,7 +56,7 @@ fun <T> AppDrawerItem(
                 .fillMaxWidth()
                 .padding(vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ){
             Icon(
                 imageVector = item.drawableId,

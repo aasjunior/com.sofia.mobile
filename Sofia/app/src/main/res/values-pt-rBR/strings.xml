@@ -36,6 +36,7 @@
     <!-- Drawer -->
     <string name="drawer_perfil">Meu perfil ></string>
     <string name="drawer_logout">Sair</string>
+    <string name="drawer_settings">Configuração</string>
 
     <!-- Alert Dialog -->
     <string name="alert_title">Alerta</string>
@@ -181,4 +182,9 @@
     <string name="result_details_title">Resultado</string>
     <string name="result_details_profile">Perfil</string>
     <string name="result_details_responses">Respostas</string>
+
+    <!-- 404 -->
+    <string name="coming_soon">Ops! Ainda estamos trabalhando nisso.</string>
+    <string name="coming_soon_msg">Parece que você tentou acessar uma parte do sistema que ainda está em desenvolvimento. Pedimos desculpa pelo incoveniente.</string>
+    <string name="coming_soon_back">Voltar ao início</string>
 </resources>

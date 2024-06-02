@@ -176,7 +176,7 @@ private fun Logout(
                 .fillMaxWidth()
                 .padding(vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ){
             Icon(
                 painter = painterResource(id = R.drawable.ic_logout),

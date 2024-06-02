@@ -49,7 +49,7 @@ fun HomeScreen(
         WelcomeCard(name = user?.firstName ?: "None", navController = rememberNavController())
 
         Row(
-            modifier = Modifier.  width(312.dp),
+            modifier = Modifier.width(312.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
             StarButton(

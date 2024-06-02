@@ -9,5 +9,6 @@ enum class MainNavOptions{
     CheckListScreen,
     QChatScreen,
     CheckListResultScreen,
-    ResultDetailsScreen
+    ResultDetailsScreen,
+    SettingsScreen
 }

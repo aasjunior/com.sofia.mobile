@@ -20,6 +20,7 @@ import com.sofia.mobile.ui.view.screens.main.PatientProfileScreen
 import com.sofia.mobile.ui.view.screens.main.PatientRegisterScreen
 import com.sofia.mobile.ui.view.screens.main.QChatScreen
 import com.sofia.mobile.ui.view.screens.main.ResultDetailsScreen
+import com.sofia.mobile.ui.view.screens.main.SettingScreen
 import com.sofia.mobile.ui.viewmodel.ImagePickerViewModel
 
 fun NavGraphBuilder.mainGraph(
@@ -120,6 +121,11 @@ fun NavGraphBuilder.mainGraph(
 
             BaseContent(navHostController, drawerState) {
                 ResultDetailsScreen(navHostController, testId!!, result!!)
+            }
+        }
+        composable(MainNavOptions.SettingsScreen.name){
+            BaseContent(navHostController, drawerState) {
+                SettingScreen(navHostController)
             }
         }
     }
