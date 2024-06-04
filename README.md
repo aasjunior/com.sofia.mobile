@@ -26,7 +26,7 @@ Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista
 ## Pré-Requisitos 💜
 
 * JDK (Java Development Kit)
-* MySQL
+* MongoDB 
 * Git
 * Android Studio
 * VSCode
