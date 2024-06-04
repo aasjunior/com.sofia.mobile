@@ -37,8 +37,6 @@ Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista
 Este projeto depende das seguintes APIs:
 
 * [Sofia API](https://github.com/aasjunior/com.sofia.restapi.git)
-<br>
-
 * [Sofia api-flask (Neural Network)](https://github.com/mandis-ncs/api-flask.git)
   <br>
 
