@@ -9,7 +9,7 @@
 ### Descrição do projeto 💜
 
 <p align="justify">
-O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpack Compose, com banco de dados MySQL. Até o momento, foram desenvolvidas as telas de splash, home, cadastro de um novo paciente, listagem de pacientes cadastrados e visualização individual.
+O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpack Compose, com banco de dados Mongodb.
 </p>
 
 <p align="center">
@@ -50,9 +50,9 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 
 3. Certifique-se de que o JDK está instalado e configurado corretamente
 
-4. Certifique-se de que o MySQL está instalado e funcionando corretamente
+4. Certifique-se de que o Mongodb está instalado e funcionando corretamente
 
-5. Configure a API Sofia pelo VS Code. A API estará rodando em `http://localhost:8080`
+5. Configure a API Sofia pelo VS Code ou IDE de sua preferência. A API estará rodando em `http://localhost:8080`
 
 6. Execute o Emulador do Android Studio
 <br>
