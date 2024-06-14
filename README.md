@@ -79,8 +79,8 @@ O Jetpack Compose é uma moderna toolkit de UI para Android que simplifica e ace
 
 ## Tecnologias 💜
 <p align="center">
-   <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/adc364c7-8401-4326-ad56-3807673b85f2" width="600px" alt="Android"/>
-   <div align="center"><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
+   <img src="https://github.com/aasjunior/com.sofia.mobile/assets/61213599/db90a6e0-3c46-4891-ad39-8405d499bea9" width="600px" alt="Android"/>
+<div align="center"><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android"/>
    <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white"/>
    <img src="https://img.shields.io/badge/Jetpack%20Compose-FF4081?style=for-the-badge&logo=jetpack&logoColor=white" alt="Jetpack Compose"/></div>
 </p>
