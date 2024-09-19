@@ -21,7 +21,7 @@ O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpac
 </p>
 <br>
  
-Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista aqui](https://youtu.be/ArjSy3HSWuY) 💜
+Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista aqui](https://www.youtube.com/watch?v=wSeBx_eXvcY) 💜
 
 ## Pré-Requisitos 💜
 
