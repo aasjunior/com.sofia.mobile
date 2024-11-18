@@ -1,6 +1,6 @@
 # Sofia Mobile 💜
 
-Sofia é um Software Orientado por Inteligência Artificial para Auxílio ao Pré-diagnóstico de Crianças de 0 a 4 Anos com Manifestações Comportamentais do Transtorno do Espectro Autista (TEA). O aplicativo mobile CAD _(Computer-aided Diagnosis)_ é destinado ao auxílio de profissionais da saúde na triagem e identificação de sinais do TEA. <strong> 💜 Nosso Objetivo 💜 </strong> é promover a acessibilidade ao diagnóstico precoce de TEA! 💜
+Sofia é um Software Orientado por Inteligência Artificial para Auxílio ao Pré-diagnóstico de Crianças de 0 a 2 Anos com Manifestações Comportamentais do Transtorno do Espectro Autista (TEA). O aplicativo mobile CAD _(Computer-aided Diagnosis)_ é destinado ao auxílio de profissionais da saúde na triagem e identificação de sinais do TEA. <strong> 💜 Nosso Objetivo 💜 </strong> é promover a acessibilidade ao diagnóstico precoce de TEA! 💜
 
 <div align="center">
   <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/ce5ba98e-c63a-4fb7-a311-ced454084bc7" width="700" alt="ilustracao">
@@ -21,7 +21,7 @@ O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpac
 </p>
 <br>
  
-Ficou interessado? Veja mais no nosso pitch de apresentação da SOFIA, [assista aqui](https://www.youtube.com/watch?v=wSeBx_eXvcY) 💜
+Ficou interessado? Veja mais no nosso [pitch](https://www.youtube.com/watch?v=wSeBx_eXvcY) de apresentação da SOFIA, ou acesse o nosso [site](https://sofia-aja.vercel.app/). 💜
 
 ## Pré-Requisitos 💜
 
@@ -56,7 +56,41 @@ git clone https://github.com/aasjunior/com.sofia.mobile.git
 5. Configure a API Sofia pelo VS Code ou IDE de sua preferência. A API estará rodando em `http://localhost:8080`
 
 6. Execute o Emulador do Android Studio
-<br>
+
+### Provisionamento do back-end com Docker Compose 💜
+
+##### Requisitos
+- **Docker**
+- **Docker Compose**
+
+Para provisionar o back-end completo do **SOFIA**:
+
+1. Clone o repositório da [Sofia API](https://github.com/aasjunior/com.sofia.restapi.git) para sua máquina local usando o seguinte comando
+```
+git clone https://github.com/aasjunior/com.sofia.restapi.git
+```
+
+1. Navegue até o diretório `/infra`:
+
+```bash
+cd infra
+```
+
+2. Execute o comando para subir todos os serviços (API, FastAPI e NGINX):
+
+```bash
+docker-compose up
+```
+
+## Sofia-Server 💜
+
+Para provisionar um servidor **Ubuntu** e configurar toda a infraestrutura do SOFIA, consulte a [documentação do Sofia-Server](https://github.com/aasjunior/com.sofia.restapi/tree/main/infra).
+
+Esta documentação inclui:
+
+- Passos para criar um servidor Ubuntu na AWS ou localmente.
+- Instalação do **Docker** e **Docker Compose**.
+- Execução do ambiente completo de back-end utilizando o arquivo `docker-compose.yml`, disponívem em [infra/docker-compose.yml](https://github.com/aasjunior/com.sofia.restapi/blob/main/infra/docker-compose.yml).
 
 ## Problemas Conhecidos 💜
 
