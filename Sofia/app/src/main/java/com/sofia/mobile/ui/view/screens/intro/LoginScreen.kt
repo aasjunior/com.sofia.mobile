@@ -48,6 +48,7 @@ fun LoginScreen(
     relativeDimensions: RelativeDimensions
 ){
     val loginState by lvm.loginState.collectAsState()
+    val errorMessage by lvm.errorMessage.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
     var alertMessage by remember { mutableStateOf<String?>(null) }
 
@@ -76,9 +77,11 @@ fun LoginScreen(
         }
     }
 
-    if(lvm.errorMessage.value != null){
-        alertMessage = lvm.errorMessage.value
-        showDialog = true
+    LaunchedEffect(errorMessage) {
+        errorMessage?.let {
+            alertMessage = it
+            showDialog = true
+        }
     }
 
     if(showDialog){
@@ -101,6 +104,7 @@ private fun FormLogin(
 ){
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    val alertEmptyFields = stringResource(id = R.string.alert_empty_field)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -123,7 +127,11 @@ private fun FormLogin(
         Button(
             modifier = Modifier.width(relativeDimensions.btnWidth),
             onClick = {
-                loginViewModel.login(email, password)
+                if(email.isNotEmpty() && password.isNotEmpty()){
+                    loginViewModel.login(email, password)
+                }else{
+                    loginViewModel.errorMessage.value = alertEmptyFields
+                }
             }
         ) {
             Text(text = "Login")

@@ -31,9 +31,11 @@ class AuthenticationService(
                 }
             }else{
                 val errorBody = response.errorBody()?.string()
-                LoginState.Error(errorBody ?: "Unknown error")
+                Log.i("ErroAuthenticate", "$errorBody")
+                LoginState.Error("Usuário ou senha incorreto")
             }
         }catch(e: Exception){
+            Log.i("ErroAuthenticateException", "$e")
             LoginState.Error(e.message ?: "Unknown error")
         }
     }

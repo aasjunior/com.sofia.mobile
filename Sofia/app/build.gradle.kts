@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.sofia.mobile"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sofia.mobile"

@@ -124,7 +124,7 @@
     <string name="patient_form_ethnicity">Ethnicity</string>
 
     <string name="patient_form_step_02">Profile</string>
-    <string name="patient_form_q01">Were they born prematurely?</string>
+    <string name="patient_form_q01">Were they born with jaundice?</string>
     <string name="patient_form_q02">Is there a family member diagnosed with autism?</string>
     <string name="patient_form_q03">Did the mother have complications during pregnancy?</string>
 
