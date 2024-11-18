@@ -1,0 +1,67 @@
+MIT License
+
+Copyright (c) 2024 Equipe AJA (Amanda Castro, Adeldivo Junior e Aline Lauriano)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Gerenciamento de Licenças de Software
+
+O gerenciamento das licenças de software é crucial para garantir que o projeto esteja em
+conformidade com as regras de uso das ferramentas e bibliotecas utilizadas no desenvolvimento,
+protegendo o projeto contra riscos legais.
+
+## Licenças de Ferramentas Utilizadas
+
+O projeto utiliza um ecossistema de tecnologias open-source, incluindo:
+
+- **Kotlin e Java Spring Boot**: Ambas licenciadas sob a Apache 2.0, permitindo uso comercial
+  e modificações, desde que acompanhadas de atribuições.
+- **FastAPI e TensorFlow**: Licenças como MIT e Apache 2.0 garantem flexibilidade no uso,
+  desde que o projeto respeite as condições estipuladas, como a inclusão de notificações de
+  copyright.
+
+A importância de verificar as licenças reside em evitar infrações que poderiam resultar em
+sanções legais ou restrições ao uso do software.
+
+## Licenciamento do Software Desenvolvido
+
+Para a aplicação SOFIA, optou-se pela adoção da licença de software livre MIT, pois ela é a
+mais indicada para o objetivo de promover o compartilhamento do código. A licença MIT facilita a
+adoção do sistema por outros desenvolvedores, permitindo que o código seja livremente utilizado,
+modificado e distribuído, o que pode estimular a colaboração e o aprimoramento contínuo da aplicação
+por parte de uma comunidade mais ampla.
+
+### Uso Ético e Responsável da IA
+
+Considerando o impacto social do projeto, o uso da aplicação SOFIA será restrito exclusivamente a profissionais da saúde, garantindo que o software seja utilizado apenas para finalidades que
+respeitem os princípios éticos. Essa restrição já é formalizada por meio de um termo de uso, o qual servirá para prevenir abusos, como a discriminação baseada em resultados preditivos, e
+assegurar que a ferramenta seja utilizada de maneira responsável e em conformidade com as normas
+profissionais.
+
+### Importância Geral
+
+A implementação da LGPD e licenças de software no projeto SOFIA não é apenas um requisito
+técnico ou legal, mas uma demonstração do compromisso com a ética, a responsabilidade social e a
+segurança. Projetos como o SOFIA, que utilizam dados de populações, têm o poder de transformar
+vidas, mas essa transformação deve ser sustentada por uma base sólida de conformidade e boas
+práticas.
+
+(c) Equipe AJA - SOFIA
