@@ -3,7 +3,6 @@ package com.sofia.mobile.ui.view.screens.intro
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -77,12 +77,12 @@ private fun FormRegister(
 ){
     val coroutineScope = rememberCoroutineScope()
     val uvm: UserViewModel = viewModel()
-    val us = uvm.userState.value
+    val us by uvm.userState.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
     var showDialogSuccess by remember { mutableStateOf(false) }
     val alertEmptyFields = stringResource(id = R.string.alert_empty_field)
     var alertMessage by remember { mutableStateOf<String?>(null) }
-    var currentStep by remember { mutableStateOf(0) }
+    var currentStep by remember { mutableIntStateOf(0) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         when(currentStep){
@@ -170,6 +170,7 @@ private fun FormRegister(
             onDismissRequest = { !showDialog },
             text = alertMessage!!
         ) {
+            uvm.errorMessage.value = null
             showDialog = false
         }
     }
@@ -196,13 +197,11 @@ private fun FormRegister(
             }
         }
         if(lvm.isFirstLogin.value){
-            coroutineScope.launch {
+            LaunchedEffect(Unit) {
                 navController.navigate(IntroNavOptions.GettingStartedScreen.name)
             }
         }
     }
-
-
 
 }
 

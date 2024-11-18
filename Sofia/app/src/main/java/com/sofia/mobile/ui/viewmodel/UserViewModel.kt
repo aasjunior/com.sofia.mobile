@@ -36,7 +36,10 @@ class UserViewModel: ViewModel() {
                     this._userResponse.value = response.body()
                     "success"
                 }else{
-                    throw Exception(response.message())
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("SendDataError", "Failed to register: $errorBody")
+                    errorMessage.value = errorBody ?: "Unknown error"
+                    ""
                 }
             }else{
                 throw Exception("Empty shields: $request")

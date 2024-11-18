@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.sofia.mobile.R
+import com.sofia.mobile.domain.common.utils.mergeSort
 import com.sofia.mobile.domain.model.patient.Patient
 import com.sofia.mobile.ui.navigation.routes.MainNavOptions
 import com.sofia.mobile.ui.theme.SofiaColorScheme
@@ -42,7 +43,8 @@ fun PatientList(
     patients: List<Patient>,
     navRoute: MainNavOptions = MainNavOptions.PatientProfileScreen
 ){
-    val grouped = patients.groupBy { it.firstName[0].uppercase()[0] }
+    val sortedPatients = mergeSort(patients)
+    val grouped = sortedPatients.groupBy { it.firstName[0].uppercaseChar() }
     val listState = rememberLazyListState()
 
     LazyColumn(state = listState){
@@ -106,8 +108,13 @@ fun PatientList(
 fun PatientCheckList(
     plvm: PatientListViewModel
 ) {
-    val patients = plvm.patients.sortedBy { it.firstName }
-    val grouped = patients.groupBy { it.firstName[0].uppercase()[0] }
+    // val patients = plvm.patients.sortedBy { it.firstName }
+    // val grouped = patients.groupBy { it.firstName[0].uppercase()[0] }
+
+    val patients = mergeSort(plvm.patients)
+    val grouped = patients.groupBy { it.firstName[0].uppercaseChar() }
+
+
     val listState = rememberLazyListState()
     val allChecked = remember { mutableStateOf(false) }
 

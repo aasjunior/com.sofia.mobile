@@ -113,7 +113,7 @@
     <string name="patient_form_ethnicity">Etnia</string>
 
     <string name="patient_form_step_02">Perfil</string>
-    <string name="patient_form_q01">Nasceu prematuro?</string>
+    <string name="patient_form_q01">Nasceu com icterícia?</string>
     <string name="patient_form_q02">Há alguém na família diagnosticado com autismo?</string>
     <string name="patient_form_q03">A mãe teve complicações na gravidez?</string>
 
