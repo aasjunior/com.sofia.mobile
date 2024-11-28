@@ -92,7 +92,7 @@ docker-compose up
 
 ## Sofia-Server 💜
 
-Para provisionar um servidor **Ubuntu** e configurar toda a infraestrutura do SOFIA, consulte a [documentação do Sofia-Server](https://github.com/aasjunior/com.sofia.restapi/tree/main/infra).
+Para provisionar um servidor **Ubuntu** e configurar toda a infraestrutura do SOFIA, consulte a [documentação do Sofia-Server](https://github.com/aasjunior/com.sofia.restapi/tree/main/infra/README.md).
 
 Esta documentação inclui:
 
