@@ -6,6 +6,7 @@ Sofia é um Software Orientado por Inteligência Artificial para Auxílio ao Pr�
   <img src="https://github.com/aasjunior/com.sofia.mobile/assets/85968113/ce5ba98e-c63a-4fb7-a311-ced454084bc7" width="700" alt="ilustracao">
 </div>
 
+
 ### Descrição do projeto 💜
 
 <p align="justify">
@@ -22,6 +23,13 @@ O Sofia Mobile é um aplicativo desenvolvido com Kotlin, Android Studio e Jetpac
 <br>
  
 Ficou interessado? Veja mais no nosso [pitch](https://www.youtube.com/watch?v=wSeBx_eXvcY) de apresentação da SOFIA, ou acesse o nosso [site](https://sofia-aja.vercel.app/). 💜
+
+<br>
+
+###### FETEPS 2024
+Este projeto participou da **15ª Feira Tecnológica do Centro Paula Souza** - <a href='https://feteps.cpscetec.com.br/docs/2024_feteps_publicacao.pdf' target='_blank'>FETEPS</a>.
+
+<br>
 
 ## Pré-Requisitos 💜
 
