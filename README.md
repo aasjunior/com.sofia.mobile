@@ -8,7 +8,7 @@ Sofia é um Software Orientado por Inteligência Artificial para Auxílio ao Pr�
 
 ###### Publicação Qualis B2 - ISSN: 2446-7049
 
-Este projeto foi publicado na **Revista Tecnológica da Fatec Americana** - <a href='https://www.fatec.edu.br/revista/index.php/RTecFatecAM/article/view/388' target='_blank'>ISSN: 2446-7049</a>
+Este projeto foi publicado na **Revista Tecnológica da Fatec Americana** - <a href='https://www.fatec.edu.br/revista/index.php/RTecFatecAM/article/view/388' target='_blank'>ISSN: 2446-7049</a>.
 
 ###### FETEPS 2024
 Este projeto participou da **15ª Feira Tecnológica do Centro Paula Souza** - <a href='https://feteps.cpscetec.com.br/docs/2024_feteps_publicacao.pdf' target='_blank'>FETEPS</a>.
